@@ -56,7 +56,6 @@ function allocate(N, slots) {
   return positions;
 }
 
-// I.i — Continuous Harvest: 5 source nodes, feed lines, central collector, reference ring
 function shapeHarvest(N) {
   const R = 1.05;
   const nodes = [];
@@ -93,7 +92,6 @@ function shapeHarvest(N) {
   ]);
 }
 
-// I.ii — Weighted Discriminator: 14 bars, last 5 copper, threshold line
 function shapeDiscriminator(N) {
   const baseY = -0.85;
   const maxH = 1.7;
@@ -130,7 +128,6 @@ function shapeDiscriminator(N) {
   ]);
 }
 
-// II.i — Cadence Engine: 6-lobed wheel with orbit, hub, spokes, notches
 function shapeCadence(N) {
   const outer = 0.98;
   const inner = 0.38;
@@ -178,7 +175,6 @@ function shapeCadence(N) {
   ]);
 }
 
-// II.ii — Sensor Confluence: three overlapping circles, copper intersection
 function shapeConfluence(N) {
   const r = 0.62;
   const off = 0.34;
@@ -204,7 +200,6 @@ function shapeConfluence(N) {
   ]);
 }
 
-// III.i — Metered Dispatch: 50-dot grid (5x10), first 22 filled, threshold bar below
 function shapeDispatch(N) {
   const cols = 10, rows = 5, total = 50, filled = 22;
   const spacingX = 0.20;
@@ -249,7 +244,6 @@ function shapeDispatch(N) {
   ]);
 }
 
-// III.ii — Coordinate Sweep: grid of intersections + spiral of copper marks + corner refs
 function shapeSweep(N) {
   const size = 1.6;
   const n = 11;
@@ -317,12 +311,12 @@ function shapeSweep(N) {
 }
 
 const SHAPES = [
-  { name: 'Continuous Harvest', ref: 'I · i',   sub: 'loop · multi-source',         gen: shapeHarvest },
-  { name: 'Weighted Discriminator', ref: 'I · ii', sub: 'classifier · threshold',    gen: shapeDiscriminator },
-  { name: 'Cadence Engine',     ref: 'II · i',  sub: 'scheduler · 6h interval',      gen: shapeCadence },
-  { name: 'Sensor Confluence',  ref: 'II · ii', sub: 'fusion · ambient state',       gen: shapeConfluence },
-  { name: 'Metered Dispatch',   ref: 'III · i', sub: 'rate-limited · N / diem',      gen: shapeDispatch },
-  { name: 'Coordinate Sweep',   ref: 'III · ii',sub: 'grid · paginated',             gen: shapeSweep },
+  { name: 'ProWorkSpace',              ref: '01', sub: 'AI SaaS Chrome extension',        gen: shapeHarvest },
+  { name: 'Forex Lead Finder',         ref: '02', sub: 'Multi-platform scraping engine',  gen: shapeDiscriminator },
+  { name: 'AYVA',                      ref: '03', sub: 'Shopify Dawn fork · storefront',  gen: shapeCadence },
+  { name: 'BrandiVibe',                ref: '04', sub: '3D WebGL brand experience',       gen: shapeConfluence },
+  { name: 'Email Outreach Engine',     ref: '05', sub: 'Rate-limited cold acquisition',   gen: shapeDispatch },
+  { name: 'Maps Lead Extractor',       ref: '06', sub: 'Local business data pipeline',    gen: shapeSweep },
 ];
 
 /* ═══════════════════════════════════════════════════════════════

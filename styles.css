@@ -355,10 +355,18 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
 .hero-title {
   font-family: var(--f-display);
   font-weight: 400;
-  font-size: clamp(64px, 13vw, 220px);
-  line-height: 0.86;
-  letter-spacing: -0.02em;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: rgba(238,231,216,0.75);
+}
+.title-line.big {
+  font-size: clamp(64px, 13vw, 200px);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
   color: var(--paper);
+  margin-top: 2px;
+  margin-bottom: 18px;
 }
 @keyframes fadeIn { to { opacity: 1; } }
 
@@ -398,12 +406,22 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   }
 }
 .legend-ref {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   font-family: var(--f-mono);
   font-size: 11px;
   letter-spacing: 0.25em;
   color: var(--copper);
   font-weight: 700;
-  min-width: 60px;
+  min-width: 90px;
+}
+.legend-label {
+  font-size: 9.5px;
+  color: rgba(238,231,216,0.45);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
 }
 .legend-body { min-width: 0; }
 .legend-name {
@@ -558,7 +576,7 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
 }
 .act-h em { font-family: var(--f-italic); font-style: italic; color: var(--copper); }
 
-/* ═════ specimen grid (Proof of Work) ═════ */
+/* ═════ specimen cards (Selected Work) ═════ */
 .specimen-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -893,6 +911,13 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   gap: 12px;
 }
 .foot .copper { color: var(--copper); }
+.foot a {
+  color: rgba(238,231,216,0.7);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(238,231,216,0.25);
+  transition: color 0.3s, border-color 0.3s;
+}
+.foot a:hover { color: var(--copper); border-color: var(--copper); }
 
 /* ═══════════════════════════════════════════════════════════════
    HERO ADDITIONS — status dot, title typewriter, CTA, metrics
