@@ -1,25 +1,15 @@
-/* ══════════════════════════════════════════════════════════════
-   QUIET APPARATUS — app.js
-   · Hero: WebGL particle instrument morphing through 6 specimens
-   · Close: WebGL ambient drift field
+/* ═══════════════════════════════════════════════════════════════
+   app.js
+   · Hero: Three.js neural-network scene (nodes + pulsing edges)
    · Specimen cards: 2D canvas archival dot illustrations
-   · Custom cursor, preloader, scroll reveals, smooth scroll
-   ══════════════════════════════════════════════════════════════ */
+   · Custom cursor, preloader, scroll reveals, title typewriter,
+     metric count-up
+   ═══════════════════════════════════════════════════════════════ */
 
 import * as THREE from 'three';
 
-const COLORS = {
-  paper:   new THREE.Color('#EEE7D8'),
-  copper:  new THREE.Color('#BD5A33'),
-};
-
 const IS_MOBILE = window.matchMedia('(max-width: 720px)').matches;
-const IS_TOUCH = window.matchMedia('(hover: none)').matches;
-
-// Particle counts tuned for perceived density vs GPU cost.
-// Three tiers: low-end mobile → mid mobile → desktop.
-const LOW_END = IS_MOBILE && (navigator.hardwareConcurrency || 4) <= 4;
-const PARTICLE_COUNT = LOW_END ? 3500 : (IS_MOBILE ? 5500 : 12000);
+const IS_TOUCH  = window.matchMedia('(hover: none)').matches;
 
 /* ═══════════════════════════════════════════════════════════════
    SHAPE GENERATORS
@@ -319,115 +309,38 @@ const SHAPES = [
   { name: 'Maps Lead Extractor',       ref: '06', sub: 'Local business data pipeline',    gen: shapeSweep },
 ];
 
-/* ═══════════════════════════════════════════════════════════════
-   SHADERS
-   ═══════════════════════════════════════════════════════════════ */
-
-const VERT = /* glsl */`
-  uniform float uTime;
-  uniform float uProgress;
-  uniform vec2  uMouse;
-  uniform float uMouseStrength;
-  uniform float uPointSize;
-  uniform float uPixelRatio;
-
-  attribute vec3 aPosA;
-  attribute vec3 aPosB;
-  attribute float aRandom;
-
-  varying float vAlpha;
-  varying float vAccent;
-  varying float vMouseGlow;
-
-  // ease
-  float easeInOut(float t) { return t * t * (3.0 - 2.0 * t); }
-
-  void main() {
-    float t = easeInOut(clamp(uProgress, 0.0, 1.0));
-    vec3 p = mix(aPosA, aPosB, t);
-
-    // organic drift (breath)
-    float phase = uTime * 0.35 + aRandom * 6.28;
-    p.x += sin(phase * 0.9) * 0.006;
-    p.y += cos(phase * 1.15) * 0.006;
-    p.z += sin(phase * 0.4) * 0.03;
-
-    // mouse repulsion in world space
-    vec2 toMouse = p.xy - uMouse;
-    float d = length(toMouse);
-    float force = smoothstep(0.55, 0.0, d) * uMouseStrength;
-    p.xy += normalize(toMouse + vec2(0.0001)) * force * 0.22;
-    vMouseGlow = smoothstep(0.4, 0.0, d);
-
-    vec4 mv = modelViewMatrix * vec4(p, 1.0);
-    gl_Position = projectionMatrix * mv;
-
-    float size = uPointSize * (0.55 + aRandom * 0.95);
-    size += vMouseGlow * 0.5;
-    gl_PointSize = size * uPixelRatio * (340.0 / -mv.z);
-
-    vAlpha  = 0.4 + aRandom * 0.55;
-    vAccent = step(0.93, aRandom);   // ~7 % copper accent particles
-  }
-`;
-
-const FRAG = /* glsl */`
-  precision highp float;
-  uniform vec3 uCopper;
-  uniform vec3 uPaper;
-
-  varying float vAlpha;
-  varying float vAccent;
-  varying float vMouseGlow;
-
-  void main() {
-    vec2 uv = gl_PointCoord - 0.5;
-    float d = length(uv);
-    if (d > 0.5) discard;
-    float a = smoothstep(0.5, 0.0, d);
-    vec3 base = mix(uPaper, uCopper, vAccent);
-    base = mix(base, uCopper, vMouseGlow * 0.6);
-    gl_FragColor = vec4(base, a * vAlpha);
-  }
-`;
 
 /* ═══════════════════════════════════════════════════════════════
-   HERO WEBGL — particle instrument
+   NEURON — Three.js network scene for the hero
+   Nodes float in 3-D space and form edges whenever they're close
+   enough; edges fade with distance. A pulse travels along a random
+   edge every couple of seconds.
    ═══════════════════════════════════════════════════════════════ */
 
-class HeroInstrument {
+class Neuron {
   constructor(canvas) {
     this.canvas = canvas;
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 20);
-    this.camera.position.z = 3.2;
+    this.camera = new THREE.PerspectiveCamera(55, 1, 0.1, 40);
+    this.camera.position.z = 6;
 
     this.renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
+      canvas, antialias: true, alpha: true,
       powerPreference: 'high-performance',
     });
     this.renderer.setClearColor(0x000000, 0);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+    this.nodeCount = IS_MOBILE ? 48 : 90;
+    this.linkDist  = IS_MOBILE ? 1.9 : 1.8;     // connection threshold in world units
+    this.maxLinks  = this.nodeCount * 6;        // safety cap on lines
+
     this.mouse = new THREE.Vector2(-10, -10);
     this.mouseTarget = new THREE.Vector2(-10, -10);
-    this.mouseStrength = 0;
-    this.mouseStrengthTarget = 0;
 
-    this.buildGeometry();
-    this.buildMaterial();
-    this.points = new THREE.Points(this.geometry, this.material);
-    this.scene.add(this.points);
-
-    this.currentIndex = 0;
-    this.nextIndex = 1;
-    this.transition = 0;
-    this.transitionDuration = 1.4;
-    this.holdDuration = 5.6;
-    this.timer = this.holdDuration;
-    this.transitioning = false;
+    this.buildNodes();
+    this.buildLines();
+    this.buildPulses();
 
     this.clock = new THREE.Clock();
 
@@ -436,46 +349,182 @@ class HeroInstrument {
     if (!IS_TOUCH) {
       window.addEventListener('mousemove', this.onMouse.bind(this));
     }
-
-    this.onShapeChange = null;
   }
 
-  buildGeometry() {
-    const N = PARTICLE_COUNT;
+  buildNodes() {
+    const N = this.nodeCount;
+    const positions = new Float32Array(N * 3);
+    const velocities = new Float32Array(N * 3);
+    const sizes = new Float32Array(N);
+    const accent = new Float32Array(N);
+
+    for (let i = 0; i < N; i++) {
+      // distribute roughly inside a 6 × 4 × 3 box
+      positions[i * 3]     = (Math.random() - 0.5) * 6.0;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 4.0;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 3.0;
+      velocities[i * 3]     = (Math.random() - 0.5) * 0.07;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.07;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.04;
+      sizes[i] = 0.6 + Math.random() * 1.4;
+      accent[i] = Math.random() < 0.18 ? 1 : 0;    // ~18% copper nodes
+    }
+
+    this.nodePositions = positions;
+    this.nodeVelocities = velocities;
+
     const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    g.setAttribute('aSize',    new THREE.BufferAttribute(sizes, 1));
+    g.setAttribute('aAccent',  new THREE.BufferAttribute(accent, 1));
 
-    // Precompute one BufferAttribute per specimen; transitions just swap references.
-    this.attrPool = SHAPES.map(s => new THREE.BufferAttribute(s.gen(N), 3));
-
-    const random = new Float32Array(N);
-    for (let i = 0; i < N; i++) random[i] = Math.random();
-
-    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(N * 3), 3));
-    g.setAttribute('aPosA', this.attrPool[0]);
-    g.setAttribute('aPosB', this.attrPool[1]);
-    g.setAttribute('aRandom', new THREE.BufferAttribute(random, 1));
-
-    this.geometry = g;
-  }
-
-  buildMaterial() {
-    this.material = new THREE.ShaderMaterial({
+    this.nodeMaterial = new THREE.ShaderMaterial({
       uniforms: {
-        uTime:           { value: 0 },
-        uProgress:       { value: 0 },
-        uMouse:          { value: new THREE.Vector2(-10, -10) },
-        uMouseStrength:  { value: 0 },
-        uPointSize:      { value: IS_MOBILE ? 3.0 : 3.2 },
-        uPixelRatio:     { value: Math.min(window.devicePixelRatio, 2) },
-        uPaper:          { value: COLORS.paper },
-        uCopper:         { value: COLORS.copper },
+        uPixel: { value: Math.min(window.devicePixelRatio, 2) },
+        uPaper:  { value: new THREE.Color('#EEE7D8') },
+        uCopper: { value: new THREE.Color('#BD5A33') },
       },
-      vertexShader: VERT,
-      fragmentShader: FRAG,
+      vertexShader: /* glsl */`
+        attribute float aSize;
+        attribute float aAccent;
+        uniform float uPixel;
+        varying float vAccent;
+        void main() {
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          gl_Position = projectionMatrix * mv;
+          gl_PointSize = aSize * uPixel * (260.0 / -mv.z);
+          vAccent = aAccent;
+        }
+      `,
+      fragmentShader: /* glsl */`
+        precision highp float;
+        uniform vec3 uPaper;
+        uniform vec3 uCopper;
+        varying float vAccent;
+        void main() {
+          vec2 uv = gl_PointCoord - 0.5;
+          float d = length(uv);
+          if (d > 0.5) discard;
+          float a = smoothstep(0.5, 0.0, d);
+          vec3 c = mix(uPaper, uCopper, vAccent);
+          gl_FragColor = vec4(c, a);
+        }
+      `,
       transparent: true,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     });
+
+    this.nodes = new THREE.Points(g, this.nodeMaterial);
+    this.nodeGeometry = g;
+    this.scene.add(this.nodes);
+  }
+
+  buildLines() {
+    const max = this.maxLinks;
+    // each edge is 2 vertices; each vertex has xyz + alpha
+    this.linePositions = new Float32Array(max * 2 * 3);
+    this.lineAlpha     = new Float32Array(max * 2);
+
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(this.linePositions, 3));
+    g.setAttribute('aAlpha',   new THREE.BufferAttribute(this.lineAlpha, 1));
+    g.setDrawRange(0, 0);
+
+    this.lineMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uColor: { value: new THREE.Color('#EEE7D8') },
+      },
+      vertexShader: /* glsl */`
+        attribute float aAlpha;
+        varying float vAlpha;
+        void main() {
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          gl_Position = projectionMatrix * mv;
+          vAlpha = aAlpha;
+        }
+      `,
+      fragmentShader: /* glsl */`
+        precision highp float;
+        uniform vec3 uColor;
+        varying float vAlpha;
+        void main() {
+          gl_FragColor = vec4(uColor, vAlpha * 0.45);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+
+    this.lines = new THREE.LineSegments(g, this.lineMaterial);
+    this.lineGeometry = g;
+    this.scene.add(this.lines);
+  }
+
+  buildPulses() {
+    // a handful of copper "signals" travelling along random edges
+    this.pulseCount = IS_MOBILE ? 3 : 6;
+    const positions = new Float32Array(this.pulseCount * 3);
+    const sizes = new Float32Array(this.pulseCount);
+
+    for (let i = 0; i < this.pulseCount; i++) {
+      positions[i * 3] = 0;
+      positions[i * 3 + 1] = 0;
+      positions[i * 3 + 2] = 0;
+      sizes[i] = 3.0;
+    }
+
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    g.setAttribute('aSize',    new THREE.BufferAttribute(sizes, 1));
+
+    this.pulseMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        uPixel:  { value: Math.min(window.devicePixelRatio, 2) },
+        uCopper: { value: new THREE.Color('#D8784F') },
+      },
+      vertexShader: /* glsl */`
+        attribute float aSize;
+        uniform float uPixel;
+        void main() {
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          gl_Position = projectionMatrix * mv;
+          gl_PointSize = aSize * uPixel * (260.0 / -mv.z);
+        }
+      `,
+      fragmentShader: /* glsl */`
+        precision highp float;
+        uniform vec3 uCopper;
+        void main() {
+          vec2 uv = gl_PointCoord - 0.5;
+          float d = length(uv);
+          if (d > 0.5) discard;
+          float a = smoothstep(0.5, 0.0, d);
+          gl_FragColor = vec4(uCopper, a);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+
+    this.pulses = new THREE.Points(g, this.pulseMaterial);
+    this.pulseGeometry = g;
+    this.scene.add(this.pulses);
+
+    // each pulse travels from node A -> node B with progress t
+    this.pulseTracks = [];
+    for (let i = 0; i < this.pulseCount; i++) {
+      this.pulseTracks.push(this.newPulseTrack());
+    }
+  }
+
+  newPulseTrack() {
+    const a = Math.floor(Math.random() * this.nodeCount);
+    let b = Math.floor(Math.random() * this.nodeCount);
+    if (b === a) b = (a + 1) % this.nodeCount;
+    return { a, b, t: 0, speed: 0.15 + Math.random() * 0.25 };
   }
 
   resize() {
@@ -487,151 +536,106 @@ class HeroInstrument {
   }
 
   onMouse(e) {
-    // normalise to clip space, project to world at z=0
     const rect = this.canvas.getBoundingClientRect();
-    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-    // convert to world-ish coords at z=0 plane
+    const nx = ((e.clientX - rect.left) / rect.width)  * 2 - 1;
+    const ny = -(((e.clientY - rect.top)  / rect.height) * 2 - 1);
     const vFOV = (this.camera.fov * Math.PI) / 180;
     const height = 2 * Math.tan(vFOV / 2) * this.camera.position.z;
-    const width = height * this.camera.aspect;
+    const width  = height * this.camera.aspect;
     this.mouseTarget.set(nx * width / 2, ny * height / 2);
-    this.mouseStrengthTarget = 1;
-  }
-
-  beginTransition() {
-    this.currentIndex = this.nextIndex;
-    this.nextIndex = (this.nextIndex + 1) % SHAPES.length;
-    this.geometry.setAttribute('aPosA', this.attrPool[this.currentIndex]);
-    this.geometry.setAttribute('aPosB', this.attrPool[this.nextIndex]);
-    this.transition = 0;
-    this.transitioning = true;
-    if (this.onShapeChange) this.onShapeChange(this.currentIndex, this.nextIndex);
-  }
-
-  // 0 → 1 across one full hold + transition cycle
-  getCycleProgress() {
-    const total = this.holdDuration + this.transitionDuration;
-    const elapsed = this.transitioning
-      ? this.holdDuration + this.transition * this.transitionDuration
-      : this.holdDuration - this.timer;
-    return Math.max(0, Math.min(1, elapsed / total));
   }
 
   tick() {
     const dt = Math.min(this.clock.getDelta(), 0.1);
-    const t  = this.clock.elapsedTime;
-
-    // mouse smoothing
     this.mouse.lerp(this.mouseTarget, 0.08);
-    this.mouseStrength += (this.mouseStrengthTarget - this.mouseStrength) * 0.08;
-    this.mouseStrengthTarget *= 0.985;
-    this.material.uniforms.uMouse.value.copy(this.mouse);
-    this.material.uniforms.uMouseStrength.value = this.mouseStrength;
-    this.material.uniforms.uTime.value = t;
 
-    // state machine
-    if (this.transitioning) {
-      this.transition += dt / this.transitionDuration;
-      if (this.transition >= 1) {
-        this.transition = 1;
-        this.transitioning = false;
-        this.timer = this.holdDuration;
+    // advect nodes + box bounds + gentle mouse attraction
+    const p = this.nodePositions;
+    const v = this.nodeVelocities;
+    const bx = 3.2, by = 2.2, bz = 1.6;
+    const mx = this.mouse.x, my = this.mouse.y;
+    for (let i = 0; i < this.nodeCount; i++) {
+      const j = i * 3;
+      p[j]     += v[j]     * dt;
+      p[j + 1] += v[j + 1] * dt;
+      p[j + 2] += v[j + 2] * dt;
+
+      // subtle mouse attraction at long range, repulsion very close
+      const dx = p[j] - mx;
+      const dy = p[j + 1] - my;
+      const d2 = dx * dx + dy * dy + 0.0001;
+      if (d2 < 4 && this.mouse.x > -5) {
+        const f = -0.0012 / d2;       // attract toward mouse
+        const near = d2 < 0.18 ? -0.02 / d2 : 0;  // push away if very close
+        p[j]     += dx * (f + near);
+        p[j + 1] += dy * (f + near);
       }
-      this.material.uniforms.uProgress.value = this.transition;
-    } else {
-      this.timer -= dt;
-      if (this.timer <= 0) {
-        this.beginTransition();
+
+      // soft walls
+      if (p[j] >  bx) v[j] -= 0.02;
+      if (p[j] < -bx) v[j] += 0.02;
+      if (p[j + 1] >  by) v[j + 1] -= 0.02;
+      if (p[j + 1] < -by) v[j + 1] += 0.02;
+      if (p[j + 2] >  bz) v[j + 2] -= 0.02;
+      if (p[j + 2] < -bz) v[j + 2] += 0.02;
+      // gentle damping
+      v[j]     *= 0.995;
+      v[j + 1] *= 0.995;
+      v[j + 2] *= 0.995;
+    }
+    this.nodeGeometry.attributes.position.needsUpdate = true;
+
+    // rebuild line segments: O(N^2) but N is small
+    const lp = this.linePositions;
+    const la = this.lineAlpha;
+    const maxD = this.linkDist;
+    const maxD2 = maxD * maxD;
+    let pair = 0;
+    const maxPairs = this.maxLinks;
+    for (let i = 0; i < this.nodeCount && pair < maxPairs; i++) {
+      const ix = p[i * 3], iy = p[i * 3 + 1], iz = p[i * 3 + 2];
+      for (let j = i + 1; j < this.nodeCount && pair < maxPairs; j++) {
+        const dx = ix - p[j * 3];
+        const dy = iy - p[j * 3 + 1];
+        const dz = iz - p[j * 3 + 2];
+        const d2 = dx * dx + dy * dy + dz * dz;
+        if (d2 < maxD2) {
+          const k = pair * 6;
+          lp[k]     = ix; lp[k + 1] = iy; lp[k + 2] = iz;
+          lp[k + 3] = p[j * 3]; lp[k + 4] = p[j * 3 + 1]; lp[k + 5] = p[j * 3 + 2];
+          const alpha = 1.0 - Math.sqrt(d2) / maxD;
+          la[pair * 2]     = alpha;
+          la[pair * 2 + 1] = alpha;
+          pair++;
+        }
       }
-      // Keep uProgress at 1.0 so last B stays rendered; after beginTransition it resets to 0
     }
+    this.lineGeometry.setDrawRange(0, pair * 2);
+    this.lineGeometry.attributes.position.needsUpdate = true;
+    this.lineGeometry.attributes.aAlpha.needsUpdate = true;
 
-    // gentle rotation for depth
-    this.points.rotation.z = Math.sin(t * 0.05) * 0.015;
-    this.points.rotation.y = Math.sin(t * 0.07) * 0.10;
-
-    this.renderer.render(this.scene, this.camera);
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   CLOSE WEBGL — ambient drift
-   ═══════════════════════════════════════════════════════════════ */
-
-class AmbientDrift {
-  constructor(canvas) {
-    this.canvas = canvas;
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(50, 1, 0.1, 20);
-    this.camera.position.z = 3.5;
-    this.renderer = new THREE.WebGLRenderer({
-      canvas, antialias: true, alpha: true,
-    });
-    this.renderer.setClearColor(0x000000, 0);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const N = IS_MOBILE ? 2500 : 7000;
-    const posA = new Float32Array(N * 3);
-    const posB = new Float32Array(N * 3);
-    const random = new Float32Array(N);
-    for (let i = 0; i < N; i++) {
-      // dispersed cloud
-      const a = Math.random() * Math.PI * 2;
-      const r = Math.pow(Math.random(), 0.8) * 1.5;
-      posA[i*3]   = Math.cos(a) * r;
-      posA[i*3+1] = Math.sin(a) * r * 0.55;
-      posA[i*3+2] = (Math.random() - 0.5) * 0.8;
-      posB[i*3]   = posA[i*3];
-      posB[i*3+1] = posA[i*3+1];
-      posB[i*3+2] = posA[i*3+2];
-      random[i] = Math.random();
+    // pulses travelling along edges
+    const pulsePos = this.pulseGeometry.attributes.position.array;
+    for (let i = 0; i < this.pulseCount; i++) {
+      const track = this.pulseTracks[i];
+      track.t += dt * track.speed;
+      if (track.t >= 1) {
+        this.pulseTracks[i] = this.newPulseTrack();
+        continue;
+      }
+      const a = track.a * 3;
+      const b = track.b * 3;
+      const t = track.t;
+      pulsePos[i * 3]     = p[a]     + (p[b]     - p[a])     * t;
+      pulsePos[i * 3 + 1] = p[a + 1] + (p[b + 1] - p[a + 1]) * t;
+      pulsePos[i * 3 + 2] = p[a + 2] + (p[b + 2] - p[a + 2]) * t;
     }
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(N * 3), 3));
-    g.setAttribute('aPosA', new THREE.BufferAttribute(posA, 3));
-    g.setAttribute('aPosB', new THREE.BufferAttribute(posB, 3));
-    g.setAttribute('aRandom', new THREE.BufferAttribute(random, 1));
+    this.pulseGeometry.attributes.position.needsUpdate = true;
 
-    this.material = new THREE.ShaderMaterial({
-      uniforms: {
-        uTime:           { value: 0 },
-        uProgress:       { value: 1 },
-        uMouse:          { value: new THREE.Vector2(-10, -10) },
-        uMouseStrength:  { value: 0 },
-        uPointSize:      { value: 2.0 },
-        uPixelRatio:     { value: Math.min(window.devicePixelRatio, 2) },
-        uPaper:          { value: COLORS.paper },
-        uCopper:         { value: COLORS.copper },
-      },
-      vertexShader: VERT,
-      fragmentShader: FRAG,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
+    // drift the whole scene for depth cue
+    this.scene.rotation.y = Math.sin(this.clock.elapsedTime * 0.05) * 0.12;
+    this.scene.rotation.x = Math.sin(this.clock.elapsedTime * 0.04) * 0.05;
 
-    this.points = new THREE.Points(g, this.material);
-    this.scene.add(this.points);
-
-    this.clock = new THREE.Clock();
-    this.resize();
-    window.addEventListener('resize', this.resize.bind(this));
-  }
-
-  resize() {
-    const w = this.canvas.clientWidth;
-    const h = this.canvas.clientHeight;
-    this.renderer.setSize(w, h, false);
-    this.camera.aspect = w / h;
-    this.camera.updateProjectionMatrix();
-  }
-
-  tick() {
-    this.clock.getDelta(); // advances elapsedTime
-    const t = this.clock.elapsedTime;
-    this.material.uniforms.uTime.value = t;
-    this.points.rotation.z = t * 0.01;
     this.renderer.render(this.scene, this.camera);
   }
 }
@@ -821,44 +825,9 @@ function initNav() {
   if (close)  io.observe(close);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   HERO LEGEND — reflect current specimen
-   ═══════════════════════════════════════════════════════════════ */
-
-function updateLegend(idx) {
-  const shape = SHAPES[idx];
-  const refEl = document.getElementById('legendRef');
-  const nameEl = document.getElementById('legendName');
-  const subEl = document.getElementById('legendSub');
-  const idxEl = document.getElementById('legendIdx');
-  if (!refEl) return;
-
-  // fade out and swap
-  [nameEl, subEl, refEl, idxEl].forEach(el => el.style.opacity = '0.2');
-  setTimeout(() => {
-    refEl.textContent = shape.ref;
-    nameEl.textContent = shape.name;
-    subEl.textContent = shape.sub;
-    idxEl.textContent = String(idx + 1).padStart(2, '0');
-    [nameEl, subEl, refEl, idxEl].forEach(el => el.style.opacity = '1');
-  }, 180);
-}
-
-function makeLegendBarUpdater(hero) {
-  const fill = document.getElementById('legendBarFill');
-  if (!fill) return () => {};
-  let lastPct = -1;
-  return () => {
-    const pct = hero.getCycleProgress() * 100;
-    if (Math.abs(pct - lastPct) >= 0.4) {
-      fill.style.width = pct + '%';
-      lastPct = pct;
-    }
-  };
-}
-
 async function boot() {
-  // WebGL and DOM init happen in parallel with the preloader animation.
+  let neuron = null;
+
   const setup = () => {
     initCursor();
     initReveal();
@@ -866,69 +835,44 @@ async function boot() {
     initHeroTitle();
     initMetricsCount();
 
-    let hero = null;
     const heroCanvas = document.getElementById('heroCanvas');
     if (heroCanvas) {
       try {
-        hero = new HeroInstrument(heroCanvas);
-        hero.onShapeChange = (cur) => updateLegend(cur);
-        updateLegend(0);
-      } catch (err) { console.warn('Hero WebGL failed', err); }
-    }
-
-    let close = null;
-    const closeCanvas = document.getElementById('closeCanvas');
-    if (closeCanvas) {
-      try {
-        close = new AmbientDrift(closeCanvas);
-      } catch (err) { console.warn('Close WebGL failed', err); }
+        neuron = new Neuron(heroCanvas);
+      } catch (err) {
+        console.warn('Neuron WebGL failed', err);
+      }
     }
 
     document.querySelectorAll('.spec-canvas canvas').forEach(cv => {
       renderSpecimenCard(cv, parseInt(cv.dataset.specimen, 10));
     });
-
-    return { hero, close };
   };
 
-  const [ { hero, close } ] = await Promise.all([
-    Promise.resolve().then(setup),
+  await Promise.all([
     runPreloader(),
+    Promise.resolve().then(setup),
   ]);
 
   document.body.dataset.loaded = 'true';
 
-  const updateLegendBar = hero ? makeLegendBarUpdater(hero) : () => {};
-
-  // Only render each canvas while its section is in (or near) the viewport.
-  const visible = { hero: true, close: false };
-  if (hero && 'IntersectionObserver' in window) {
+  // pause Neuron whenever the hero is off-screen, or the tab is hidden
+  let visible = true;
+  if (neuron && 'IntersectionObserver' in window) {
     const heroSection = document.getElementById('hero');
     if (heroSection) {
       new IntersectionObserver(
-        ([e]) => { visible.hero = e.isIntersecting; },
+        ([e]) => { visible = e.isIntersecting; },
         { rootMargin: '100px' }
       ).observe(heroSection);
     }
   }
-  if (close && 'IntersectionObserver' in window) {
-    const closeSection = document.getElementById('contact');
-    if (closeSection) {
-      new IntersectionObserver(
-        ([e]) => { visible.close = e.isIntersecting; },
-        { rootMargin: '300px' }
-      ).observe(closeSection);
-    }
-  }
 
   function loop() {
-    if (!document.hidden) {
-      if (hero  && visible.hero)  { hero.tick();  updateLegendBar(); }
-      if (close && visible.close) close.tick();
-    }
+    if (neuron && visible && !document.hidden) neuron.tick();
     requestAnimationFrame(loop);
   }
-  loop();
+  if (neuron) loop();
 }
 
 boot();
