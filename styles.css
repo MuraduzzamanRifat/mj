@@ -1522,57 +1522,57 @@ html, body { background: var(--ink); }
 
 /* tooling / code plates */
 .tooling { background: transparent; }
-.tooling-intro { color: rgba(238,231,216,0.70); }
+.tooling-intro { color: rgba(238,231,216,0.85); }
 .code-plate {
-  background: rgba(20,20,22,0.55);
-  border-color: rgba(238,231,216,0.15);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background: rgba(17,17,20,0.82);
+  border-color: rgba(238,231,216,0.18);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 .code-plate:hover { border-color: var(--copper); }
 .code-plate h3 { color: var(--paper); }
-.plate-sub { color: rgba(238,231,216,0.55); }
-.plate-file { color: rgba(238,231,216,0.55); }
-.plate-foot { border-top-color: rgba(238,231,216,0.15); color: rgba(238,231,216,0.55); }
-.plate-rule { background: rgba(238,231,216,0.15); }
-.tt-text { color: rgba(238,231,216,0.70); }
-.tt-rule { background: rgba(238,231,216,0.2); }
+.plate-sub { color: rgba(238,231,216,0.72); }
+.plate-file { color: rgba(238,231,216,0.70); }
+.plate-foot { border-top-color: rgba(238,231,216,0.18); color: rgba(238,231,216,0.75); }
+.plate-rule { background: rgba(238,231,216,0.2); }
+.tt-text { color: rgba(238,231,216,0.85); }
+.tt-rule { background: rgba(238,231,216,0.25); }
 
 /* specimen cards */
 .specimen {
-  background: rgba(20,20,22,0.55);
-  border-color: rgba(238,231,216,0.15);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background: rgba(17,17,20,0.82);
+  border-color: rgba(238,231,216,0.18);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 .specimen:hover { border-color: var(--copper); }
 .specimen h3 { color: var(--paper); }
-.specimen .sub { color: rgba(238,231,216,0.6); }
-.specimen .spec-idx { color: rgba(238,231,216,0.5); }
+.specimen .sub { color: rgba(238,231,216,0.72); }
+.specimen .spec-idx { color: rgba(238,231,216,0.65); }
 .specimen .spec-canvas {
-  border-top-color: rgba(238,231,216,0.15);
-  border-bottom-color: rgba(238,231,216,0.15);
+  border-top-color: rgba(238,231,216,0.18);
+  border-bottom-color: rgba(238,231,216,0.18);
 }
-.specimen p.desc { color: rgba(238,231,216,0.78); }
-.specimen footer { border-top-color: rgba(238,231,216,0.15); }
-.specimen .stack-list { color: rgba(238,231,216,0.55); }
+.specimen p.desc { color: rgba(238,231,216,0.90); }
+.specimen footer { border-top-color: rgba(238,231,216,0.18); }
+.specimen .stack-list { color: rgba(238,231,216,0.70); }
 
 /* stack / skills */
 .sblock h4 { color: var(--paper); }
-.sblock h4 .l { background: rgba(238,231,216,0.2); }
-.sblock p { color: rgba(238,231,216,0.75); }
+.sblock h4 .l { background: rgba(238,231,216,0.22); }
+.sblock p { color: rgba(238,231,216,0.88); }
 
 /* experience */
-.exp { border-bottom-color: rgba(238,231,216,0.12); }
-.exp-date { color: rgba(238,231,216,0.5); }
+.exp { border-bottom-color: rgba(238,231,216,0.14); }
+.exp-date { color: rgba(238,231,216,0.65); }
 .exp-body h4 { color: var(--paper); }
-.exp-body h4 .co { color: rgba(238,231,216,0.55); }
-.exp-body p { color: rgba(238,231,216,0.72); }
+.exp-body h4 .co { color: rgba(238,231,216,0.70); }
+.exp-body p { color: rgba(238,231,216,0.88); }
 
 /* credentials */
 .creds-grid li {
-  color: rgba(238,231,216,0.72);
-  border-bottom-color: rgba(238,231,216,0.12);
+  color: rgba(238,231,216,0.88);
+  border-bottom-color: rgba(238,231,216,0.14);
 }
 
 /* act divider — just a single thin copper-dot row */
