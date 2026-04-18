@@ -322,11 +322,12 @@ button:focus-visible,
 }
 
 .hero-canvas {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero-top-bar {
@@ -554,8 +555,8 @@ button:focus-visible,
    ACT DIVIDER
    ═══════════════════════════════════════════════════════════════ */
 .act-divider {
-  background: linear-gradient(to bottom, var(--ink) 0%, var(--paper) 100%);
-  padding: 60px 0;
+  background: transparent;
+  padding: 40px 0;
 }
 .act-divider .wrap {
   display: flex;
@@ -1380,4 +1381,109 @@ button:focus-visible,
   .tooling-tag { flex-direction: column; gap: 18px; }
   .tt-rule { width: 80px; flex: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   FULL-SITE NEURON — Act II is transparent so the fixed canvas
+   shows through; components re-skinned for a dark background
+   ═══════════════════════════════════════════════════════════════ */
+
+html, body { background: var(--ink); }
+
+.act-two {
+  background: transparent;
+  color: var(--paper);
+  position: relative;
+  z-index: 1;
+}
+.act-two section { border-bottom: 1px solid rgba(238,231,216,0.12); }
+.act-two .sec-meta {
+  color: rgba(238,231,216,0.55);
+  border-color: rgba(238,231,216,0.25);
+}
+.act-two .act-h { color: var(--paper); }
+.act-two .act-h em { color: var(--copper); }
+
+/* tooling / code plates */
+.tooling { background: transparent; }
+.tooling-intro { color: rgba(238,231,216,0.70); }
+.code-plate {
+  background: rgba(20,20,22,0.55);
+  border-color: rgba(238,231,216,0.15);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.code-plate:hover { border-color: var(--copper); }
+.code-plate h3 { color: var(--paper); }
+.plate-sub { color: rgba(238,231,216,0.55); }
+.plate-file { color: rgba(238,231,216,0.55); }
+.plate-foot { border-top-color: rgba(238,231,216,0.15); color: rgba(238,231,216,0.55); }
+.plate-rule { background: rgba(238,231,216,0.15); }
+.tt-text { color: rgba(238,231,216,0.70); }
+.tt-rule { background: rgba(238,231,216,0.2); }
+
+/* specimen cards */
+.specimen {
+  background: rgba(20,20,22,0.55);
+  border-color: rgba(238,231,216,0.15);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.specimen:hover { border-color: var(--copper); }
+.specimen h3 { color: var(--paper); }
+.specimen .sub { color: rgba(238,231,216,0.6); }
+.specimen .spec-idx { color: rgba(238,231,216,0.5); }
+.specimen .spec-canvas {
+  border-top-color: rgba(238,231,216,0.15);
+  border-bottom-color: rgba(238,231,216,0.15);
+}
+.specimen p.desc { color: rgba(238,231,216,0.78); }
+.specimen footer { border-top-color: rgba(238,231,216,0.15); }
+.specimen .stack-list { color: rgba(238,231,216,0.55); }
+
+/* stack / skills */
+.sblock h4 { color: var(--paper); }
+.sblock h4 .l { background: rgba(238,231,216,0.2); }
+.sblock p { color: rgba(238,231,216,0.75); }
+
+/* experience */
+.exp { border-bottom-color: rgba(238,231,216,0.12); }
+.exp-date { color: rgba(238,231,216,0.5); }
+.exp-body h4 { color: var(--paper); }
+.exp-body h4 .co { color: rgba(238,231,216,0.55); }
+.exp-body p { color: rgba(238,231,216,0.72); }
+
+/* credentials */
+.creds-grid li {
+  color: rgba(238,231,216,0.72);
+  border-bottom-color: rgba(238,231,216,0.12);
+}
+
+/* act divider — just a single thin copper-dot row */
+.act-divider .divider-line { background: rgba(238,231,216,0.2); }
+
+/* close section — also transparent so neuron extends into it */
+.close { background: transparent; position: relative; z-index: 1; }
+.foot  { background: rgba(17,17,20,0.8); position: relative; z-index: 1; }
+
+/* nav keeps its own backdrop blur, but 'light' state no longer fires */
+.nav.light {
+  background: rgba(17,17,20,0.72);
+  color: var(--paper);
+  border-bottom: 1px solid rgba(238,231,216,0.12);
+}
+.nav.light .nav-sig     { color: var(--paper); }
+.nav.light .nav-links a { color: var(--paper); }
+.nav.light .nav-cta,
+.nav.light .nav-pdf     { color: var(--paper); border-color: rgba(238,231,216,0.35); }
+.nav.light .nav-cta:hover,
+.nav.light .nav-pdf:hover { background: var(--copper); border-color: var(--copper); color: var(--paper); }
+
+/* preserve a base fill so the canvas has real dark beneath it */
+body::after {
+  content: "";
+  position: fixed; inset: 0; z-index: -1;
+  background: var(--ink);
+  pointer-events: none;
+}
+
 

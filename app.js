@@ -662,16 +662,15 @@ function renderSpecimenCard(canvas, shapeIdx) {
     const x = positions[i * 3] * scale + cx;
     const y = -positions[i * 3 + 1] * scale + cy;
     const r = Math.random();
-    const isCopper = r < 0.08;
-    ctx.fillStyle = isCopper ? '#BD5A33' : 'rgba(20,20,22,0.82)';
+    const isCopper = r < 0.12;
+    ctx.fillStyle = isCopper ? '#BD5A33' : 'rgba(238,231,216,0.82)';
     const size = isCopper ? 1.6 : 1.1;
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  // subtle inner frame tick (archival)
-  ctx.strokeStyle = 'rgba(186,176,160,0.6)';
+  ctx.strokeStyle = 'rgba(238,231,216,0.25)';
   ctx.lineWidth = 1;
   ctx.strokeRect(8, 8, W - 16, H - 16);
   ctx.fillStyle = '#BD5A33';
@@ -856,20 +855,8 @@ async function boot() {
 
   document.body.dataset.loaded = 'true';
 
-  // pause Neuron whenever the hero is off-screen, or the tab is hidden
-  let visible = true;
-  if (neuron && 'IntersectionObserver' in window) {
-    const heroSection = document.getElementById('hero');
-    if (heroSection) {
-      new IntersectionObserver(
-        ([e]) => { visible = e.isIntersecting; },
-        { rootMargin: '100px' }
-      ).observe(heroSection);
-    }
-  }
-
   function loop() {
-    if (neuron && visible && !document.hidden) neuron.tick();
+    if (neuron && !document.hidden) neuron.tick();
     requestAnimationFrame(loop);
   }
   if (neuron) loop();
