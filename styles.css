@@ -323,7 +323,6 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
 
 @media (max-width: 900px) {
   .hero-top-bar { padding: 70px 24px 0; }
-  .tb-mid { display: none; }
 }
 
 .hero-content {
@@ -361,76 +360,7 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   letter-spacing: -0.02em;
   color: var(--paper);
 }
-.title-row {
-  display: block;
-  overflow: hidden;
-}
-.title-row .word {
-  display: inline-block;
-  transform: translateY(110%);
-  animation: slideUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
-}
-.title-row .word:nth-child(2) { animation-delay: 0.95s; }
-.title-row.sub {
-  margin-top: 8px;
-  font-size: clamp(32px, 5.5vw, 100px);
-}
-.title-row.sub em {
-  font-style: italic;
-  font-family: var(--f-italic);
-  color: var(--copper);
-  display: inline-block;
-  transform: translateY(110%);
-  animation: slideUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.1s forwards;
-}
-@keyframes slideUp { to { transform: translateY(0); } }
-
-.hero-under {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin: 44px 0 36px;
-  opacity: 0;
-  animation: fadeIn 0.8s 1.6s forwards;
-}
 @keyframes fadeIn { to { opacity: 1; } }
-.hu-rule {
-  flex: 1;
-  height: 1px;
-  background: rgba(238,231,216,0.3);
-}
-.hu-mark {
-  position: relative;
-  width: 40px; height: 40px;
-  flex: none;
-}
-.hu-ring {
-  position: absolute; inset: 0;
-  border: 1px solid var(--paper);
-  border-radius: 50%;
-}
-.hu-cross {
-  position: absolute; inset: 8px;
-}
-.hu-cross::before, .hu-cross::after {
-  content: ""; position: absolute; background: var(--paper);
-}
-.hu-cross::before {
-  top: 50%; left: 0; right: 0; height: 1px;
-  transform: translateY(-50%);
-}
-.hu-cross::after {
-  left: 50%; top: 0; bottom: 0; width: 1px;
-  transform: translateX(-50%);
-}
-.hu-core {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px; height: 8px;
-  background: var(--copper);
-  border-radius: 50%;
-}
 
 .hero-lede {
   font-family: var(--f-italic);
@@ -515,38 +445,6 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
 }
 .legend-idx { color: var(--paper); }
 .legend-idx span { color: var(--copper); }
-
-.hero-scroll {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  padding: 20px 0 40px;
-  opacity: 0;
-  animation: fadeIn 1s 2.5s forwards;
-}
-.hs-rule {
-  width: 80px;
-  height: 1px;
-  background: rgba(238,231,216,0.4);
-  position: relative;
-  overflow: hidden;
-}
-.hs-rule::after {
-  content: "";
-  position: absolute;
-  top: 0; left: -40%;
-  width: 40%; height: 100%;
-  background: var(--copper);
-  animation: slide 2s ease-in-out infinite;
-}
-@keyframes slide {
-  0%   { left: -40%; }
-  50%  { left: 100%; }
-  100% { left: 100%; }
-}
 
 /* ═══════════════════════════════════════════════════════════════
    POSITIONING (still dark, Act I)

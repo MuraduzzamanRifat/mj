@@ -8,13 +8,9 @@
 
 import * as THREE from 'three';
 
-// ─────────────── Colors ───────────────
 const COLORS = {
-  ink:     new THREE.Color('#111114'),
   paper:   new THREE.Color('#EEE7D8'),
   copper:  new THREE.Color('#BD5A33'),
-  copperL: new THREE.Color('#D8784F'),
-  graph:   new THREE.Color('#6E6C66'),
 };
 
 const IS_MOBILE = window.matchMedia('(max-width: 720px)').matches;
@@ -379,7 +375,6 @@ const VERT = /* glsl */`
 
 const FRAG = /* glsl */`
   precision highp float;
-  uniform vec3 uInk;
   uniform vec3 uCopper;
   uniform vec3 uPaper;
 
@@ -393,7 +388,6 @@ const FRAG = /* glsl */`
     if (d > 0.5) discard;
     float a = smoothstep(0.5, 0.0, d);
     vec3 base = mix(uPaper, uCopper, vAccent);
-    // mouse-lit particles brighten toward copper
     base = mix(base, uCopper, vMouseGlow * 0.6);
     gl_FragColor = vec4(base, a * vAlpha);
   }
@@ -452,15 +446,15 @@ class HeroInstrument {
     const N = PARTICLE_COUNT;
     const g = new THREE.BufferGeometry();
 
-    this.positionsA = SHAPES[0].gen(N);
-    this.positionsB = SHAPES[1].gen(N);
+    // Precompute one BufferAttribute per specimen; transitions just swap references.
+    this.attrPool = SHAPES.map(s => new THREE.BufferAttribute(s.gen(N), 3));
 
     const random = new Float32Array(N);
     for (let i = 0; i < N; i++) random[i] = Math.random();
 
     g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(N * 3), 3));
-    g.setAttribute('aPosA', new THREE.BufferAttribute(this.positionsA, 3));
-    g.setAttribute('aPosB', new THREE.BufferAttribute(this.positionsB, 3));
+    g.setAttribute('aPosA', this.attrPool[0]);
+    g.setAttribute('aPosB', this.attrPool[1]);
     g.setAttribute('aRandom', new THREE.BufferAttribute(random, 1));
 
     this.geometry = g;
@@ -475,7 +469,6 @@ class HeroInstrument {
         uMouseStrength:  { value: 0 },
         uPointSize:      { value: IS_MOBILE ? 3.0 : 3.2 },
         uPixelRatio:     { value: Math.min(window.devicePixelRatio, 2) },
-        uInk:            { value: COLORS.ink },
         uPaper:          { value: COLORS.paper },
         uCopper:         { value: COLORS.copper },
       },
@@ -511,14 +504,20 @@ class HeroInstrument {
   beginTransition() {
     this.currentIndex = this.nextIndex;
     this.nextIndex = (this.nextIndex + 1) % SHAPES.length;
-    // swap A ← previous B, generate new B
-    this.positionsA = this.positionsB;
-    this.positionsB = SHAPES[this.nextIndex].gen(PARTICLE_COUNT);
-    this.geometry.setAttribute('aPosA', new THREE.BufferAttribute(this.positionsA, 3));
-    this.geometry.setAttribute('aPosB', new THREE.BufferAttribute(this.positionsB, 3));
+    this.geometry.setAttribute('aPosA', this.attrPool[this.currentIndex]);
+    this.geometry.setAttribute('aPosB', this.attrPool[this.nextIndex]);
     this.transition = 0;
     this.transitioning = true;
     if (this.onShapeChange) this.onShapeChange(this.currentIndex, this.nextIndex);
+  }
+
+  // 0 → 1 across one full hold + transition cycle
+  getCycleProgress() {
+    const total = this.holdDuration + this.transitionDuration;
+    const elapsed = this.transitioning
+      ? this.holdDuration + this.transition * this.transitionDuration
+      : this.holdDuration - this.timer;
+    return Math.max(0, Math.min(1, elapsed / total));
   }
 
   tick() {
@@ -604,7 +603,6 @@ class AmbientDrift {
         uMouseStrength:  { value: 0 },
         uPointSize:      { value: 2.0 },
         uPixelRatio:     { value: Math.min(window.devicePixelRatio, 2) },
-        uInk:            { value: COLORS.ink },
         uPaper:          { value: COLORS.paper },
         uCopper:         { value: COLORS.copper },
       },
@@ -632,7 +630,7 @@ class AmbientDrift {
   }
 
   tick() {
-    this.clock.getDelta();
+    this.clock.getDelta(); // advances elapsedTime
     const t = this.clock.elapsedTime;
     this.material.uniforms.uTime.value = t;
     this.points.rotation.z = t * 0.01;
@@ -850,72 +848,67 @@ function updateLegend(idx) {
   }, 180);
 }
 
-function animateLegendBar(hero) {
+function makeLegendBarUpdater(hero) {
   const fill = document.getElementById('legendBarFill');
-  function step() {
-    if (!fill) return;
-    const totalCycle = hero.holdDuration + hero.transitionDuration;
-    let pct;
-    if (hero.transitioning) {
-      pct = (hero.holdDuration + hero.transition * hero.transitionDuration) / totalCycle * 100;
-    } else {
-      pct = (hero.holdDuration - hero.timer) / totalCycle * 100;
+  if (!fill) return () => {};
+  let lastPct = -1;
+  return () => {
+    const pct = hero.getCycleProgress() * 100;
+    if (Math.abs(pct - lastPct) >= 0.4) {
+      fill.style.width = pct + '%';
+      lastPct = pct;
     }
-    fill.style.width = Math.min(100, Math.max(0, pct)) + '%';
-    requestAnimationFrame(step);
-  }
-  step();
+  };
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   BOOT
-   ═══════════════════════════════════════════════════════════════ */
-
 async function boot() {
-  await runPreloader();
+  // WebGL and DOM init happen in parallel with the preloader animation.
+  const setup = () => {
+    initCursor();
+    initReveal();
+    initNav();
+    initHeroTitle();
+    initMetricsCount();
+
+    let hero = null;
+    const heroCanvas = document.getElementById('heroCanvas');
+    if (heroCanvas) {
+      try {
+        hero = new HeroInstrument(heroCanvas);
+        hero.onShapeChange = (cur) => updateLegend(cur);
+        updateLegend(0);
+      } catch (err) { console.warn('Hero WebGL failed', err); }
+    }
+
+    let close = null;
+    const closeCanvas = document.getElementById('closeCanvas');
+    if (closeCanvas) {
+      try {
+        close = new AmbientDrift(closeCanvas);
+      } catch (err) { console.warn('Close WebGL failed', err); }
+    }
+
+    document.querySelectorAll('.spec-canvas canvas').forEach(cv => {
+      renderSpecimenCard(cv, parseInt(cv.dataset.specimen, 10));
+    });
+
+    return { hero, close };
+  };
+
+  const [ { hero, close } ] = await Promise.all([
+    Promise.resolve().then(setup),
+    runPreloader(),
+  ]);
+
   document.body.dataset.loaded = 'true';
 
-  initCursor();
-  initReveal();
-  initNav();
-  initHeroTitle();
-  initMetricsCount();
+  const updateLegendBar = hero ? makeLegendBarUpdater(hero) : () => {};
 
-  // Hero instrument
-  const heroCanvas = document.getElementById('heroCanvas');
-  let hero = null;
-  if (heroCanvas) {
-    try {
-      hero = new HeroInstrument(heroCanvas);
-      hero.onShapeChange = (cur) => updateLegend(cur);
-      updateLegend(0);
-      animateLegendBar(hero);
-    } catch (err) {
-      console.warn('Hero WebGL failed', err);
-    }
-  }
-
-  // Close ambient drift
-  const closeCanvas = document.getElementById('closeCanvas');
-  let close = null;
-  if (closeCanvas) {
-    try {
-      close = new AmbientDrift(closeCanvas);
-    } catch (err) {
-      console.warn('Close WebGL failed', err);
-    }
-  }
-
-  // Specimen card illustrations (2D)
-  document.querySelectorAll('.spec-canvas canvas').forEach(cv => {
-    const idx = parseInt(cv.dataset.specimen, 10);
-    renderSpecimenCard(cv, idx);
-  });
-
-  // unified render loop
   function loop() {
-    if (hero)  hero.tick();
-    if (close) close.tick();
+    if (!document.hidden) {
+      if (hero)  { hero.tick();  updateLegendBar(); }
+      if (close) close.tick();
+    }
     requestAnimationFrame(loop);
   }
   loop();
