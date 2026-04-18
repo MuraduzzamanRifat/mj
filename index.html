@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Muraduzzaman — Quiet Apparatus</title>
+<meta name="description" content="Growth Engineer. A marketer who ships software. SEO, Python automation, Chrome extensions, AI tooling. Dhaka, Bangladesh." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Muraduzzaman — Quiet Apparatus" />
+<meta property="og:description" content="A marketer who ships software. Seven years of SEO. Now building the systems that run beneath the outcomes." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400;1,6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-loaded="false">
+
+<!-- ══════════ PRELOADER ══════════ -->
+<div class="preloader" id="preloader">
+  <div class="pre-grid">
+    <span class="pre-mono">CALIBRATING  APPARATUS</span>
+    <span class="pre-mono right">MMXXVI  /  DHAKA</span>
+  </div>
+  <div class="pre-mark">
+    <svg viewBox="0 0 100 100" width="100" height="100">
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#A84D2A" stroke-width="1"/>
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#EEE7D8" stroke-width="1" stroke-dasharray="1 4"/>
+      <circle cx="50" cy="50" r="3" fill="#A84D2A"/>
+      <line x1="14" y1="50" x2="44" y2="50" stroke="#EEE7D8" stroke-width="1"/>
+      <line x1="56" y1="50" x2="86" y2="50" stroke="#EEE7D8" stroke-width="1"/>
+      <line x1="50" y1="14" x2="50" y2="44" stroke="#EEE7D8" stroke-width="1"/>
+      <line x1="50" y1="56" x2="50" y2="86" stroke="#EEE7D8" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="pre-progress">
+    <span class="pre-mono" id="preProgress">0000</span>
+    <div class="pre-bar"><div class="pre-bar-fill" id="preBar"></div></div>
+    <span class="pre-mono">LOAD</span>
+  </div>
+</div>
+
+<!-- ══════════ CUSTOM CURSOR ══════════ -->
+<div class="cursor-dot"   id="cursorDot"></div>
+<div class="cursor-ring"  id="cursorRing"></div>
+
+<!-- ══════════ GRAIN OVERLAY ══════════ -->
+<div class="grain-overlay"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-sig">
+      <svg viewBox="0 0 40 40" width="22" height="22" class="nav-mark">
+        <circle cx="20" cy="20" r="12" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="20" cy="20" r="2.5" fill="#A84D2A"/>
+        <line x1="6"  y1="20" x2="16" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="24" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="6"  x2="20" y2="16" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="24" x2="20" y2="34" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <span>Muraduzzaman</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#tooling"    data-n="01">Code</a></li>
+      <li><a href="#work"       data-n="02">Work</a></li>
+      <li><a href="#stack"      data-n="03">Stack</a></li>
+      <li><a href="#experience" data-n="04">Experience</a></li>
+      <li><a href="#contact"    data-n="05">Contact</a></li>
+    </ul>
+    <a href="mailto:dev@try-n.com" class="nav-cta">
+      <span>Open an inquiry</span>
+      <svg viewBox="0 0 24 24" width="12" height="12"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     ACT I — DARK  (WebGL-driven hero + positioning)
+     ══════════════════════════════════════════════════════════════ -->
+<main id="top">
+
+<section class="hero" id="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
+  <div class="hero-top-bar">
+    <div class="tb-left">
+      <span class="mono-11">MURADUZZAMAN</span>
+      <span class="mono-11 dim">GROWTH ENGINEER · INDEX 001 / MMXXVI</span>
+    </div>
+    <div class="tb-right">
+      <span class="mono-11 status">
+        <span class="status-dot"></span>
+        <span>Available — select engagements</span>
+      </span>
+      <span class="mono-11 dim">DHAKA · 23.81° N · 90.41° E</span>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-kicker">
+      <span class="dot"></span>
+      <span>SEO &nbsp;·&nbsp; AUTOMATION &nbsp;·&nbsp; AI &nbsp;·&nbsp; CODE</span>
+      <span class="dot"></span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="title-line"><span class="tw-line" data-delay="700">I rank sites.</span></span>
+      <span class="title-line"><span class="tw-line" data-delay="1350">Then I ship the systems</span></span>
+      <span class="title-line sub"><em class="tw-line" data-delay="2050">that keep them ranked.</em></span>
+    </h1>
+
+    <p class="hero-lede">
+      <strong>A marketer who codes.</strong> An engineer who ranks.<br>
+      One hire that replaces the vendor chain.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#work" class="cta-btn primary">
+        <span class="cta-label">See what I've shipped</span>
+        <span class="cta-arrow">↓</span>
+      </a>
+      <a href="mailto:dev@try-n.com" class="cta-btn">
+        <span class="cta-label">Open an inquiry</span>
+        <span class="cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- credibility strip — four numbers that count up on load -->
+  <div class="hero-metrics" id="heroMetrics">
+    <div class="metric">
+      <span class="metric-num" data-count="7" data-pad="02">00</span>
+      <span class="metric-unit">years ranking</span>
+      <span class="metric-sub">sites on Google</span>
+    </div>
+    <div class="metric">
+      <span class="metric-num" data-count="6" data-pad="02">00</span>
+      <span class="metric-unit">products shipped</span>
+      <span class="metric-sub">SaaS · scrapers · themes · apps</span>
+    </div>
+    <div class="metric">
+      <span class="metric-num" data-count="14" data-pad="02">00</span>
+      <span class="metric-unit">platforms automated</span>
+      <span class="metric-sub">Reddit · TradingView · IG · FB · more</span>
+    </div>
+    <div class="metric">
+      <span class="metric-num">01</span>
+      <span class="metric-unit">operator</span>
+      <span class="metric-sub">no vendor chain</span>
+    </div>
+  </div>
+
+  <!-- specimen legend — which apparatus is currently rendered -->
+  <div class="hero-legend" id="heroLegend">
+    <div class="legend-ref"><span id="legendRef">I · i</span></div>
+    <div class="legend-body">
+      <div class="legend-name" id="legendName">Continuous Harvest</div>
+      <div class="legend-sub"  id="legendSub">loop · multi-source</div>
+    </div>
+    <div class="legend-progress">
+      <div class="legend-bar"><div class="legend-bar-fill" id="legendBarFill"></div></div>
+      <div class="legend-idx"><span id="legendIdx">01</span> / 06</div>
+    </div>
+  </div>
+</section>
+
+<section class="positioning">
+  <div class="wrap">
+    <div class="sec-meta">
+      <span><span class="num">§ I</span> &nbsp; Positioning</span>
+      <span class="dim">Field Register</span>
+    </div>
+    <div class="pos-grid">
+      <div class="pos-lead reveal">
+        <p>Most marketers buy tools.</p>
+        <p><em>I build them.</em></p>
+      </div>
+      <div class="pos-body">
+        <p class="reveal">
+          I spent seven years inside the machinery of SEO — technical audits, on-page architecture, off-page campaigns, the full funnel. Then I got tired of paying agencies and Fiverr sellers for scrapers that broke in a week, Chrome extensions that never shipped, and "AI content" that was ChatGPT with a wrapper.
+        </p>
+        <p class="reveal">
+          So I learned to code. Python. JavaScript. Kotlin. Liquid. Chrome Extensions API. FastAPI. Playwright. Enough to stop outsourcing anything.
+        </p>
+        <p class="reveal">
+          The result is a hybrid operator who writes the SEO brief, codes the scraper that feeds it, ships the Chrome extension that captures it, and launches the Shopify store that sells it.
+        </p>
+        <div class="pos-tag reveal">
+          <span>ONE</span><span class="sep">·</span>
+          <span>HIRE</span><span class="sep">·</span>
+          <span>FULL</span><span class="sep">·</span>
+          <span>STACK</span><span class="sep">·</span>
+          <span>NO</span><span class="sep">·</span>
+          <span>VENDOR</span><span class="sep">·</span>
+          <span>CHAIN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════════════
+     ACT II — LIGHT  (archival register of observable work)
+     ══════════════════════════════════════════════════════════════ -->
+<div class="act-divider">
+  <div class="wrap">
+    <div class="divider-line"></div>
+    <div class="divider-mark">
+      <svg viewBox="0 0 24 24" width="14" height="14">
+        <circle cx="12" cy="12" r="4" fill="#A84D2A"/>
+      </svg>
+    </div>
+    <div class="divider-line"></div>
+  </div>
+</div>
+
+<div class="act-two">
+
+<!-- ─────────────── THE TOOLING (code as artifact) ─────────────── -->
+<section id="tooling" class="tooling">
+  <div class="wrap">
+    <div class="sec-meta">
+      <span><span class="num">§ II</span> &nbsp; The Tooling</span>
+      <span class="dim">Built in-house · Four excerpts</span>
+    </div>
+
+    <h2 class="act-h reveal">
+      Built, not bought.<br>
+      Every tool <em>written in-house.</em>
+    </h2>
+
+    <p class="tooling-intro reveal">
+      Four excerpts from four shipped systems — the same code that classifies leads, runs the scheduler, powers the Chrome extension, and renders the storefront. If the work is the proof, then the code is the receipt.
+    </p>
+
+    <div class="code-grid">
+
+      <article class="code-plate reveal" data-plate="0">
+        <header class="plate-head">
+          <span class="plate-ref">PLATE A</span>
+          <span class="plate-file">classifier / forex_classifier.py</span>
+        </header>
+        <h3>The Lead Classifier</h3>
+        <p class="plate-sub">Fifteen-point scoring engine — Forex Lead Finder</p>
+        <div class="plate-window">
+          <div class="plate-chrome">
+            <span class="cd"></span><span class="cd"></span><span class="cd"></span>
+            <span class="plate-tag">PYTHON · EXCERPT</span>
+          </div>
+          <pre class="code" data-lang="py"><code class="code-body"><span class="code-line"><span class="ln">01</span><span class="k">def</span> <span class="fn">score_profile</span>(profile, posts):</span>
+<span class="code-line"><span class="ln">02</span>    <span class="c"># bio keyword = +10 · post keyword = +10</span></span>
+<span class="code-line"><span class="ln">03</span>    <span class="c"># trading pair = +10 · MT4 / MT5 = +5 · hashtag = +5</span></span>
+<span class="code-line"><span class="ln">04</span>    score = <span class="n">0</span></span>
+<span class="code-line"><span class="ln">05</span>    <span class="k">for</span> kw <span class="k">in</span> BIO_KEYWORDS:</span>
+<span class="code-line"><span class="ln">06</span>        <span class="k">if</span> kw <span class="k">in</span> profile.bio.lower():</span>
+<span class="code-line"><span class="ln">07</span>            score += <span class="n">10</span></span>
+<span class="code-line"><span class="ln">08</span>    <span class="k">for</span> post <span class="k">in</span> posts:</span>
+<span class="code-line"><span class="ln">09</span>        <span class="k">if</span> any(p <span class="k">in</span> post <span class="k">for</span> p <span class="k">in</span> PAIRS):</span>
+<span class="code-line"><span class="ln">10</span>            score += <span class="n">10</span></span>
+<span class="code-line"><span class="ln">11</span>    <span class="k">return</span> score  <span class="c"># ≥ 15 kept · &lt; 15 discarded</span></span></code></pre>
+        </div>
+        <footer class="plate-foot">
+          <span class="plate-metric">accepts ~26% · discards ~74%</span>
+          <span class="plate-rule"></span>
+        </footer>
+      </article>
+
+      <article class="code-plate reveal" data-plate="1">
+        <header class="plate-head">
+          <span class="plate-ref">PLATE B</span>
+          <span class="plate-file">scheduler.py</span>
+        </header>
+        <h3>The Cadence Engine</h3>
+        <p class="plate-sub">Six-hour harvest loop — APScheduler</p>
+        <div class="plate-window">
+          <div class="plate-chrome">
+            <span class="cd"></span><span class="cd"></span><span class="cd"></span>
+            <span class="plate-tag">PYTHON · EXCERPT</span>
+          </div>
+          <pre class="code" data-lang="py"><code class="code-body"><span class="code-line"><span class="ln">01</span><span class="k">from</span> apscheduler.schedulers.blocking <span class="k">import</span> BlockingScheduler</span>
+<span class="code-line"><span class="ln">02</span><span class="k">from</span> main <span class="k">import</span> run_multi_platform</span>
+<span class="code-line"><span class="ln">03</span></span>
+<span class="code-line"><span class="ln">04</span>scheduler = BlockingScheduler(timezone=<span class="s">"UTC"</span>)</span>
+<span class="code-line"><span class="ln">05</span></span>
+<span class="code-line"><span class="ln">06</span><span class="at">@scheduler.scheduled_job</span>(<span class="s">"interval"</span>, hours=<span class="n">6</span>)</span>
+<span class="code-line"><span class="ln">07</span><span class="k">def</span> <span class="fn">tick</span>():</span>
+<span class="code-line"><span class="ln">08</span>    <span class="c"># four runs per day — enough signal, low ban risk</span></span>
+<span class="code-line"><span class="ln">09</span>    run_multi_platform(platforms=[<span class="s">"reddit"</span>, <span class="s">"babypips"</span>,</span>
+<span class="code-line"><span class="ln">10</span>                                  <span class="s">"tradingview"</span>, <span class="s">"forexfactory"</span>])</span>
+<span class="code-line"><span class="ln">11</span></span>
+<span class="code-line"><span class="ln">12</span>scheduler.start()</span></code></pre>
+        </div>
+        <footer class="plate-foot">
+          <span class="plate-metric">four harvests per day · indefinite runtime</span>
+          <span class="plate-rule"></span>
+        </footer>
+      </article>
+
+      <article class="code-plate reveal" data-plate="2">
+        <header class="plate-head">
+          <span class="plate-ref">PLATE C</span>
+          <span class="plate-file">extension / content.js</span>
+        </header>
+        <h3>The Upwork Autoloom</h3>
+        <p class="plate-sub">Chrome extension DOM injection — ProWorkSpace</p>
+        <div class="plate-window">
+          <div class="plate-chrome">
+            <span class="cd"></span><span class="cd"></span><span class="cd"></span>
+            <span class="plate-tag">JAVASCRIPT · EXCERPT</span>
+          </div>
+          <pre class="code" data-lang="js"><code class="code-body"><span class="code-line"><span class="ln">01</span><span class="c">// inject the enhancement panel into the Upwork proposal page</span></span>
+<span class="code-line"><span class="ln">02</span><span class="k">const</span> observer = <span class="k">new</span> <span class="fn">MutationObserver</span>(() =&gt; {</span>
+<span class="code-line"><span class="ln">03</span>    <span class="k">const</span> host = document.<span class="fn">querySelector</span>(<span class="s">"[data-cy='cover-letter']"</span>);</span>
+<span class="code-line"><span class="ln">04</span>    <span class="k">if</span> (!host || host.dataset.pws) <span class="k">return</span>;</span>
+<span class="code-line"><span class="ln">05</span>    host.dataset.pws = <span class="s">"1"</span>;</span>
+<span class="code-line"><span class="ln">06</span>    host.<span class="fn">append</span>(<span class="fn">renderPanel</span>(host));</span>
+<span class="code-line"><span class="ln">07</span>});</span>
+<span class="code-line"><span class="ln">08</span>observer.<span class="fn">observe</span>(document.body, { childList: <span class="k">true</span>, subtree: <span class="k">true</span> });</span>
+<span class="code-line"><span class="ln">09</span></span>
+<span class="code-line"><span class="ln">10</span><span class="c">// the panel calls our AI endpoint, streams tokens back</span></span>
+<span class="code-line"><span class="ln">11</span><span class="k">async function</span> <span class="fn">renderPanel</span>(host) { <span class="c">/* … */</span> }</span></code></pre>
+        </div>
+        <footer class="plate-foot">
+          <span class="plate-metric">idempotent · SPA-safe · no polling</span>
+          <span class="plate-rule"></span>
+        </footer>
+      </article>
+
+      <article class="code-plate reveal" data-plate="3">
+        <header class="plate-head">
+          <span class="plate-ref">PLATE D</span>
+          <span class="plate-file">sections / product-grid.liquid</span>
+        </header>
+        <h3>The Storefront Section</h3>
+        <p class="plate-sub">Hand-authored Liquid — AYVA Dawn fork</p>
+        <div class="plate-window">
+          <div class="plate-chrome">
+            <span class="cd"></span><span class="cd"></span><span class="cd"></span>
+            <span class="plate-tag">LIQUID · EXCERPT</span>
+          </div>
+          <pre class="code" data-lang="liquid"><code class="code-body"><span class="code-line"><span class="ln">01</span><span class="c">{%- comment -%} no apps · no bloat · 50 products {%- endcomment -%}</span></span>
+<span class="code-line"><span class="ln">02</span>&lt;section class=<span class="s">"ayva-grid"</span> data-tone=<span class="s">"{{ section.settings.tone }}"</span>&gt;</span>
+<span class="code-line"><span class="ln">03</span>  &lt;h2 class=<span class="s">"ayva-h"</span>&gt;{{ section.settings.heading }}&lt;/h2&gt;</span>
+<span class="code-line"><span class="ln">04</span>  &lt;ul class=<span class="s">"ayva-grid__list"</span>&gt;</span>
+<span class="code-line"><span class="ln">05</span>    {%- <span class="k">for</span> product <span class="k">in</span> collections[section.settings.collection].products limit: <span class="n">12</span> -%}</span>
+<span class="code-line"><span class="ln">06</span>      &lt;li&gt;{%- render <span class="s">'ayva-card'</span>, product: product -%}&lt;/li&gt;</span>
+<span class="code-line"><span class="ln">07</span>    {%- <span class="k">endfor</span> -%}</span>
+<span class="code-line"><span class="ln">08</span>  &lt;/ul&gt;</span>
+<span class="code-line"><span class="ln">09</span>&lt;/section&gt;</span></code></pre>
+        </div>
+        <footer class="plate-foot">
+          <span class="plate-metric">zero third-party apps · &lt;50 kb css</span>
+          <span class="plate-rule"></span>
+        </footer>
+      </article>
+
+    </div>
+
+    <div class="tooling-tag reveal">
+      <span class="tt-rule"></span>
+      <span class="tt-text">
+        Four tiles. Four languages. Four of <strong>six</strong> systems currently running in production.
+      </span>
+      <span class="tt-rule"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── PROOF OF WORK ─────────────── -->
+<section id="work" class="work">
+  <div class="wrap">
+    <div class="sec-meta">
+      <span><span class="num">§ III</span> &nbsp; Proof of Work</span>
+      <span class="dim">Six&nbsp;Specimens&nbsp;·&nbsp;2024 — 2026</span>
+    </div>
+
+    <h2 class="act-h reveal">Six products, <em>one operator.</em></h2>
+
+    <div class="specimen-grid">
+      <article class="specimen reveal" data-idx="0">
+        <header>
+          <span class="ref">I · i</span>
+          <span class="spec-idx">01 / 06</span>
+        </header>
+        <h3>ProWorkSpace</h3>
+        <p class="sub">AI SaaS Chrome extension — shipped end-to-end</p>
+        <div class="spec-canvas"><canvas data-specimen="0"></canvas></div>
+        <p class="desc">End-to-end SaaS for Upwork freelancers: Chrome extension, marketing site, Stripe payment flow, admin dashboard. Launched, monetized, ads-ready.</p>
+        <footer>
+          <span class="stack-label">Stack</span>
+          <span class="stack-list">Chrome Ext · JS · Node · Stripe</span>
+        </footer>
+      </article>
+
+      <article class="specimen reveal" data-idx="1">
+        <header>
+          <span class="ref">I · ii</span>
+          <span class="spec-idx">02 / 06</span>
+        </header>
+        <h3>Forex Lead Finder</h3>
+        <p class="sub">Multi-platform scraping engine &nbsp;·&nbsp; AI classifier</p>
+        <div class="spec-canvas"><canvas data-specimen="1"></canvas></div>
+        <p class="desc">Python system scraping Reddit, TradingView, BabyPips, ForexFactory, and LinkedIn concurrently. 15-point keyword classifier, SQLite warehouse, Flask UI, REST API, 6-hour scheduler.</p>
+        <footer>
+          <span class="stack-label">Stack</span>
+          <span class="stack-list">Python · Flask · Playwright · SQLite</span>
+        </footer>
+      </article>
+
+      <article class="specimen reveal" data-idx="2">
+        <header>
+          <span class="ref">II · i</span>
+          <span class="spec-idx">03 / 06</span>
+        </header>
+        <h3>AYVA</h3>
+        <p class="sub">Shopify Dawn fork &nbsp;·&nbsp; Scandinavian DTC</p>
+        <div class="spec-canvas"><canvas data-specimen="2"></canvas></div>
+        <p class="desc">Custom homepage, collection, and about-page Liquid sections. Fifty products migrated. Zero third-party app bloat. The store loads on principle.</p>
+        <footer>
+          <span class="stack-label">Stack</span>
+          <span class="stack-list">Liquid · Shopify · Dawn</span>
+        </footer>
+      </article>
+
+      <article class="specimen reveal" data-idx="3">
+        <header>
+          <span class="ref">II · ii</span>
+          <span class="spec-idx">04 / 06</span>
+        </header>
+        <h3>TriggerEclipse</h3>
+        <p class="sub">Android habit-intervention system</p>
+        <div class="spec-canvas"><canvas data-specimen="3"></canvas></div>
+        <p class="desc">Native Android MVP in Kotlin + Jetpack Compose with a FastAPI backend. Sensor-fusion pipeline triggers automatic grayscale and Do-Not-Disturb based on device state.</p>
+        <footer>
+          <span class="stack-label">Stack</span>
+          <span class="stack-list">Kotlin · Compose · FastAPI</span>
+        </footer>
+      </article>
+
+      <article class="specimen reveal" data-idx="4">
+        <header>
+          <span class="ref">III · i</span>
+          <span class="spec-idx">05 / 06</span>
+        </header>
+        <h3>Email Outreach Engine</h3>
+        <p class="sub">Rate-limited collector &amp; sender</p>
+        <div class="spec-canvas"><canvas data-specimen="4"></canvas></div>
+        <p class="desc">Playwright collector scraping emails from Facebook Groups and Instagram hashtags. Webmail sender capped at 50 per day for deliverability and anti-spam compliance.</p>
+        <footer>
+          <span class="stack-label">Stack</span>
+          <span class="stack-list">Playwright · Webmail · Rate limit</span>
+        </footer>
+      </article>
+
+      <article class="specimen reveal" data-idx="5">
+        <header>
+          <span class="ref">III · ii</span>
+          <span class="spec-idx">06 / 06</span>
+        </header>
+        <h3>Google Maps Lead Extractor</h3>
+        <p class="sub">SerpAPI-driven survey</p>
+        <div class="spec-canvas"><canvas data-specimen="5"></canvas></div>
+        <p class="desc">SerpAPI-driven CLI pulling local business leads with pagination, CSV export, and environment-based configuration. Scoped for clean, repeatable sweeps.</p>
+        <footer>
+          <span class="stack-label">Stack</span>
+          <span class="stack-list">Python · SerpAPI · CSV</span>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── STACK ─────────────── -->
+<section id="stack" class="stack-sec">
+  <div class="wrap">
+    <div class="sec-meta">
+      <span><span class="num">§ IV</span> &nbsp; Core Stack</span>
+      <span class="dim">The Apparatus</span>
+    </div>
+    <h2 class="act-h reveal">The stack, <em>calibrated.</em></h2>
+    <div class="stack-grid">
+      <div class="sblock reveal">
+        <h4><span class="n">001</span><span>Growth &amp; SEO</span><span class="l"></span></h4>
+        <p>Technical SEO · On-page · Off-page · Keyword research · SERP analysis · GMB / Local · Content strategy · Link building · Competitor teardowns · GA4 · Search Console · Ahrefs · Semrush</p>
+      </div>
+      <div class="sblock reveal">
+        <h4><span class="n">002</span><span>Paid Media</span><span class="l"></span></h4>
+        <p>Google Ads (Search · Display · Shopping) · Meta Ads (Facebook + Instagram) · Campaign architecture · Audience segmentation · Conversion optimization · Retargeting</p>
+      </div>
+      <div class="sblock reveal">
+        <h4><span class="n">003</span><span>Engineering &amp; Automation</span><span class="l"></span></h4>
+        <p>Python (Flask · FastAPI · Playwright · BeautifulSoup · APScheduler) · JavaScript / Node · Chrome Extension APIs · REST · SQLite · Web scraping at scale · Rate-limited pipelines · N8n</p>
+      </div>
+      <div class="sblock reveal">
+        <h4><span class="n">004</span><span>AI &amp; LLM Integration</span><span class="l"></span></h4>
+        <p>Claude API · OpenAI API · Production prompt engineering · AI content pipelines · LLM-powered lead classification · Agent orchestration</p>
+      </div>
+      <div class="sblock reveal">
+        <h4><span class="n">005</span><span>Platforms</span><span class="l"></span></h4>
+        <p>WordPress · Odoo · Shopify (Liquid · Dawn theme forking) · Android (Kotlin · Jetpack Compose)</p>
+      </div>
+      <div class="sblock reveal">
+        <h4><span class="n">006</span><span>Data &amp; Analytics</span><span class="l"></span></h4>
+        <p>GA4 · Google Search Console · Looker Studio · SQL · XLSX / CSV pipelines · Attribution modeling</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── EXPERIENCE ─────────────── -->
+<section id="experience" class="exp-sec">
+  <div class="wrap">
+    <div class="sec-meta">
+      <span><span class="num">§ V</span> &nbsp; Experience</span>
+      <span class="dim">Seven Years In Service</span>
+    </div>
+    <h2 class="act-h reveal">The record, <em>seven years deep.</em></h2>
+
+    <ol class="exp-list">
+      <li class="exp reveal">
+        <span class="exp-num">01</span>
+        <div class="exp-date">Mar 2024 — Present</div>
+        <div class="exp-body">
+          <h4>Digital Marketing Specialist <span class="co">— Funky Kittens</span></h4>
+          <p>Owns the full-funnel growth strategy. Runs multi-channel acquisition, brand, and retention across SEO, paid media, and organic social. Leads cross-functional marketing team.</p>
+        </div>
+      </li>
+      <li class="exp reveal">
+        <span class="exp-num">02</span>
+        <div class="exp-date">May 2021 — Mar 2024</div>
+        <div class="exp-body">
+          <h4>Senior SEO &amp; Digital Marketing Specialist <span class="co">— Print Britannia</span></h4>
+          <p>Architected the SEO + PPC + content stack that pushed high-value commercial keywords into top SERP positions and converted organic demand into online sales.</p>
+        </div>
+      </li>
+      <li class="exp reveal">
+        <span class="exp-num">03</span>
+        <div class="exp-date">Jul 2023 — Present</div>
+        <div class="exp-body">
+          <h4>Independent Consultant <span class="co">— Upwork &amp; direct</span></h4>
+          <p>SEO, custom tooling, AI content systems, and web development for global clients. Builds the systems that clients would otherwise contract three separate vendors to deliver.</p>
+        </div>
+      </li>
+      <li class="exp reveal">
+        <span class="exp-num">04</span>
+        <div class="exp-date">Jan 2019 — May 2021</div>
+        <div class="exp-body">
+          <h4>SEO &amp; Digital Marketing Specialist <span class="co">— Image Retouching Lab</span></h4>
+          <p>Led the digital team executing brand awareness, social campaigns, and client-engagement content strategy.</p>
+        </div>
+      </li>
+      <li class="exp reveal">
+        <span class="exp-num">05</span>
+        <div class="exp-date">Apr 2019 — Jan 2021</div>
+        <div class="exp-body">
+          <h4>Remote SEO Specialist <span class="co">— SEO Liquido, Italy</span></h4>
+          <p>Technical SEO audits, keyword research, and on-page optimization for international clients.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ─────────────── CREDENTIALS ─────────────── -->
+<section class="creds-sec">
+  <div class="wrap">
+    <div class="sec-meta">
+      <span><span class="num">§ VI</span> &nbsp; Credentials</span>
+      <span class="dim">The Register</span>
+    </div>
+    <div class="creds-grid">
+      <div class="reveal">
+        <h5>Certifications</h5>
+        <ul>
+          <li>HubSpot Academy — SEO &amp; Digital Marketing <span class="y">2024</span></li>
+          <li>Skillshare — Google Ads &amp; Meta Ads Mastery <span class="y">2024</span></li>
+          <li>Coursera — Branding &amp; Social Media Marketing <span class="y">2024</span></li>
+          <li>Semrush Academy — SEO Crash Course, Brian Dean <span class="y">2023</span></li>
+          <li>UY Lab Dhaka — Digital Marketing &amp; SEO <span class="y">2018</span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h5>Education</h5>
+        <ul>
+          <li>LLB — Bangladesh Islami University, Dhaka <span class="y">2019</span></li>
+          <li>HSC — Khilgaon Model University College <span class="y">2015</span></li>
+          <li>SSC — Haider Ali School and College <span class="y">2013</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.act-two -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     ACT III — DARK CLOSE
+     ══════════════════════════════════════════════════════════════ -->
+<section class="close" id="contact">
+  <canvas class="close-canvas" id="closeCanvas"></canvas>
+  <div class="wrap">
+    <div class="sec-meta light">
+      <span><span class="num">§ VII</span> &nbsp; Contact</span>
+      <span class="dim">Open For Select Contracts</span>
+    </div>
+    <h2 class="close-h reveal">
+      Hire a marketer — you get campaigns.<br>
+      Hire a developer — you get features.<br>
+      <em>Hire me — you get the system.</em>
+    </h2>
+    <p class="manifesto reveal">
+      The campaign. The tool that runs it. The data pipeline beneath. The storefront it sells on. <strong>One hire. No vendor chain.</strong>
+    </p>
+
+    <div class="contact-grid">
+      <a class="c-item reveal" href="mailto:dev@try-n.com">
+        <span class="c-label">Primary Email</span>
+        <span class="c-value">dev@try-n.com</span>
+        <span class="c-arrow">→</span>
+      </a>
+      <a class="c-item reveal" href="mailto:mjrifat54@gmail.com">
+        <span class="c-label">Secondary Email</span>
+        <span class="c-value">mjrifat54@gmail.com</span>
+        <span class="c-arrow">→</span>
+      </a>
+      <a class="c-item reveal" href="tel:+8801310429518">
+        <span class="c-label">Telephone</span>
+        <span class="c-value">+880 1310 429 518</span>
+        <span class="c-arrow">→</span>
+      </a>
+      <div class="c-item non-link reveal">
+        <span class="c-label">Studio</span>
+        <span class="c-value">Dhaka · Bangladesh</span>
+        <span class="c-arrow">·</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© MMXXVI <span class="copper">·</span> Muraduzzaman <span class="copper">·</span> Quiet Apparatus</span>
+    <span>Plate 01 <span class="copper">·</span> Field Register <span class="copper">·</span> First Impression</span>
+  </div>
+</footer>
+
+<!-- ══════════ MODULE IMPORT ══════════ -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://esm.sh/three@0.160.0"
+  }
+}
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
