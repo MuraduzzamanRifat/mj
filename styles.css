@@ -100,9 +100,16 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   grid-template-rows: auto 1fr auto;
   padding: 32px;
   opacity: 1;
-  transition: opacity 0.45s ease;
+  transition: opacity 0.6s ease;
 }
-.preloader.done { opacity: 0; pointer-events: none; }
+.preloader.done {
+  opacity: 0;
+  pointer-events: none;
+}
+.preloader.done .pre-centre {
+  transform: translateY(-32px);
+  opacity: 0;
+}
 
 .pre-grid {
   display: flex;
@@ -119,12 +126,91 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
 }
 .pre-mono.right { text-align: right; }
 
-.pre-mark {
+/* centre block — kicker + name letter reveal + tagline */
+.pre-centre {
   align-self: center;
   justify-self: center;
-  animation: rot 8s linear infinite;
+  text-align: center;
+  max-width: 90vw;
+  transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
-@keyframes rot { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.pre-kicker {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: pre-fade 0.6s 0.1s ease forwards;
+}
+.pre-name {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(44px, 8vw, 104px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--paper);
+  margin: 0;
+  display: inline-flex;
+  justify-content: center;
+}
+.pre-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(80%);
+  animation: pre-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.pre-name .pre-char:nth-child(1)  { animation-delay: 0.10s; }
+.pre-name .pre-char:nth-child(2)  { animation-delay: 0.16s; }
+.pre-name .pre-char:nth-child(3)  { animation-delay: 0.22s; }
+.pre-name .pre-char:nth-child(4)  { animation-delay: 0.28s; }
+.pre-name .pre-char:nth-child(5)  { animation-delay: 0.34s; }
+.pre-name .pre-char:nth-child(6)  { animation-delay: 0.40s; }
+.pre-name .pre-char:nth-child(7)  { animation-delay: 0.46s; }
+.pre-name .pre-char:nth-child(8)  { animation-delay: 0.52s; }
+.pre-name .pre-char:nth-child(9)  { animation-delay: 0.58s; }
+.pre-name .pre-char:nth-child(10) { animation-delay: 0.64s; }
+.pre-name .pre-char:nth-child(11) { animation-delay: 0.70s; }
+.pre-name .pre-char:nth-child(12) { animation-delay: 0.76s; }
+
+.pre-rules {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px auto 22px;
+  max-width: 360px;
+  opacity: 0;
+  animation: pre-fade 0.6s 0.9s ease forwards;
+}
+.pre-rules .pre-r {
+  flex: 1;
+  height: 1px;
+  background: rgba(238,231,216,0.25);
+}
+.pre-rules .pre-dot {
+  width: 6px; height: 6px;
+  background: var(--copper);
+  border-radius: 50%;
+}
+.pre-tagline {
+  display: block;
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: clamp(15px, 1.6vw, 20px);
+  line-height: 1.4;
+  color: rgba(238,231,216,0.6);
+  max-width: 640px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: pre-fade 0.8s 1.0s ease forwards;
+}
+
+@keyframes pre-fade { to { opacity: 1; } }
+@keyframes pre-rise {
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .pre-progress {
   display: flex;
@@ -136,12 +222,43 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   height: 1px;
   background: rgba(238,231,216,0.2);
   overflow: hidden;
+  position: relative;
 }
 .pre-bar-fill {
   height: 100%;
   width: 0%;
   background: var(--copper);
-  transition: width 0.4s ease;
+  transition: width 0.35s ease;
+}
+.pre-bar-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 30%; height: 100%;
+  background: linear-gradient(90deg,
+    rgba(238,231,216,0) 0%,
+    rgba(238,231,216,0.6) 50%,
+    rgba(238,231,216,0) 100%);
+  animation: pre-shine 1.6s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform;
+}
+@keyframes pre-shine {
+  0%   { transform: translateX(-100%); }
+  60%  { transform: translateX(500%); }
+  100% { transform: translateX(500%); }
+}
+
+/* ═════ scroll progress rail ═════ */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--copper);
+  z-index: 150;
+  pointer-events: none;
+  transition: width 0.15s linear;
+  box-shadow: 0 0 8px rgba(189,90,51,0.5);
 }
 
 /* ═════ nav ═════ */

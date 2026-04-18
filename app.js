@@ -690,19 +690,24 @@ function runPreloader() {
     const el = document.getElementById('preloader');
     const barEl = document.getElementById('preBar');
     const txtEl = document.getElementById('preProgress');
-    let p = 0;
-    const int = setInterval(() => {
-      p += 16 + Math.random() * 14;
-      if (p >= 100) {
-        p = 100;
-        clearInterval(int);
-        el.classList.add('done');
-        setTimeout(() => el.remove(), 500);
-        resolve();
-      }
+    // Preloader total ≈ 1.7 s — long enough to see the name letters
+    // reveal and the tagline settle, short enough not to annoy.
+    const duration = 1700;
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 2.4);       // ease-out
+      const p = eased * 100;
       barEl.style.width = p + '%';
-      txtEl.textContent = String(Math.floor(p * 10)).padStart(4, '0');
-    }, 40);
+      txtEl.textContent = String(Math.floor(eased * 1000)).padStart(4, '0');
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.classList.add('done');
+        setTimeout(() => { el.remove(); resolve(); }, 650);
+      }
+    }
+    requestAnimationFrame(step);
   });
 }
 
@@ -751,6 +756,49 @@ function initReveal() {
     });
   }, { threshold: 0.14, rootMargin: '0px 0px -80px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL PROGRESS — thin copper rail at top of viewport
+   ═══════════════════════════════════════════════════════════════ */
+
+function initScrollProgress() {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  let ticking = false;
+  function update() {
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const pct = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
+    bar.style.width = pct + '%';
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  update();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CARD TILT — subtle rotateX/rotateY based on cursor position
+   ═══════════════════════════════════════════════════════════════ */
+
+function initCardTilt() {
+  if (IS_TOUCH) return;
+  const cards = document.querySelectorAll('.specimen, .code-plate');
+  cards.forEach(card => {
+    card.style.transformStyle = 'preserve-3d';
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top)  / rect.height;
+      const rx = (0.5 - y) * 4;            // max ±2°
+      const ry = (x - 0.5) * 4;
+      card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -833,11 +881,18 @@ async function boot() {
     initNav();
     initHeroTitle();
     initMetricsCount();
+    initScrollProgress();
+    initCardTilt();
 
     const heroCanvas = document.getElementById('heroCanvas');
     if (heroCanvas) {
       try {
         neuron = new Neuron(heroCanvas);
+        function loop() {
+          if (neuron && !document.hidden) neuron.tick();
+          requestAnimationFrame(loop);
+        }
+        loop();
       } catch (err) {
         console.warn('Neuron WebGL failed', err);
       }
@@ -854,12 +909,6 @@ async function boot() {
   ]);
 
   document.body.dataset.loaded = 'true';
-
-  function loop() {
-    if (neuron && !document.hidden) neuron.tick();
-    requestAnimationFrame(loop);
-  }
-  if (neuron) loop();
 }
 
 boot();
