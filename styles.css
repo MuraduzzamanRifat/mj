@@ -43,7 +43,7 @@ body {
   overflow-x: hidden;
   cursor: none;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.4s ease;
 }
 body[data-loaded="true"] { opacity: 1; }
 
@@ -100,7 +100,7 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   grid-template-rows: auto 1fr auto;
   padding: 32px;
   opacity: 1;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.45s ease;
 }
 .preloader.done { opacity: 0; pointer-events: none; }
 

@@ -14,8 +14,12 @@ const COLORS = {
 };
 
 const IS_MOBILE = window.matchMedia('(max-width: 720px)').matches;
-const PARTICLE_COUNT = IS_MOBILE ? 6000 : 18000;
 const IS_TOUCH = window.matchMedia('(hover: none)').matches;
+
+// Particle counts tuned for perceived density vs GPU cost.
+// Three tiers: low-end mobile → mid mobile → desktop.
+const LOW_END = IS_MOBILE && (navigator.hardwareConcurrency || 4) <= 4;
+const PARTICLE_COUNT = LOW_END ? 3500 : (IS_MOBILE ? 5500 : 12000);
 
 /* ═══════════════════════════════════════════════════════════════
    SHAPE GENERATORS
@@ -691,19 +695,17 @@ function runPreloader() {
     const txtEl = document.getElementById('preProgress');
     let p = 0;
     const int = setInterval(() => {
-      p += 6 + Math.random() * 10;
+      p += 16 + Math.random() * 14;
       if (p >= 100) {
         p = 100;
         clearInterval(int);
-        setTimeout(() => {
-          el.classList.add('done');
-          setTimeout(() => el.remove(), 900);
-          resolve();
-        }, 200);
+        el.classList.add('done');
+        setTimeout(() => el.remove(), 500);
+        resolve();
       }
       barEl.style.width = p + '%';
       txtEl.textContent = String(Math.floor(p * 10)).padStart(4, '0');
-    }, 60);
+    }, 40);
   });
 }
 
@@ -904,10 +906,31 @@ async function boot() {
 
   const updateLegendBar = hero ? makeLegendBarUpdater(hero) : () => {};
 
+  // Only render each canvas while its section is in (or near) the viewport.
+  const visible = { hero: true, close: false };
+  if (hero && 'IntersectionObserver' in window) {
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+      new IntersectionObserver(
+        ([e]) => { visible.hero = e.isIntersecting; },
+        { rootMargin: '100px' }
+      ).observe(heroSection);
+    }
+  }
+  if (close && 'IntersectionObserver' in window) {
+    const closeSection = document.getElementById('contact');
+    if (closeSection) {
+      new IntersectionObserver(
+        ([e]) => { visible.close = e.isIntersecting; },
+        { rootMargin: '300px' }
+      ).observe(closeSection);
+    }
+  }
+
   function loop() {
     if (!document.hidden) {
-      if (hero)  { hero.tick();  updateLegendBar(); }
-      if (close) close.tick();
+      if (hero  && visible.hero)  { hero.tick();  updateLegendBar(); }
+      if (close && visible.close) close.tick();
     }
     requestAnimationFrame(loop);
   }
