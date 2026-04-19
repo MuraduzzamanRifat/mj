@@ -1039,8 +1039,19 @@ button:focus-visible,
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
 }
+.cv-hint {
+  max-width: 760px;
+  margin: 0 0 60px;
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(238,231,216,0.7);
+}
+.cv-hint em { color: var(--copper); font-style: italic; }
+.cv-hint strong { color: var(--paper); font-weight: 700; font-style: normal; }
 .close-cta {
   display: inline-flex;
   align-items: center;
