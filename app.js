@@ -823,14 +823,14 @@ function initMetricsCount() {
   const runCount = (el) => {
     const target = parseInt(el.dataset.count, 10);
     const pad = parseInt(el.dataset.pad || '2', 10);
+    const suffix = el.dataset.suffix || '';
     const duration = 1400;
     const start = performance.now();
     function step(now) {
       const t = Math.min(1, (now - start) / duration);
-      // ease-out cubic
       const e = 1 - Math.pow(1 - t, 3);
       const v = Math.round(target * e);
-      el.textContent = String(v).padStart(pad, '0');
+      el.textContent = String(v).padStart(pad, '0') + (t >= 1 ? suffix : '');
       if (t < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
