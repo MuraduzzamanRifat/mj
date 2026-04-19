@@ -873,7 +873,27 @@ function initNav() {
 }
 
 async function boot() {
-  let neuron = null;
+  // Neuron lives inside the preloader only; ticks until the
+  // preloader element is removed from the DOM.
+  const preCanvas = document.getElementById('preloaderCanvas');
+  let preNeuron = null;
+  let preRunning = true;
+  if (preCanvas) {
+    try {
+      preNeuron = new Neuron(preCanvas);
+      (function loop() {
+        if (!preRunning || document.hidden) return;
+        if (!document.getElementById('preloader')) {
+          preRunning = false;
+          return;
+        }
+        preNeuron.tick();
+        requestAnimationFrame(loop);
+      })();
+    } catch (err) {
+      console.warn('Preloader Neuron failed', err);
+    }
+  }
 
   const setup = () => {
     initCursor();
@@ -883,20 +903,6 @@ async function boot() {
     initMetricsCount();
     initScrollProgress();
     initCardTilt();
-
-    const heroCanvas = document.getElementById('heroCanvas');
-    if (heroCanvas) {
-      try {
-        neuron = new Neuron(heroCanvas);
-        function loop() {
-          if (neuron && !document.hidden) neuron.tick();
-          requestAnimationFrame(loop);
-        }
-        loop();
-      } catch (err) {
-        console.warn('Neuron WebGL failed', err);
-      }
-    }
 
     document.querySelectorAll('.spec-canvas canvas').forEach(cv => {
       renderSpecimenCard(cv, parseInt(cv.dataset.specimen, 10));
