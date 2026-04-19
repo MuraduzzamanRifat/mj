@@ -303,7 +303,7 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
 
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 26px;
   list-style: none;
 }
 .nav-links a {
@@ -311,11 +311,12 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   text-decoration: none;
   font-family: var(--f-mono);
   font-size: 11px;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   opacity: 0.65;
   transition: opacity 0.3s, color 0.3s;
   position: relative;
+  white-space: nowrap;
 }
 .nav.light .nav-links a { color: var(--ink); }
 .nav-links a:hover { opacity: 1; }
@@ -343,11 +344,12 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   text-decoration: none;
   font-family: var(--f-mono);
   font-size: 11px;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 10px 18px;
+  padding: 10px 16px;
   border: 1px solid rgba(238,231,216,0.35);
   transition: background 0.3s, color 0.3s, border-color 0.3s;
+  white-space: nowrap;
 }
 .nav.light .nav-cta,
 .nav.light .nav-pdf { color: var(--ink); border-color: var(--ink); }
