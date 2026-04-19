@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://muraduzzamanrifat.github.io/mj/sitemap.xml

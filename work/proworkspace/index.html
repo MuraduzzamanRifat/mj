@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ProWorkSpace — Case Study · Muraduzzaman</title>
+<meta name="description" content="How I designed, built, and monetized ProWorkSpace — an AI-powered Chrome extension for Upwork freelancers — as a solo developer." />
+
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  /* ============ CASE STUDY LAYOUT ============ */
+  .case-wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  .case-hero {
+    padding: 140px 0 80px;
+    position: relative;
+    z-index: 1;
+  }
+  .case-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(238,231,216,0.7);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 4px;
+    transition: color 0.3s, gap 0.3s, border-color 0.3s;
+    margin-bottom: 40px;
+  }
+  .case-back:hover { color: var(--copper); border-color: var(--copper); gap: 14px; }
+
+  .case-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(238,231,216,0.25);
+    margin-bottom: 28px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(238,231,216,0.7);
+  }
+  .case-meta .copper { color: var(--copper); font-weight: 700; }
+
+  .case-title {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(52px, 10vw, 140px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    margin: 0 0 18px;
+  }
+  .case-subtitle {
+    font-family: var(--f-italic);
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.3;
+    color: var(--copper);
+    margin: 0 0 44px;
+    max-width: 900px;
+  }
+
+  .case-lede {
+    font-family: var(--f-mono);
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(238,231,216,0.88);
+    max-width: 720px;
+    margin-bottom: 60px;
+  }
+
+  .case-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(238,231,216,0.18);
+    border-bottom: 1px solid rgba(238,231,216,0.18);
+    padding: 28px 0;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 720px) {
+    .case-summary { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
+  }
+  .cs-cell {
+    padding: 0 24px;
+    border-right: 1px solid rgba(238,231,216,0.15);
+  }
+  .cs-cell:first-child { padding-left: 0; }
+  .cs-cell:last-child { border-right: none; }
+  .cs-label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(238,231,216,0.65);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .cs-value {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--paper);
+  }
+  .cs-value em { font-family: var(--f-italic); font-style: italic; color: var(--copper); }
+
+  /* body sections */
+  .case-body { position: relative; z-index: 1; padding-bottom: 140px; }
+  .case-section { margin-bottom: 90px; }
+  .case-h2 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(32px, 4vw, 54px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--paper);
+    margin: 0 0 14px;
+  }
+  .case-h2 em { font-family: var(--f-italic); font-style: italic; color: var(--copper); }
+
+  .case-eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .case-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--copper);
+  }
+
+  .case-prose p {
+    font-family: var(--f-mono);
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(238,231,216,0.88);
+    margin: 0 0 18px;
+    max-width: 760px;
+  }
+  .case-prose p strong { color: var(--paper); font-weight: 700; }
+
+  .case-prose blockquote {
+    border-left: 2px solid var(--copper);
+    padding: 4px 0 4px 24px;
+    margin: 24px 0;
+    font-family: var(--f-italic);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(238,231,216,0.92);
+  }
+
+  .case-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+    max-width: 760px;
+  }
+  .case-list li {
+    padding: 14px 0 14px 28px;
+    border-bottom: 1px dashed rgba(238,231,216,0.15);
+    position: relative;
+    font-family: var(--f-mono);
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(238,231,216,0.88);
+  }
+  .case-list li:last-child { border-bottom: none; }
+  .case-list li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 24px;
+    width: 12px; height: 1px;
+    background: var(--copper);
+  }
+  .case-list strong { color: var(--paper); }
+
+  /* architecture diagram */
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+  @media (max-width: 900px) { .arch-grid { grid-template-columns: repeat(2, 1fr); } }
+  .arch-tile {
+    background: rgba(17,17,20,0.82);
+    border: 1px solid rgba(238,231,216,0.18);
+    padding: 22px 18px;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .arch-tile .arch-num {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--copper);
+    font-weight: 700;
+  }
+  .arch-tile h4 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--paper);
+    margin: 6px 0 8px;
+  }
+  .arch-tile p {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(238,231,216,0.75);
+    margin: 0;
+  }
+
+  /* stack band */
+  .case-stack-band {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(238,231,216,0.2);
+    border-bottom: 1px solid rgba(238,231,216,0.2);
+    margin: 24px 0;
+  }
+  @media (max-width: 720px) { .case-stack-band { grid-template-columns: 1fr; gap: 16px; } }
+  .case-stack-col h5 {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  .case-stack-col p {
+    font-family: var(--f-mono);
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(238,231,216,0.88);
+    margin: 0;
+  }
+
+  /* CTA bottom */
+  .case-cta {
+    margin-top: 60px;
+    padding: 44px 40px;
+    border: 1px solid rgba(238,231,216,0.25);
+    background: rgba(17,17,20,0.82);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .case-cta h3 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.2;
+    color: var(--paper);
+    margin: 0 0 6px;
+    max-width: 520px;
+  }
+  .case-cta p {
+    font-family: var(--f-italic);
+    font-style: italic;
+    color: rgba(238,231,216,0.72);
+    font-size: 14px;
+    margin: 0;
+  }
+  .case-cta-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body data-loaded="true">
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="grain-overlay"></div>
+<canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="../../" class="nav-sig">
+      <svg viewBox="0 0 40 40" width="22" height="22" class="nav-mark">
+        <circle cx="20" cy="20" r="12" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="20" cy="20" r="2.5" fill="#A84D2A"/>
+        <line x1="6"  y1="20" x2="16" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="24" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="6"  x2="20" y2="16" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="24" x2="20" y2="34" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <span>Muraduzzaman</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../../#work" data-n="02">Back to work</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="../../muraduzzaman-cv.pdf" class="nav-pdf" download="muraduzzaman-cv.pdf" aria-label="Download CV as PDF">
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>CV</span>
+      </a>
+      <a href="mailto:me@mjrifat.com" class="nav-cta">
+        <span>Email</span>
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="case-hero">
+  <div class="case-wrap">
+    <a href="../../#work" class="case-back">
+      <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>All work</span>
+    </a>
+
+    <div class="case-meta">
+      <span><span class="copper">Case Study · 01</span></span>
+      <span>Shipped 2024</span>
+    </div>
+
+    <h1 class="case-title">ProWorkSpace.</h1>
+    <p class="case-subtitle">An AI SaaS for Upwork freelancers — built, launched, and monetized solo.</p>
+
+    <p class="case-lede">
+      I spent seven years ranking freelancers' profiles on Google and watching how they competed on Upwork. Proposals were the bottleneck. Writing a good one takes 20 minutes; writing 40 takes a day. So I built the thing that used to not exist — a Chrome extension that drafts a tailored proposal, scores fit, and routes the freelancer to a better inbox, right inside the Upwork UI they already use.
+    </p>
+
+    <div class="case-summary">
+      <div class="cs-cell">
+        <span class="cs-label">Role</span>
+        <span class="cs-value">Solo <em>everything</em></span>
+      </div>
+      <div class="cs-cell">
+        <span class="cs-label">Timeline</span>
+        <span class="cs-value">~10 weeks</span>
+      </div>
+      <div class="cs-cell">
+        <span class="cs-label">Status</span>
+        <span class="cs-value">Live &amp; <em>monetized</em></span>
+      </div>
+      <div class="cs-cell">
+        <span class="cs-label">Users</span>
+        <span class="cs-value">Paid &amp; growing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ BODY ══════════ -->
+<main id="main" class="case-body">
+  <div class="case-wrap">
+
+    <section class="case-section case-prose">
+      <div class="case-eyebrow">01 · The problem</div>
+      <h2 class="case-h2">Freelancers spend most of their week <em>not earning.</em></h2>
+      <p>
+        Upwork's economics punish volume. A freelancer with a $50 hourly rate who takes two hours per proposal and converts at 5% is losing their margin before the first invoice. The best proposals are researched, tailored, and concise — three properties that don't scale with copy-paste templates or generic AI wrappers.
+      </p>
+      <p>
+        I'd watched this for years while helping freelancers rank their profiles on Google. The ranking got them traffic. The proposal wall killed the conversion. So I built <strong>ProWorkSpace</strong> — a Chrome extension that lives on the Upwork job page, reads the brief, and drafts a proposal the freelancer can approve or edit in seconds.
+      </p>
+    </section>
+
+    <section class="case-section case-prose">
+      <div class="case-eyebrow">02 · The approach</div>
+      <h2 class="case-h2">Draft in the page. <em>Ship in the page.</em></h2>
+      <p>
+        Every competing tool I tried was an external app — open a tab, paste the brief, copy the output, paste it back. That loop kills the time saving. I wanted the AI to live <strong>inside</strong> the Upwork UI so the friction was zero.
+      </p>
+      <p>
+        So ProWorkSpace ships as four things, each one responsible for a different friction point in the freelancer's day:
+      </p>
+      <ul class="case-list">
+        <li><strong>A Chrome extension</strong> that injects an AI panel into the Upwork cover-letter modal, watches for the brief, and drafts a proposal styled to the freelancer's profile.</li>
+        <li><strong>A marketing site</strong> with an activation flow that explains the value in 30 seconds and turns a skeptical first-time visitor into a trialed user.</li>
+        <li><strong>A Stripe-backed billing layer</strong> that handles subscription conversion, plan tiers, and payment recovery without a finance team in the loop.</li>
+        <li><strong>An admin panel</strong> that lets me gate features, monitor usage, and push prompt updates without shipping a new extension build.</li>
+      </ul>
+      <blockquote>
+        The whole thing had to look, move, and behave like it was built by a ten-person team. Shipping it solo meant every decision had to compound.
+      </blockquote>
+    </section>
+
+    <section class="case-section">
+      <div class="case-eyebrow">03 · Architecture</div>
+      <h2 class="case-h2">Four systems, <em>one integrated product.</em></h2>
+      <p class="cs-label" style="color: rgba(238,231,216,0.7); letter-spacing: 0.25em; margin-bottom: 20px;">How the pieces fit together.</p>
+
+      <div class="arch-grid">
+        <article class="arch-tile">
+          <span class="arch-num">01 / Chrome Ext</span>
+          <h4>Page-level AI panel</h4>
+          <p>Manifest V3 content script, MutationObserver-based UI injection, idempotent, SPA-safe. Streams proposal tokens back from the API.</p>
+        </article>
+        <article class="arch-tile">
+          <span class="arch-num">02 / API</span>
+          <h4>Node + Anthropic</h4>
+          <p>Edge-deployed inference proxy. Rate-limited per-user. Prompts versioned and remotely swappable without a new extension build.</p>
+        </article>
+        <article class="arch-tile">
+          <span class="arch-num">03 / Billing</span>
+          <h4>Stripe subscriptions</h4>
+          <p>Checkout + customer portal + webhooks. Handles trial, upgrade, pause, dunning, and refund flows without manual intervention.</p>
+        </article>
+        <article class="arch-tile">
+          <span class="arch-num">04 / Admin</span>
+          <h4>Role-gated panel</h4>
+          <p>Feature flags, prompt registry, usage observability. Gives me — and only me — a single place to operate the product.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="case-section case-prose">
+      <div class="case-eyebrow">04 · The work beneath the surface</div>
+      <h2 class="case-h2">The pieces that aren't <em>obvious from the screenshots.</em></h2>
+      <p>
+        Most Chrome extensions fail on the same three invisible problems. Getting these right was half the battle.
+      </p>
+      <ul class="case-list">
+        <li><strong>SPA safety.</strong> Upwork re-renders chunks of its page without triggering a full navigation event. The naive "run on load" injection misses 80% of page states. The extension uses a MutationObserver gated by a dataset flag so it injects exactly once, per visible job posting, even as Upwork re-mounts the surrounding React tree.</li>
+        <li><strong>Prompt versioning.</strong> The AI drafts are only as good as the latest prompt. Ship that prompt inside the extension and every iteration costs a new Chrome Web Store review. So the extension pulls the active prompt ID at runtime from the API, and the admin panel lets me swap prompts in seconds.</li>
+        <li><strong>Deliverability of the marketing funnel.</strong> SaaS acquisition costs break the math for small-ticket products unless you control the full funnel. I built landing, Stripe, and admin as one coherent stack so the cost of iterating on any of them is minutes, not days.</li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <div class="case-eyebrow">05 · Stack</div>
+      <h2 class="case-h2">What it's built with.</h2>
+      <div class="case-stack-band">
+        <div class="case-stack-col">
+          <h5>Frontend &amp; Extension</h5>
+          <p>Chrome Extensions API (Manifest V3) · vanilla JS · DOM injection · MutationObserver · custom panel UI · streamed tokens</p>
+        </div>
+        <div class="case-stack-col">
+          <h5>Backend &amp; AI</h5>
+          <p>Node.js · Anthropic API · prompt registry · per-user rate limiting · edge-deployed inference · webhooks</p>
+        </div>
+        <div class="case-stack-col">
+          <h5>Payments</h5>
+          <p>Stripe Checkout · subscription lifecycle · dunning &amp; retry · customer portal · webhook-driven entitlement sync</p>
+        </div>
+        <div class="case-stack-col">
+          <h5>Admin &amp; Ops</h5>
+          <p>Role-gated dashboard · feature flags · prompt versioning · usage monitoring · email / receipt flows</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section case-prose">
+      <div class="case-eyebrow">06 · The takeaway</div>
+      <h2 class="case-h2">Why this matters on a CV.</h2>
+      <p>
+        Most freelance marketers can talk about what a good funnel looks like. Most extension developers can ship a Chrome extension. What's unusual is building both, gluing them together with payments, and operating the result as a live product for real paying customers — as a single person, in a few months.
+      </p>
+      <p>
+        ProWorkSpace is the proof case for my positioning: <strong>one operator replaces the three-vendor stack</strong>. The SEO lead, the developer, the billing engineer — one brain, coordinated delivery, no handoffs, no communication tax.
+      </p>
+    </section>
+
+    <div class="case-cta">
+      <div>
+        <h3>Want something like this built for your company?</h3>
+        <p>I'm currently available for select engagements.</p>
+      </div>
+      <div class="case-cta-buttons">
+        <a href="https://proworkspace.online" target="_blank" rel="noopener" class="cta-btn">
+          <span class="cta-label">See ProWorkSpace live</span>
+          <span class="cta-arrow">↗</span>
+        </a>
+        <a href="mailto:me@mjrifat.com?subject=Project%20inquiry" class="cta-btn primary">
+          <span class="cta-label">Start a conversation</span>
+          <span class="cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 <span class="copper">·</span> Muraduzzaman <span class="copper">·</span> Dhaka, Bangladesh</span>
+    <span><a href="../../">Back to portfolio</a></span>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"
+  }
+}
+</script>
+<script type="module" src="../../app.js"></script>
+
+</body>
+</html>
