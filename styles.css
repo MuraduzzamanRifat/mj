@@ -268,14 +268,14 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   z-index: 90;
   padding: 24px 40px;
   background: linear-gradient(to bottom, rgba(17,17,20,0.7) 0%, rgba(17,17,20,0) 100%);
-  backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   transition: background 0.4s ease, backdrop-filter 0.4s ease;
 }
 .nav.light {
   background: rgba(238,231,216,0.92);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--hairline);
 }
 .nav-inner {
@@ -1595,6 +1595,114 @@ html, body { background: var(--ink); }
 .nav.light .nav-pdf     { color: var(--paper); border-color: rgba(238,231,216,0.35); }
 .nav.light .nav-cta:hover,
 .nav.light .nav-pdf:hover { background: var(--copper); border-color: var(--copper); color: var(--paper); }
+
+/* ═════ CAPABILITIES — BrandiVibe-style service grid ═════ */
+.capabilities-sec { padding: 140px 0; }
+
+.cap-intro {
+  max-width: 820px;
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.55;
+  color: rgba(238,231,216,0.82);
+  margin: -40px 0 60px;
+}
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1000px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .cap-grid { grid-template-columns: 1fr; } }
+
+.cap-tile {
+  background: rgba(17,17,20,0.82);
+  border: 1px solid rgba(238,231,216,0.18);
+  padding: 26px 26px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.4s, transform 0.3s;
+}
+.cap-tile:hover {
+  border-color: var(--copper);
+}
+
+.cap-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cap-icon {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(238,231,216,0.25);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--copper);
+  background: rgba(189,90,51,0.06);
+}
+.cap-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(238,231,216,0.7);
+}
+.cap-dot {
+  width: 6px; height: 6px;
+  background: var(--copper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(189,90,51,0.6);
+  animation: pulse 2s ease-out infinite;
+}
+
+.cap-tile h3 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  margin: 4px 0 0;
+}
+.cap-tile p {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(238,231,216,0.82);
+  margin: 0;
+  flex: 1;
+}
+
+.cap-tile footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(238,231,216,0.2);
+  font-family: var(--f-mono);
+  text-transform: uppercase;
+}
+.cap-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(238,231,216,0.5);
+}
+.cap-value {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--copper);
+  font-weight: 700;
+}
 
 /* ═════ PRAISE — featured testimonial block ═════ */
 .praise-sec { padding: 140px 0; }
