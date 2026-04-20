@@ -676,13 +676,13 @@ def build_contact_page(up="../"):
 <main id="main" class="sub-body">
   <div class="wrap">
     <div class="close-actions reveal" style="margin-bottom:20px;">
-      <a href="{up}muraduzzaman-cv-portfolio.pdf" download class="close-cta primary">
+      <a href="{up}muraduzzaman-cv.pdf" download class="close-cta primary">
         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span>Download portfolio CV</span>
+        <span>Download CV</span>
       </a>
-      <a href="{up}muraduzzaman-cv.pdf" download class="close-cta">
+      <a href="{up}muraduzzaman-cv-ats.pdf" download class="close-cta">
         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span>Download ATS CV</span>
+        <span>ATS version</span>
       </a>
       <a href="#contact-form" class="close-cta">
         <span>Start a project</span>
@@ -691,9 +691,9 @@ def build_contact_page(up="../"):
     </div>
 
     <p class="cv-hint reveal" style="max-width:760px;margin-bottom:60px;">
-      <em>Two versions of the CV:</em>
-      the <strong>portfolio</strong> PDF matches this site's dark aesthetic (for founder-clients and creative agencies);
-      the <strong>ATS</strong> PDF is single-column, plain-contrast, and safe for Workday / Greenhouse / Lever resume parsers.
+      <em>Two formats:</em>
+      the main <strong>CV</strong> matches this site's dark aesthetic — best for founder-clients, creative agencies, and anyone reviewing the PDF by hand.
+      The <strong>ATS version</strong> is single-column, plain-contrast, and safe for Workday / Greenhouse / Lever resume parsers.
     </p>
 
     <section id="contact-form" class="contact-form-wrap" aria-labelledby="contact-form-title">
