@@ -93,8 +93,8 @@ HEAD = """<!DOCTYPE html>
         <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span>CV</span>
       </a>
-      <a href="mailto:me@mjrifat.com" class="nav-cta">
-        <span>Email</span>
+      <a href="{up}contact/" class="nav-cta">
+        <span>Contact</span>
         <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
       </a>
     </div>
@@ -114,7 +114,7 @@ HEAD = """<!DOCTYPE html>
   </ul>
   <div class="nav-mobile-foot">
     <a href="{up}muraduzzaman-cv.pdf" download="muraduzzaman-cv.pdf">Download CV (PDF)</a>
-    <a href="mailto:me@mjrifat.com">me@mjrifat.com</a>
+    <a href="{up}contact/">Start a project</a>
   </div>
 </div>
 """
@@ -149,7 +149,7 @@ FOOTER = """
       <div class="sf-col">
         <h5>Channels</h5>
         <ul>
-          <li><a href="mailto:me@mjrifat.com">Email</a></li>
+          <li><a href="{up}contact/">Contact</a></li>
           <li><a href="https://github.com/MuraduzzamanRifat" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://www.upwork.com/freelancers/~018280ef5078222f43" target="_blank" rel="noopener">Upwork</a></li>
           <li><a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -260,7 +260,7 @@ def build_about(up="../"):
       </ul>
 
       <h2>How to start working together</h2>
-      <p>Send a one-paragraph brief to <a href="mailto:me@mjrifat.com">me@mjrifat.com</a>. I reply within 24 hours with either a scope-and-price proposal or an honest "not a fit." No long qualification calls before I understand what you actually need.</p>
+      <p>Send a one-paragraph brief through the <a href="../contact/">contact form</a>. I reply within 24 hours with either a scope-and-price proposal or an honest "not a fit." No long qualification calls before I understand what you actually need.</p>
 
       <div class="prose-tag">SEO · AEO · GEO · AUTOMATION · AI · CODE</div>
     </section>
@@ -653,7 +653,7 @@ def build_praise_page(up="../"):
 
 
 def build_contact_page(up="../"):
-    body = page_hero("Contact", "Let's talk.", "Currently available for select engagements — SEO, automation, AI workflows, and full-stack web projects.") + f"""
+    body = page_hero("Contact", "Let's talk.", "Currently available for select engagements — SEO, automation, AI workflows, and full-stack web projects. Share your brief below; I reply within 24 hours.") + f"""
 <main id="main" class="sub-body">
   <div class="wrap">
     <div class="close-actions reveal" style="margin-bottom:20px;">
@@ -665,8 +665,8 @@ def build_contact_page(up="../"):
         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span>Download ATS CV</span>
       </a>
-      <a href="mailto:me@mjrifat.com?subject=Project%20inquiry" class="close-cta">
-        <span>Start a conversation</span>
+      <a href="#contact-form" class="close-cta">
+        <span>Start a project</span>
         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
       </a>
     </div>
@@ -677,15 +677,113 @@ def build_contact_page(up="../"):
       the <strong>ATS</strong> PDF is single-column, plain-contrast, and safe for Workday / Greenhouse / Lever resume parsers.
     </p>
 
-    <div class="contact-grid">
-      <a class="c-item reveal" href="mailto:me@mjrifat.com">
-        <span class="c-label">Email</span>
-        <span class="c-value">me@mjrifat.com</span>
-        <span class="c-arrow">→</span>
-      </a>
-      <a class="c-item reveal" href="tel:+8801310429518">
+    <section id="contact-form" class="contact-form-wrap reveal" aria-labelledby="contact-form-title">
+      <header class="cf-head">
+        <h2 id="contact-form-title">Project inquiry</h2>
+        <p>Tell me what you're trying to ship. I read every message myself and reply within <strong>24 hours</strong> with either a scoped proposal or an honest "not a fit."</p>
+      </header>
+
+      <form id="contactForm" class="contact-form" action="https://formsubmit.co/mjrifat54@gmail.com" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New inquiry from mjrifat.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://mjrifat.com/contact/?sent=1">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true">
+
+        <div class="cf-row two">
+          <div class="cf-field">
+            <label for="cf-name">Your name <span class="req">*</span></label>
+            <input id="cf-name" name="name" type="text" required autocomplete="name" minlength="2" maxlength="100">
+          </div>
+          <div class="cf-field">
+            <label for="cf-email">Work email <span class="req">*</span></label>
+            <input id="cf-email" name="email" type="email" required autocomplete="email" maxlength="120">
+          </div>
+        </div>
+
+        <div class="cf-row two">
+          <div class="cf-field">
+            <label for="cf-company">Company / website <span class="opt">(optional)</span></label>
+            <input id="cf-company" name="company" type="text" autocomplete="organization" maxlength="160">
+          </div>
+          <div class="cf-field">
+            <label for="cf-role">Your role <span class="opt">(optional)</span></label>
+            <input id="cf-role" name="role" type="text" autocomplete="organization-title" maxlength="80">
+          </div>
+        </div>
+
+        <div class="cf-row three">
+          <div class="cf-field">
+            <label for="cf-type">Project type</label>
+            <select id="cf-type" name="project_type">
+              <option value="">Choose one…</option>
+              <option>SEO — technical audit &amp; rebuild</option>
+              <option>SEO — content &amp; ranking programme</option>
+              <option>Chrome extension</option>
+              <option>Automation / scraper / AI workflow</option>
+              <option>Shopify theme or storefront</option>
+              <option>Full-stack web app</option>
+              <option>WebGL / 3D brand experience</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="cf-field">
+            <label for="cf-budget">Budget range</label>
+            <select id="cf-budget" name="budget">
+              <option value="">Choose one…</option>
+              <option>Under $2,000</option>
+              <option>$2,000 – $5,000</option>
+              <option>$5,000 – $15,000</option>
+              <option>$15,000 – $50,000</option>
+              <option>$50,000+</option>
+              <option>Retainer / monthly</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="cf-field">
+            <label for="cf-timeline">Timeline</label>
+            <select id="cf-timeline" name="timeline">
+              <option value="">Choose one…</option>
+              <option>Yesterday</option>
+              <option>Within 2 weeks</option>
+              <option>Within 1 month</option>
+              <option>1 – 3 months</option>
+              <option>Flexible</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cf-field">
+          <label for="cf-message">Project brief <span class="req">*</span></label>
+          <textarea id="cf-message" name="message" rows="7" required minlength="20" maxlength="4000" placeholder="What are you trying to ship? What's blocking you? Share goals, constraints, and anything relevant — the more specific the brief, the more useful my reply."></textarea>
+          <span class="cf-counter" id="cf-counter" aria-live="polite">0 / 4000</span>
+        </div>
+
+        <div class="cf-actions">
+          <button type="submit" class="cf-submit" id="cf-submit">
+            <span class="cf-submit-label">Send inquiry</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
+          </button>
+          <p class="cf-meta">
+            Delivered to me within seconds via an encrypted form service. No newsletter, no data sharing, no follow-up marketing — only your inquiry.
+          </p>
+        </div>
+
+        <div class="cf-success" id="cfSuccess" hidden>
+          <strong>Thanks — your brief is in my inbox.</strong>
+          <p>I reply within 24 hours, usually sooner. If you don't hear from me, your email provider may have filtered my reply — check spam, or ping me on <a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+        </div>
+        <div class="cf-error" id="cfError" hidden>
+          <strong>Hmm — that didn't go through.</strong>
+          <p>Please try again, or reach me directly on <a href="tel:+8801917286515">+880 1917 286 515</a> / <a href="https://www.upwork.com/freelancers/~018280ef5078222f43" target="_blank" rel="noopener">Upwork</a>.</p>
+        </div>
+      </form>
+    </section>
+
+    <div class="contact-grid" style="margin-top:80px;">
+      <a class="c-item reveal" href="tel:+8801917286515">
         <span class="c-label">Phone</span>
-        <span class="c-value">+880 1310 429 518</span>
+        <span class="c-value">+880 1917 286 515</span>
         <span class="c-arrow">→</span>
       </a>
       <a class="c-item reveal" href="https://github.com/MuraduzzamanRifat" target="_blank" rel="noopener">
@@ -711,6 +809,61 @@ def build_contact_page(up="../"):
     </div>
   </div>
 </main>
+
+<script>
+(function() {{
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const submit  = document.getElementById('cf-submit');
+  const success = document.getElementById('cfSuccess');
+  const error   = document.getElementById('cfError');
+  const message = document.getElementById('cf-message');
+  const counter = document.getElementById('cf-counter');
+  const max = 4000;
+
+  if (new URLSearchParams(location.search).get('sent') === '1') {{
+    form.hidden = true;
+    success.hidden = false;
+  }}
+
+  function updateCounter() {{
+    const n = message.value.length;
+    counter.textContent = n + ' / ' + max;
+    counter.classList.toggle('warn', n > max * 0.9);
+  }}
+  message.addEventListener('input', updateCounter);
+  updateCounter();
+
+  form.addEventListener('submit', async (e) => {{
+    if (!form.checkValidity()) {{
+      form.reportValidity();
+      return;
+    }}
+    e.preventDefault();
+    submit.disabled = true;
+    submit.classList.add('loading');
+    error.hidden = true;
+    try {{
+      const res = await fetch(form.action, {{
+        method: 'POST',
+        body: new FormData(form),
+        headers: {{ Accept: 'application/json' }},
+      }});
+      if (!res.ok) throw new Error('Submit failed: ' + res.status);
+      form.reset();
+      form.hidden = true;
+      success.hidden = false;
+      success.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+    }} catch (err) {{
+      console.error('[contact] submission failed:', err);
+      submit.disabled = false;
+      submit.classList.remove('loading');
+      error.hidden = false;
+      error.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+    }}
+  }});
+}})();
+</script>
 """
     return body
 
