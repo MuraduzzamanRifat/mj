@@ -42,10 +42,7 @@ body {
   background: var(--ink);
   overflow-x: hidden;
   cursor: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
 }
-body[data-loaded="true"] { opacity: 1; }
 
 @media (hover: none), (max-width: 900px) {
   body { cursor: auto; }
@@ -102,7 +99,15 @@ body.cursor-active .cursor-ring { width: 56px; height: 56px; border-color: var(-
   opacity: 1;
   transition: opacity 0.6s ease;
   overflow: hidden;
+  /* Safety net: if JS never runs (module load fails, CDN times out),
+     the preloader still fades out so the page renders. JS's .done
+     class short-circuits the animation when it finishes sooner. */
+  animation: preloaderSafetyHide 0.6s 2.8s forwards;
 }
+@keyframes preloaderSafetyHide {
+  to { opacity: 0; pointer-events: none; visibility: hidden; }
+}
+.preloader.done { animation: none; }
 .preloader-canvas {
   position: absolute;
   inset: 0;
@@ -2601,3 +2606,179 @@ body::after {
 .site-foot ~ .foot { display: none; }
 
 
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE MENU — hamburger + full-screen drawer
+   Desktop hides the burger; below 900px the nav links collapse
+   into a touch-friendly drawer triggered by the burger.
+   ═══════════════════════════════════════════════════════════════ */
+
+.nav-burger {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(238,231,216,0.35);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 2px;
+  transition: border-color 0.25s, background 0.25s;
+  margin-left: 4px;
+}
+.nav-burger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--paper);
+  transition: transform 0.3s, opacity 0.25s;
+}
+.nav.light .nav-burger { border-color: rgba(238,231,216,0.35); }
+.nav.light .nav-burger span { background: var(--paper); }
+body.nav-open .nav-burger { border-color: var(--copper); }
+body.nav-open .nav-burger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.nav-open .nav-burger span:nth-child(2) { opacity: 0; }
+body.nav-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.nav-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 90;                 /* below nav (z:100) so burger stays clickable */
+  background: rgba(17,17,20,0.98);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  padding: 96px 28px 40px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s 0.35s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+body.nav-open .nav-mobile {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s;
+}
+.nav-mobile-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-mobile-links a {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 18px 6px;
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--f-display);
+  font-size: clamp(28px, 7vw, 38px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid rgba(238,231,216,0.12);
+  transition: color 0.2s, padding-left 0.3s;
+  min-height: 48px;
+}
+.nav-mobile-links a::before {
+  content: attr(data-n);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--copper);
+  flex: 0 0 auto;
+}
+.nav-mobile-links a:hover,
+.nav-mobile-links a:focus-visible { padding-left: 14px; color: var(--copper); }
+.nav-mobile-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(238,231,216,0.72);
+}
+.nav-mobile-foot a {
+  color: var(--paper);
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(238,231,216,0.12);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.nav-mobile-foot a:last-child { text-transform: none; letter-spacing: 0.08em; font-size: 12px; }
+.nav-mobile-foot a:hover { color: var(--copper); }
+
+/* Show burger + lock scroll only below 900px */
+@media (max-width: 900px) {
+  .nav-burger { display: flex; }
+  body.nav-open { overflow: hidden; touch-action: none; }
+}
+@media (min-width: 901px) {
+  .nav-mobile { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE TROUBLE-SPOT FIXES — hero top-bar wrap, preloader sizing,
+   smaller section padding, safer tap targets.
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 720px) {
+  /* Hero top bar: stack status + location vertically, trim extra copy */
+  .hero-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-top: 64px;
+  }
+  .tb-right { align-items: flex-start; }
+  .tb-right .mono-11 { font-size: 10px; letter-spacing: 0.18em; }
+
+  /* Hero title: tighten clamp so "Muraduzzaman." fits 320px viewports */
+  .title-line.big { font-size: clamp(48px, 14vw, 96px); }
+  .title-line    { font-size: clamp(22px, 5.5vw, 32px); }
+  .hero-lede     { font-size: clamp(15px, 4.2vw, 20px); }
+
+  /* Heavy top/bottom padding shrinks on small screens */
+  .positioning        { padding: 90px 0; }
+  .capabilities-sec   { padding: 80px 0; }
+
+  /* Minimum tap target on CTA buttons */
+  .cta-btn { min-height: 48px; }
+}
+
+@media (max-width: 480px) {
+  /* Preloader headline — 12-char name goes very big via display font.
+     Scale it down further at phone widths so it never overflows. */
+  .pre-name      { font-size: clamp(34px, 13vw, 60px) !important; letter-spacing: -0.015em; }
+  .pre-tagline   { font-size: 13px; padding: 0 6px; }
+  .pre-kicker    { font-size: 9.5px; letter-spacing: 0.18em; }
+  .pre-progress  { padding: 0 14px 28px; }
+
+  /* Hero metric numbers: keep readable without blowing up the card */
+  .metric-num { font-size: clamp(36px, 11vw, 60px); }
+  .metric-unit { font-size: 10px; letter-spacing: 0.22em; }
+  .metric-sub { font-size: 12px; }
+
+  /* Nav CTA pills stay compact */
+  .nav-cta, .nav-pdf { padding: 10px 10px; }
+  .nav-inner { gap: 6px; }
+}
+
+/* Accessibility: reduced-motion users skip the drawer slide */
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile,
+  .nav-burger span { transition: none !important; }
+}

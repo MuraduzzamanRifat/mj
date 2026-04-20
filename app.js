@@ -872,6 +872,36 @@ function initNav() {
   if (close)  io.observe(close);
 }
 
+function initNavMobile() {
+  const burger = document.getElementById('navBurger');
+  const menu   = document.getElementById('navMobile');
+  if (!burger || !menu) return;
+
+  const setOpen = (open) => {
+    document.body.classList.toggle('nav-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+  };
+
+  burger.addEventListener('click', () => {
+    setOpen(!document.body.classList.contains('nav-open'));
+  });
+
+  // Close when a nav link is tapped
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) setOpen(false);
+  });
+
+  // Close if viewport grows past the mobile breakpoint while open
+  const mq = window.matchMedia('(min-width: 901px)');
+  const onChange = () => { if (mq.matches) setOpen(false); };
+  (mq.addEventListener ? mq.addEventListener('change', onChange) : mq.addListener(onChange));
+}
+
 async function boot() {
   // Neuron lives inside the preloader only; ticks until the
   // preloader element is removed from the DOM.
@@ -899,6 +929,7 @@ async function boot() {
     initCursor();
     initReveal();
     initNav();
+    initNavMobile();
     initHeroTitle();
     initMetricsCount();
     initScrollProgress();
