@@ -179,28 +179,48 @@ def cta_block():
 # ──────────────────────────────────────────────────────────────────
 
 def build_about(up="../"):
-    body = page_hero("About", "A marketer who codes.", "Seven years of SEO, paired with production engineering. One operator, end-to-end.") + f"""
+    body = page_hero("About", "I replace the three-vendor stack most companies assume they need.", "SEO agency, web developer, automation consultant — one hire handles all three. Delivered by a single operator, end-to-end, without handoffs.") + f"""
 <main id="main" class="sub-body">
   <div class="wrap">
     <section class="prose reveal">
-      <h2>Who I am</h2>
-      <p>I'm Muraduzzaman — a growth engineer based in Dhaka, working with clients globally. For seven years I've worked inside the machinery of SEO: technical audits, content architecture, link systems, and the conversion flows they feed.</p>
-      <p>Over time I wanted fewer handoffs. So I learned to code — Python, JavaScript, Kotlin, Liquid, FastAPI, Playwright, Three.js — enough to build the scrapers, extensions, and web experiences I used to outsource.</p>
-      <p>Today I work across search and software as a single operator: the SEO brief, the tooling that feeds it, and the site it lands on.</p>
+      <h2>The short version</h2>
+      <p><strong>Seven years ranking commercial-intent keywords to USA #1.</strong> 20+ products shipped solo, including AI SaaS with Stripe billing, Python scrapers running in production, hand-coded Shopify themes at Lighthouse 95, and interactive WebGL brand experiences. Currently full-time at Innohedge; simultaneously retained by an international client since 2023 at a 5.0 rating.</p>
 
-      <h2>The positioning in one line</h2>
       <p class="big-quote">Most marketers buy tools. <em>I build them.</em></p>
 
-      <h2>Where I am now</h2>
+      <h2>Why this combination is rare</h2>
+      <p>A senior SEO specialist can diagnose why your organic traffic is flat. A senior engineer can ship the scraper that fixes it. <strong>Almost nobody can do both.</strong> The typical growth team either (a) hires three roles and coordinates them through JIRA, or (b) hires one specialist and outsources everything else to agencies — paying a 40% vendor tax and losing weeks in coordination loops.</p>
+
+      <p>I compress that stack into one contract, one brain, one delivery timeline.</p>
+
+      <h2>What's already shipped</h2>
       <ul>
-        <li><strong>Current role:</strong> Senior SEO &amp; Digital Marketing Specialist at <a href="../experience/">Innohedge</a> (Jan 2025 – Present)</li>
-        <li><strong>Long-term consulting:</strong> retained full-time by an international client since July 2023 (5.0 rating)</li>
-        <li><strong>Recognition:</strong> Top Performer of the Month, JK Lifestyle — July 2025</li>
-        <li><strong>Location:</strong> Dhaka, Bangladesh — working globally across time zones</li>
+        <li><strong>ProWorkSpace</strong> — Chrome extension SaaS with Stripe billing, marketing site, and admin panel. Live, paying users.</li>
+        <li><strong>Forex Lead Finder</strong> — Python engine harvesting 5 platforms, 15-point classifier, SQLite warehouse, Flask UI, 6-hour loop.</li>
+        <li><strong>AYVA</strong> — Shopify Dawn fork, zero third-party apps, Lighthouse 95 mobile, 50 products migrated.</li>
+        <li><strong>BrandiVibe</strong> — 3D WebGL brand experience shipping at 60 fps on mid-range hardware.</li>
+        <li>And <a href="../work/">16 more</a> in lead pipelines, automation, and Shopify theme work.</li>
       </ul>
 
-      <h2>What I can be hired for</h2>
-      <p>Six buildable deliverables, each scoped, priced, and shipped solo — see <a href="../services/">Services</a> for detail. Six concrete products already shipped — see <a href="../work/">Work</a> for the case studies.</p>
+      <h2>Signals worth knowing</h2>
+      <ul>
+        <li><strong>USA rank #1</strong> for a commercial-intent keyword (still live).</li>
+        <li><strong>Top Performer of the Month</strong> — JK Lifestyle, July 2025.</li>
+        <li><strong>5.0 Upwork rating</strong>; single client has retained me full-time for ~3 years without interruption.</li>
+        <li><strong>Listed on Wikidata</strong> as an entity — uncommon for an independent operator.</li>
+        <li>Organic reach across <strong>6 countries</strong> (GA4 verified, 30-day window).</li>
+      </ul>
+
+      <h2>Who I'm useful to</h2>
+      <ul>
+        <li><strong>Startups under ~$5M ARR</strong> who can't afford three specialists but need all three skill sets — hire me instead of forming a team.</li>
+        <li><strong>Growth teams at mid-market</strong> who want a senior specialist but also need execution without the usual handoff delays.</li>
+        <li><strong>Agencies</strong> sub-contracting specialist SEO + engineering work for enterprise clients.</li>
+        <li><strong>Founders</strong> who need a growth engine rebuilt end-to-end in weeks, not quarters.</li>
+      </ul>
+
+      <h2>How to start working together</h2>
+      <p>Send a one-paragraph brief to <a href="mailto:me@mjrifat.com">me@mjrifat.com</a>. I reply within 24 hours with either a scope-and-price proposal or an honest "not a fit." No long qualification calls before I understand what you actually need.</p>
 
       <div class="prose-tag">SEO · AEO · GEO · AUTOMATION · AI · CODE</div>
     </section>
@@ -213,25 +233,31 @@ def build_about(up="../"):
 
 
 def build_work_index(up="../"):
+    # Each card now leads with THE OUTCOME, not a description of what it is.
     cards = [
-        ("01", "ProWorkSpace", "AI SaaS for Upwork freelancers, built end-to-end.", "proworkspace/"),
-        ("02", "Forex Lead Finder", "Multi-platform lead scraping and scoring.", "forex-lead-finder/"),
-        ("03", "AYVA", "Shopify Dawn fork — minimalist storefront, Lighthouse 95 mobile.", "ayva/"),
-        ("04", "BrandiVibe", "Interactive 3D WebGL brand experience.", "brandivibe/"),
-        ("05", "Email Outreach Engine", "Lead acquisition pipeline with deliverability guardrails.", "email-outreach/"),
-        ("06", "Maps Lead Extractor", "Local business data pipeline via SerpAPI.", "maps-extractor/"),
+        ("01", "ProWorkSpace", "Live SaaS — paying users", "Chrome extension + Stripe billing + admin panel. Shipped solo.", "proworkspace/"),
+        ("02", "Forex Lead Finder", "5 platforms → 1 pipeline", "Python engine, 15-point classifier, 6-hour scheduler. Replaces manual lead research.", "forex-lead-finder/"),
+        ("03", "AYVA", "Lighthouse 95 mobile", "Hand-coded Shopify Dawn fork, 50 products, zero third-party apps.", "ayva/"),
+        ("04", "BrandiVibe", "60 fps on mid-range hardware", "Interactive 3D WebGL brand site with cursor-aware motion.", "brandivibe/"),
+        ("05", "Email Outreach Engine", "90%+ deliverability, 50/day", "Playwright collector + rate-capped sender. Production cold-outreach pipeline.", "email-outreach/"),
+        ("06", "Maps Lead Extractor", "Day-of-research → 10 minutes", "SerpAPI CLI. Any geo + keyword → enriched CSV, sales-ready.", "maps-extractor/"),
     ]
     card_html = "\n".join([
         f"""
     <a class="work-card reveal" href="{slug}">
       <span class="wc-idx">{idx}</span>
       <h3>{name}</h3>
+      <p class="wc-metric">{metric}</p>
       <p>{sub}</p>
       <span class="wc-arrow">Read case study <span>→</span></span>
     </a>
-""" for (idx, name, sub, slug) in cards
+""" for (idx, name, metric, sub, slug) in cards
     ])
-    body = page_hero("Work", "Six products I've shipped, end-to-end.", "Each one is its own case study — problem, architecture, stack, outcomes. Click any card to read the full build.") + f"""
+    body = page_hero(
+        "Work",
+        "Six products, each replacing a specific line-item on someone's budget.",
+        "The common thread: a workflow that used to cost an agency contract, a team hire, or a week of manual time — compressed into a tool I built end-to-end. Every case study opens with what it replaced."
+    ) + f"""
 <main id="main" class="sub-body">
   <div class="wrap">
     <div class="work-grid">{card_html}</div>
@@ -657,19 +683,18 @@ CASE_STUDIES = {
     'forex-lead-finder': dict(
         idx='02',
         name='Forex Lead Finder',
-        sub='A Python system that finds qualified forex-trader leads across five platforms and writes them to disk — on a 6-hour loop, with a 15-point scoring classifier.',
+        sub='Replaces 10 hours of weekly manual lead research with a Python engine that harvests 5 platforms, scores every profile, and delivers sales-ready CSVs on a 6-hour loop.',
         problem=dict(
-            h2='Forex educators spend 10 hours a week hunting leads.',
+            h2='Manual lead hunting burns a full workday per week.',
             paragraphs=[
-                'Anyone selling signals, courses, or brokerage services in the forex space chases the same pool of qualified traders — people who talk about MT4, mention pairs in posts, or tag themselves in bios. That audience lives scattered across Reddit, TradingView, BabyPips, ForexFactory, and LinkedIn.',
-                'Manually pulling names from those platforms is slow, fragile, and never keeps up with the flow of new voices. The market had tools that covered one source; none covered five.',
+                '<strong>Target buyer:</strong> anyone selling forex signals, courses, or brokerage services. <strong>Their bottleneck:</strong> finding qualified traders — people with MT4/MT5 bios, trading-pair posts, or telltale hashtags. That audience is scattered across Reddit, TradingView, BabyPips, ForexFactory, and LinkedIn. <strong>Existing tools:</strong> cover one platform at a time, require constant maintenance, and return unscored data that still needs a human to filter.',
             ]
         ),
         approach=dict(
-            h2='Scrape five platforms in parallel, score every profile, keep only the signal.',
+            h2='Five scrapers in parallel, scored at ingestion, sales-ready on export.',
             paragraphs=[
-                'I built a Python engine that hits all five platforms concurrently, pulls each profile + recent posts, runs every candidate through a 15-point keyword classifier, and persists qualified leads into a SQLite warehouse.',
-                'A Flask UI and a small REST API wrap the store for downstream consumers. A 6-hour APScheduler loop keeps the index fresh without manual triggering. Exports to XLSX, CSV, and JSON for direct hand-off to a sales workflow.',
+                '<strong>What ships:</strong> five platform-specific Python collectors running concurrently; a 15-point keyword classifier gating every candidate (bio keyword +10, post keyword +10, trading pair +10, MT4/MT5 +5, hashtag +5, threshold 15); SQLite warehouse keyed by profile URL (idempotent re-runs, no duplicates); Flask UI for operator review; REST endpoints for downstream CRM / email tools; APScheduler 6-hour loop; XLSX / CSV / JSON export.',
+                '<strong>What it replaces:</strong> a junior researcher spending ~10 hrs/week scraping names manually (typical market cost in Dhaka: $800–1,200/month; US: $3,500–5,000/month). This engine compresses that to zero human time after initial tuning.',
             ]
         ),
         arch_tiles=[
@@ -695,19 +720,18 @@ CASE_STUDIES = {
     'ayva': dict(
         idx='03',
         name='AYVA',
-        sub='A minimalist Shopify storefront — a hand-coded Dawn fork with zero third-party apps and a Lighthouse 95 mobile score.',
+        sub='A Shopify storefront that loads like a static site: hand-coded Dawn fork, zero third-party apps, Lighthouse 95 mobile, 50 products migrated clean.',
         problem=dict(
-            h2='Most Shopify stores are app spaghetti.',
+            h2='App-stacked Shopify stores lose money to latency.',
             paragraphs=[
-                'Stock Shopify themes get swollen fast: cart drawers from one app, reviews from another, upsells from a third. Each ships its own CSS and JavaScript, each adds latency, and the customer experience decays into pop-ups.',
-                'The brand behind AYVA wanted a Scandinavian-minimalist storefront where every pixel and every millisecond was owned. That rules out 80% of what most Shopify developers reach for.',
+                '<strong>Industry pattern:</strong> the average Shopify store runs 12–18 third-party apps. Each adds CSS, JS, and DOM weight. <strong>Result:</strong> mobile Lighthouse scores in the 30–50 range, bounce rates above 60%, and conversion drop-off of ~7% per additional second of load time (Google data). <strong>The brand\'s ask:</strong> a Scandinavian-minimalist store where every byte and every millisecond is owned. That eliminates 80% of the shortcuts most Shopify developers take.',
             ]
         ),
         approach=dict(
-            h2='Fork Dawn, re-write the sections, carry nothing forward.',
+            h2='Fork Dawn. Rewrite every section. Carry nothing forward.',
             paragraphs=[
-                'I forked Shopify Dawn as the base, then rebuilt the homepage, collection, and about-page Liquid sections from scratch — no third-party apps, no bundled kits, no carry-over from the template.',
-                'Fifty products were migrated cleanly, inventory and metafields preserved. The result: a store that loads like a static site, renders like an editorial magazine, and gives the brand control over every byte.',
+                '<strong>What ships:</strong> hand-written Liquid for homepage, collection, and about-page sections; custom section schema exposing merchant-friendly settings (non-technical staff update copy and layout from Shopify admin); hand-tuned CSS under a 50 kb budget per section; responsive image srcset pipelines; deferred fonts; zero third-party JavaScript. 50 products migrated with metafields intact; pre- and post-migration SKU diff verified none slipped.',
+                '<strong>What it replaces:</strong> a typical $2,000–5,000/year third-party app stack (reviews, cart, upsell, wishlist, loyalty) — every feature that would normally come from an app was built directly into the theme, converting recurring SaaS subscriptions into a one-time theme investment.',
             ]
         ),
         arch_tiles=[

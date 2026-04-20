@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Forex Lead Finder — Muraduzzaman</title>
-<meta name="description" content="A Python system that finds qualified forex-trader leads across five platforms and writes them to disk — on a 6-hour loop, with a 15-point scoring classifier." />
+<meta name="description" content="Replaces 10 hours of weekly manual lead research with a Python engine that harvests 5 platforms, scores every profile, and delivers sales-ready CSVs on a 6-hour loop." />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Forex Lead Finder — Muraduzzaman" />
-<meta property="og:description" content="A Python system that finds qualified forex-trader leads across five platforms and writes them to disk — on a 6-hour loop, with a 15-point scoring classifier." />
+<meta property="og:description" content="Replaces 10 hours of weekly manual lead research with a Python engine that harvests 5 platforms, scores every profile, and delivers sales-ready CSVs on a 6-hour loop." />
 
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.png">
@@ -73,7 +73,7 @@
     </div>
 
     <h1 class="case-title">Forex Lead Finder.</h1>
-    <p class="case-subtitle">A Python system that finds qualified forex-trader leads across five platforms and writes them to disk — on a 6-hour loop, with a 15-point scoring classifier.</p>
+    <p class="case-subtitle">Replaces 10 hours of weekly manual lead research with a Python engine that harvests 5 platforms, scores every profile, and delivers sales-ready CSVs on a 6-hour loop.</p>
   </div>
 </section>
 
@@ -82,14 +82,14 @@
 
     <section class="case-section case-prose">
       <div class="case-eyebrow">01 · The problem</div>
-      <h2 class="case-h2">Forex educators spend 10 hours a week hunting leads.</h2>
-      <p>Anyone selling signals, courses, or brokerage services in the forex space chases the same pool of qualified traders — people who talk about MT4, mention pairs in posts, or tag themselves in bios. That audience lives scattered across Reddit, TradingView, BabyPips, ForexFactory, and LinkedIn.</p><p>Manually pulling names from those platforms is slow, fragile, and never keeps up with the flow of new voices. The market had tools that covered one source; none covered five.</p>
+      <h2 class="case-h2">Manual lead hunting burns a full workday per week.</h2>
+      <p><strong>Target buyer:</strong> anyone selling forex signals, courses, or brokerage services. <strong>Their bottleneck:</strong> finding qualified traders — people with MT4/MT5 bios, trading-pair posts, or telltale hashtags. That audience is scattered across Reddit, TradingView, BabyPips, ForexFactory, and LinkedIn. <strong>Existing tools:</strong> cover one platform at a time, require constant maintenance, and return unscored data that still needs a human to filter.</p>
     </section>
 
     <section class="case-section case-prose">
       <div class="case-eyebrow">02 · The approach</div>
-      <h2 class="case-h2">Scrape five platforms in parallel, score every profile, keep only the signal.</h2>
-      <p>I built a Python engine that hits all five platforms concurrently, pulls each profile + recent posts, runs every candidate through a 15-point keyword classifier, and persists qualified leads into a SQLite warehouse.</p><p>A Flask UI and a small REST API wrap the store for downstream consumers. A 6-hour APScheduler loop keeps the index fresh without manual triggering. Exports to XLSX, CSV, and JSON for direct hand-off to a sales workflow.</p>
+      <h2 class="case-h2">Five scrapers in parallel, scored at ingestion, sales-ready on export.</h2>
+      <p><strong>What ships:</strong> five platform-specific Python collectors running concurrently; a 15-point keyword classifier gating every candidate (bio keyword +10, post keyword +10, trading pair +10, MT4/MT5 +5, hashtag +5, threshold 15); SQLite warehouse keyed by profile URL (idempotent re-runs, no duplicates); Flask UI for operator review; REST endpoints for downstream CRM / email tools; APScheduler 6-hour loop; XLSX / CSV / JSON export.</p><p><strong>What it replaces:</strong> a junior researcher spending ~10 hrs/week scraping names manually (typical market cost in Dhaka: $800–1,200/month; US: $3,500–5,000/month). This engine compresses that to zero human time after initial tuning.</p>
     </section>
 
     <section class="case-section">

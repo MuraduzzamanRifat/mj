@@ -2320,6 +2320,18 @@ body::after {
   color: var(--paper);
   margin: 0;
 }
+.work-card .wc-metric {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+  font-weight: 700;
+  margin: 0;
+  padding: 4px 0;
+  border-bottom: 1px dashed rgba(238,231,216,0.2);
+  margin-bottom: 8px;
+}
 .work-card p {
   font-family: var(--f-mono);
   font-size: 13px;
