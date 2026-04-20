@@ -25,9 +25,23 @@ HEAD = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{title} — Muraduzzaman</title>
 <meta name="description" content="{description}" />
+<meta name="author" content="Muraduzzaman" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://mjrifat.com/{canonical_path}" />
+
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="Muraduzzaman" />
+<meta property="og:url" content="https://mjrifat.com/{canonical_path}" />
 <meta property="og:title" content="{title} — Muraduzzaman" />
 <meta property="og:description" content="{description}" />
+<meta property="og:image" content="https://mjrifat.com/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{title} — Muraduzzaman" />
+<meta name="twitter:description" content="{description}" />
+<meta name="twitter:image" content="https://mjrifat.com/og-card.png" />
 
 <link rel="icon" type="image/svg+xml" href="{up}favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="{up}favicon.png">
@@ -35,9 +49,18 @@ HEAD = """<!DOCTYPE html>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
 
 <link rel="stylesheet" href="{up}styles.css">
+
+<script type="application/ld+json">
+{breadcrumb_json}
+</script>
+<script type="application/ld+json">
+{webpage_json}
+</script>
 </head>
 <body data-loaded="true">
 
@@ -215,7 +238,7 @@ def build_about(up="../"):
         <li><strong>ProWorkSpace</strong> — Chrome extension SaaS with Stripe billing, marketing site, and admin panel. Live, paying users.</li>
         <li><strong>Forex Lead Finder</strong> — Python engine harvesting 5 platforms, 15-point classifier, SQLite warehouse, Flask UI, 6-hour loop.</li>
         <li><strong>AYVA</strong> — Shopify Dawn fork, zero third-party apps, Lighthouse 95 mobile, 50 products migrated.</li>
-        <li><strong>BrandiVibe</strong> — 3D WebGL brand experience shipping at 60 fps on mid-range hardware.</li>
+        <li><strong>BrandiVibe</strong> — Three.js brand front-end <em>plus</em> an autonomous AI Sales Brain (GPT-4o) that writes daily SEO articles, radar-scans four startup feeds for ICP-fit leads, deep-researches each one, and runs a warmup-curve cold-email sequence with self-learning A/B. Zero daily input.</li>
         <li>And <a href="../work/">16 more</a> in lead pipelines, automation, and Shopify theme work.</li>
       </ul>
 
@@ -255,7 +278,7 @@ def build_work_index(up="../"):
         ("01", "ProWorkSpace", "Live SaaS — paying users", "Chrome extension + Stripe billing + admin panel. Shipped solo.", "proworkspace/"),
         ("02", "Forex Lead Finder", "5 platforms → 1 pipeline", "Python engine, 15-point classifier, 6-hour scheduler. Replaces manual lead research.", "forex-lead-finder/"),
         ("03", "AYVA", "Lighthouse 95 mobile", "Hand-coded Shopify Dawn fork, 50 products, zero third-party apps.", "ayva/"),
-        ("04", "BrandiVibe", "60 fps on mid-range hardware", "Interactive 3D WebGL brand site with cursor-aware motion.", "brandivibe/"),
+        ("04", "BrandiVibe", "WebGL brand + 24/7 AI Sales Brain", "Three.js front-end plus a GPT-4o-driven autonomous sales engine: daily SEO article, hourly lead radar across 4 feeds, deep research, Resend warmup cold outreach, self-learning A/B. Runs on Koyeb, state in GitHub.", "brandivibe/"),
         ("05", "Email Outreach Engine", "90%+ deliverability, 50/day", "Playwright collector + rate-capped sender. Production cold-outreach pipeline.", "email-outreach/"),
         ("06", "Maps Lead Extractor", "Day-of-research → 10 minutes", "SerpAPI CLI. Any geo + keyword → enriched CSV, sales-ready.", "maps-extractor/"),
     ]
@@ -774,39 +797,47 @@ CASE_STUDIES = {
     'brandivibe': dict(
         idx='04',
         name='BrandiVibe',
-        sub='An interactive 3D WebGL brand experience — engagement, depth, and cursor-aware motion, built on Three.js.',
+        sub='Two-layer system: a Three.js brand front-end AND an autonomous AI Sales Brain that runs content, outreach, and learning 24/7 with zero daily human input.',
         problem=dict(
-            h2='Most brand sites are static. Nobody scrolls past the hero.',
+            h2='Pretty brand sites don\'t sell. Sales engines aren\'t pretty.',
             paragraphs=[
-                'A static landing page competes poorly for attention in 2026. Bounce rates rise, session times fall, and a brand that needs to feel premium reads flat. But most 3D sites overcorrect — gimmicky intros, 60-second loaders, frame rates that die on mid-range laptops.',
-                'BrandiVibe was built to prove you can have immersive motion without the performance tax and without the gimmicky reputation of most WebGL brand pages.',
+                'Most premium brand sites are beautiful and inert — they win the click and then do nothing. Meanwhile, the sales stack that would convert that click (content marketing, cold outreach, CRM, A/B learning) typically requires a marketer, a copywriter, a sales-ops engineer, and a growth PM — four hires before the first email goes out.',
+                'BrandiVibe proves a solo operator can ship both layers — a 60-fps WebGL front-end, and the autonomous sales engine that feeds it qualified pipeline — as one system.',
             ]
         ),
         approach=dict(
-            h2='WebGL as a brand layer, not a party trick.',
+            h2='A front-end that earns the trust, and an AI Sales Brain that converts it.',
             paragraphs=[
-                'I built the site on Three.js, with cursor-aware geometry and scroll-linked animation. Every interaction has a reason. Nothing renders that a visitor cannot feel.',
-                'The experience is paired with a tight content system — the brand can update copy, imagery, and 3D scene configuration without touching the rendering code.',
+                '<strong>Layer 1 — Experience.</strong> Three.js with custom shaders, cursor-aware geometry, scroll-linked motion. JSON-driven scene config so the brand edits copy and colour without touching render code. 60 fps desktop target; 30 fps graceful fallback on mid-range mobile.',
+                '<strong>Layer 2 — The AI Sales Brain.</strong> A GPT-4o-driven autonomous system running on Koyeb with state persisted to GitHub. It writes one long-form SEO article every day, scans four startup feeds hourly for ICP-fit prospects, researches each one (scrapes homepage/about/pricing/contact, extracts personalization hooks), and runs a warmup-curve cold-email sequence via Resend. A weekly digest scores every email by angle, industry, and subject style — then proposes and auto-applies A/B winners. Zero daily human input.',
             ]
         ),
         arch_tiles=[
-            ('01 / Renderer',  'Three.js',              'Custom shaders. Runs at target 60 fps on integrated GPUs. Graceful fallback for older devices.'),
-            ('02 / Interaction','Cursor-aware',         'The scene responds to pointer position, scroll depth, and idle state — so the brand feels felt, not just seen.'),
-            ('03 / Content',   'Editable scene config', 'The brand team updates copy and section imagery without touching the shader or camera code.'),
-            ('04 / Perf',      '60 fps target',         'Frame budget enforced. Polycount capped. All textures pre-compressed. Mobile has a reduced-motion fallback.'),
+            ('01 / Renderer',        'Three.js · WebGL 2',        'Custom GLSL shaders, cursor-aware geometry, scroll-linked motion. 60 fps desktop, 30 fps mobile fallback, JSON-driven scene config.'),
+            ('02 / Content Engine',  'GPT-4o · daily',            '1,800–2,500-word SEO article per day. 10 content angles rotating (ROI, conversion psychology, case studies…). Pexels hero images, 40+ banned AI-phrase filter for E-E-A-T, auto-publishes to /journal.'),
+            ('03 / Lead Radar',      '4 feeds · hourly',          'Scans TechCrunch, Product Hunt, Hacker News Show HN, and BetaList every hour. GPT-4o extracts company, domain, funding, industry. Filters out mega-brands and sites already using premium design (Three.js, Spline, Framer, GSAP) to keep only ICP fit.'),
+            ('04 / Deep Research',   'Scrape + GPT-4o hooks',     'Scrapes each prospect\'s homepage, about, team, pricing, contact. Tech-stack + design-quality score. GPT-4o extracts personalization hooks — specific weaknesses, decision-maker name, budget estimate. Email found via scrape then pattern fallback with MX verification.'),
+            ('05 / Cold Outreach',   'Resend · warmup · timing',  'Personalized 4-touch sequence per prospect. Warmup ramps 5 → 50 emails/day over 30 days. Per-domain throttle (1 email / 3 days), send window Tue/Wed/Thu 13:00 UTC. Smart timing: clicked = 2-day follow-up, opened = 3 days, no-open = 5 days with a new subject.'),
+            ('06 / Conversion',      'Webhooks · CRM',            'Resend webhook records opens, clicks, bounces, replies. Tracked /api/brain/book link redirects to Cal.com and marks booking intent. Inbound replies auto-pause sequences. Everything lives in brain.json, synced to GitHub.'),
+            ('07 / Self-Learning',   'A/B · auto-apply',          'Monday 14:00 UTC digest scores every email by angle, industry, and subject style. Identifies winners and losers. Proposes A/B tests between top-performing patterns. Auto-applies winners to the planner\'s prompt when BRAIN_AUTONOMY=true. 60-day override expiry so it re-tests and doesn\'t freeze on stale truth.'),
+            ('08 / Operations',      'Self-healing · resumable',  'Six-hour health check emails mjrifat54@gmail.com on failure. DailyRun ledger lets the pipeline resume from its last checkpoint if Koyeb kills mid-tick. State synced to GitHub survives every redeploy.'),
         ],
         invisible=[
-            ('Frame-budget discipline —', 'every new scene element has to fit within a fixed frame budget. Nothing ships that drops the experience under 45 fps on a 2019-era laptop.'),
-            ('Mobile parity —', 'on low-end Android devices the 3D scene swaps to a simplified version that preserves the brand feel at 30 fps without dropping frames.'),
-            ('Content editability —', 'the brand never has to wait on an engineer to tweak copy or a colour — scene config lives separate from render code.'),
+            ('Frame-budget discipline —',   'every new scene element has to fit within a fixed frame budget. Nothing ships that drops the experience under 45 fps on a 2019-era laptop.'),
+            ('Deliverability engineering —', 'the warmup curve, per-domain throttle, and narrow send window aren\'t optional — they\'re what keeps the from-domain off spam filters and makes the engine sustainable past month one.'),
+            ('ICP filtering that refuses customers —', 'Lead Radar actively rejects prospects that already ship premium design (Three.js / Spline / Framer / GSAP detected on their site). They\'re not the ICP, so they\'re noise — even if the brain could get a reply.'),
+            ('Self-experimentation with guardrails —', 'the brain proposes its own A/B tests and applies winners, but overrides expire after 60 days. That stops it from freezing on a pattern that stopped working six months ago.'),
+            ('State as version-controlled artifact —', 'brain.json sits in a GitHub repo. Every run commits a diff. The entire history of every prospect, email, and learning decision is auditable — and Koyeb redeploys can\'t wipe it.'),
         ],
         stack_groups=[
-            ('Rendering',   'Three.js · GLSL shaders · WebGL 2'),
-            ('Interaction', 'Pointer events · scroll observer · requestAnimationFrame loops'),
-            ('Content',     'JSON-driven scene config · decoupled copy layer'),
-            ('Perf',        '60 fps desktop target · 30 fps mobile fallback · pre-compressed textures'),
+            ('Front-end',     'Three.js · GLSL shaders · WebGL 2 · JSON-driven scene config'),
+            ('Intelligence',  'GPT-4o (planner, article writer, lead extractor, personalizer)'),
+            ('Sourcing',      'TechCrunch RSS · Product Hunt · Hacker News Show HN · BetaList'),
+            ('Delivery',      'Resend (warmup curve, webhooks for open/click/bounce/reply)'),
+            ('Infrastructure','Koyeb cron workers · brain.json on GitHub · Pexels media · Cal.com booking redirect'),
+            ('Schedule',      'Daily 13:00 UTC · hourly sourcing · 6-hour health check · Mon 14:00 UTC learning digest'),
         ],
-        takeaway='BrandiVibe shows the WebGL work on this portfolio is not a one-off — I can build interactive 3D brand sites at a level most agencies outsource, and I can ship them without the performance tax that makes most WebGL work impractical.',
+        takeaway='BrandiVibe is both the storefront and the sales engine. The WebGL front-end earns the trust; the AI Sales Brain behind it converts attention into pipeline — writing daily SEO articles, sourcing ICP-fit prospects from four startup feeds, researching them with GPT-4o, running a four-touch warmup-curve cold-email sequence, and auto-applying its own A/B winners every week. One operator, two layers, zero daily human input. Most companies form a team to build half of this.',
         live_url='https://brandivibe.com',
     ),
     'email-outreach': dict(
@@ -1031,10 +1062,51 @@ SERVICES = {
 # WRITE EVERYTHING
 # ──────────────────────────────────────────────────────────────────
 
+import json as _json
+
+def _build_schemas(path_rel, title, description):
+    """Build per-page BreadcrumbList + WebPage JSON-LD for SEO."""
+    SITE = 'https://mjrifat.com'
+    canonical_path = path_rel.rstrip('/') + '/'
+    parts = [p for p in path_rel.split('/') if p]
+    crumbs = [{'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE + '/'}]
+    acc = SITE
+    for i, p in enumerate(parts, start=2):
+        acc = f'{acc}/{p}'
+        label = p.replace('-', ' ').title()
+        # last crumb gets the page title
+        if i - 1 == len(parts):
+            label = title
+        crumbs.append({'@type': 'ListItem', 'position': i, 'name': label, 'item': acc + '/'})
+
+    breadcrumb = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': crumbs,
+    }
+    webpage = {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        'name': f'{title} — Muraduzzaman',
+        'description': description,
+        'url': f'{SITE}/{canonical_path}',
+        'inLanguage': 'en',
+        'isPartOf': {'@type': 'WebSite', 'url': f'{SITE}/', 'name': 'Muraduzzaman'},
+        'about': {'@type': 'Person', 'name': 'Muraduzzaman', 'url': f'{SITE}/'},
+    }
+    return canonical_path, _json.dumps(breadcrumb, indent=2), _json.dumps(webpage, indent=2)
+
+
 def write_page(path_rel, title, description, body, up='../'):
-    full = HEAD.format(title=html.escape(title), description=html.escape(description), up=up) \
-         + body \
-         + FOOTER.format(up=up)
+    canonical_path, breadcrumb_json, webpage_json = _build_schemas(path_rel, title, description)
+    full = HEAD.format(
+        title=html.escape(title),
+        description=html.escape(description),
+        up=up,
+        canonical_path=canonical_path,
+        breadcrumb_json=breadcrumb_json,
+        webpage_json=webpage_json,
+    ) + body + FOOTER.format(up=up)
     target = ROOT / path_rel / 'index.html'
     target.parent.mkdir(parents=True, exist_ok=True)
     with open(target, 'w', encoding='utf-8') as f:
