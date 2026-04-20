@@ -677,7 +677,7 @@ def build_contact_page(up="../"):
       the <strong>ATS</strong> PDF is single-column, plain-contrast, and safe for Workday / Greenhouse / Lever resume parsers.
     </p>
 
-    <section id="contact-form" class="contact-form-wrap reveal" aria-labelledby="contact-form-title">
+    <section id="contact-form" class="contact-form-wrap" aria-labelledby="contact-form-title">
       <header class="cf-head">
         <h2 id="contact-form-title">Project inquiry</h2>
         <p>Tell me what you're trying to ship. I read every message myself and reply within <strong>24 hours</strong> with either a scoped proposal or an honest "not a fit."</p>

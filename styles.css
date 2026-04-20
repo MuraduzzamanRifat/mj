@@ -445,8 +445,14 @@ button:focus-visible,
   transform: translateY(24px);
   transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
               transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Safety net: if IntersectionObserver doesn't fire (JS error, disabled),
+     content becomes visible after 2s via this CSS animation. */
+  animation: revealSafety 0.6s 2s forwards;
 }
-.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal.in { animation: none; opacity: 1; transform: translateY(0); }
+@keyframes revealSafety {
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* ═══════════════════════════════════════════════════════════════
    HERO
