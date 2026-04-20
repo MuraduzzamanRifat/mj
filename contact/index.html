@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co https://api.web3forms.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Contact — Muraduzzaman</title>
 <meta name="description" content="Currently available for select engagements. Email, phone, CV downloads, and profile links." />
 <meta name="author" content="Muraduzzaman" />
@@ -79,6 +81,8 @@
 <body data-loaded="true">
 
 <a href="#main" class="skip-link">Skip to main content</a>
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 <div class="grain-overlay"></div>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -138,7 +142,7 @@
       <span class="copper">Contact</span>
     </div>
     <h1 class="sub-title">Let's talk.</h1>
-    <p class="sub-sub">Currently available for select engagements — SEO, automation, AI workflows, and full-stack web projects. Share your brief below; I reply within 24 hours.</p>
+    <p class="sub-sub">Currently available for select engagements — SEO, automation, AI workflows, and full-stack web projects. Share your brief below and I'll read it personally.</p>
   </div>
 </section>
 
@@ -168,15 +172,25 @@
     <section id="contact-form" class="contact-form-wrap" aria-labelledby="contact-form-title">
       <header class="cf-head">
         <h2 id="contact-form-title">Project inquiry</h2>
-        <p>Tell me what you're trying to ship. I read every message myself and reply within <strong>24 hours</strong> with either a scoped proposal or an honest "not a fit."</p>
+        <p>Tell me what you're trying to ship. I read every message myself and reply with either a scoped proposal or an honest <strong>"not a fit."</strong> No long qualification calls before I understand what you need.</p>
       </header>
 
-      <form id="contactForm" class="contact-form" action="https://formsubmit.co/mjrifat54@gmail.com" method="POST" novalidate>
+      <form id="contactForm" class="contact-form" action="https://formsubmit.co/ajax/mjrifat54@gmail.com" method="POST" novalidate>
         <input type="hidden" name="_subject" value="New inquiry from mjrifat.com">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://mjrifat.com/contact/?sent=1">
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true">
+        <input type="hidden" name="_pageLoadedAt" id="cf-page-ts" value="">
+
+        <!-- Honeypots: real users never see or fill these; bots auto-fill by field
+             name ("url", "website", "phone") and get silently rejected. -->
+        <div class="cf-hp" aria-hidden="true">
+          <label>Leave this empty<input type="text" name="_honey"     tabindex="-1" autocomplete="off"></label>
+          <label>Website<input         type="url"  name="url"         tabindex="-1" autocomplete="off"></label>
+          <label>Company URL<input     type="url"  name="website"     tabindex="-1" autocomplete="off"></label>
+          <label>Phone extension<input type="text" name="phone_ext"   tabindex="-1" autocomplete="off"></label>
+          <label>Confirm name<input    type="text" name="name_confirm" tabindex="-1" autocomplete="off"></label>
+        </div>
 
         <div class="cf-row two">
           <div class="cf-field">
@@ -248,7 +262,7 @@
         </div>
 
         <div class="cf-actions">
-          <button type="submit" class="cf-submit" id="cf-submit">
+          <button type="submit" class="cf-submit" id="cf-submit" disabled data-pending="1">
             <span class="cf-submit-label">Send inquiry</span>
             <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
           </button>
@@ -259,7 +273,7 @@
 
         <div class="cf-success" id="cfSuccess" hidden>
           <strong>Thanks — your brief is in my inbox.</strong>
-          <p>I reply within 24 hours, usually sooner. If you don't hear from me, your email provider may have filtered my reply — check spam, or ping me on <a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+          <p>I'll reply personally. If you don't hear back in a few days, your email provider may have filtered my reply — check spam, or ping me on <a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
         </div>
         <div class="cf-error" id="cfError" hidden>
           <strong>Hmm — that didn't go through.</strong>
@@ -294,6 +308,11 @@
         <span class="c-value">Dhaka · working globally</span>
         <span class="c-arrow">·</span>
       </div>
+      <div class="c-item non-link reveal">
+        <span class="c-label">What I build</span>
+        <span class="c-value">Any web product, end-to-end</span>
+        <span class="c-arrow">·</span>
+      </div>
     </div>
   </div>
 </main>
@@ -307,7 +326,19 @@
   const error   = document.getElementById('cfError');
   const message = document.getElementById('cf-message');
   const counter = document.getElementById('cf-counter');
+  const pageTs  = document.getElementById('cf-page-ts');
   const max = 4000;
+  const MIN_FILL_MS = 3000;    // minimum seconds between page-load and submit
+
+  // Stamp load time + enable the submit button. A submission fired before
+  // this JS executes (pure-bot pattern) finds the button disabled and
+  // can't click it — so its click is silently rejected. HTML submit events
+  // from a scripted POST are still caught by the other defences below.
+  pageTs.value = String(Date.now());
+  setTimeout(() => {
+    submit.disabled = false;
+    submit.removeAttribute('data-pending');
+  }, 800);
 
   if (new URLSearchParams(location.search).get('sent') === '1') {
     form.hidden = true;
@@ -322,12 +353,41 @@
   message.addEventListener('input', updateCounter);
   updateCounter();
 
+  function isBotSubmission() {
+    // 1. Honeypot fields — any filled = bot.
+    const hpNames = ['_honey', 'url', 'website', 'phone_ext', 'name_confirm'];
+    for (const name of hpNames) {
+      const el = form.elements[name];
+      if (el && el.value && el.value.trim() !== '') return 'honeypot:' + name;
+    }
+    // 2. Timing — humans take > 3 s to fill a form. Bots fire in < 1 s.
+    const loaded = Number(pageTs.value) || 0;
+    const delta  = Date.now() - loaded;
+    if (!loaded || delta < MIN_FILL_MS) return 'too-fast:' + delta + 'ms';
+    return null;
+  }
+
+  function fakeSuccess() {
+    // Confuse bots: pretend we succeeded so they don't retry.
+    form.reset();
+    form.hidden = true;
+    success.hidden = false;
+  }
+
   form.addEventListener('submit', async (e) => {
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
     e.preventDefault();
+
+    const botReason = isBotSubmission();
+    if (botReason) {
+      console.warn('[contact] dropped (' + botReason + ')');
+      fakeSuccess();
+      return;
+    }
+
     submit.disabled = true;
     submit.classList.add('loading');
     error.hidden = true;
@@ -400,7 +460,7 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"
+    "three": "../vendor/three-0.160.0.module.min.js"
   }
 }
 </script>

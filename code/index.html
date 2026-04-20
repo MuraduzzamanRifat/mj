@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co https://api.web3forms.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Code — Muraduzzaman</title>
 <meta name="description" content="Four excerpts from production systems — lead classifier, scheduler, Chrome extension, storefront." />
 <meta name="author" content="Muraduzzaman" />
@@ -79,6 +81,8 @@
 <body data-loaded="true">
 
 <a href="#main" class="skip-link">Skip to main content</a>
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 <div class="grain-overlay"></div>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -253,7 +257,7 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"
+    "three": "../vendor/three-0.160.0.module.min.js"
   }
 }
 </script>

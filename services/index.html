@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co https://api.web3forms.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Services — Muraduzzaman</title>
-<meta name="description" content="Six things I build, scoped and delivered by one operator. No handoffs, no vendor chain." />
+<meta name="description" content="Any web product — scoped and delivered by one operator. Six examples of what I build most often, but the list is not a limit." />
 <meta name="author" content="Muraduzzaman" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://mjrifat.com/services/" />
@@ -13,14 +15,14 @@
 <meta property="og:site_name" content="Muraduzzaman" />
 <meta property="og:url" content="https://mjrifat.com/services/" />
 <meta property="og:title" content="Services — Muraduzzaman" />
-<meta property="og:description" content="Six things I build, scoped and delivered by one operator. No handoffs, no vendor chain." />
+<meta property="og:description" content="Any web product — scoped and delivered by one operator. Six examples of what I build most often, but the list is not a limit." />
 <meta property="og:image" content="https://mjrifat.com/og-card.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Services — Muraduzzaman" />
-<meta name="twitter:description" content="Six things I build, scoped and delivered by one operator. No handoffs, no vendor chain." />
+<meta name="twitter:description" content="Any web product — scoped and delivered by one operator. Six examples of what I build most often, but the list is not a limit." />
 <meta name="twitter:image" content="https://mjrifat.com/og-card.png" />
 
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
@@ -60,7 +62,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Services \u2014 Muraduzzaman",
-  "description": "Six things I build, scoped and delivered by one operator. No handoffs, no vendor chain.",
+  "description": "Any web product \u2014 scoped and delivered by one operator. Six examples of what I build most often, but the list is not a limit.",
   "url": "https://mjrifat.com/services/",
   "inLanguage": "en",
   "isPartOf": {
@@ -79,6 +81,8 @@
 <body data-loaded="true">
 
 <a href="#main" class="skip-link">Skip to main content</a>
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 <div class="grain-overlay"></div>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -137,8 +141,8 @@
     <div class="sub-meta">
       <span class="copper">Services</span>
     </div>
-    <h1 class="sub-title">Six things I build. Start to finish.</h1>
-    <p class="sub-sub">Every engagement scoped, priced, and delivered by one operator. No handoffs, no hidden freelancers, no agency tax.</p>
+    <h1 class="sub-title">I build any web product.</h1>
+    <p class="sub-sub">The six below are what I build most often — not a hard menu. If your problem lives on the web and needs code, I can ship it end-to-end. Seven years of SEO + engineering, paired with AI as a pair-programmer, lets me cover more ground than most one-person practices.</p>
   </div>
 </section>
 
@@ -150,8 +154,8 @@
       <h3>Growth website</h3>
       <p>WebGL / 3D / motion brand sites, hand-built.</p>
       <div class="sc-foot">
-        <span class="sc-label">Typical build</span>
-        <span class="sc-value">2–4 wks</span>
+        <span class="sc-label">Read more</span>
+        <span class="sc-value">→</span>
       </div>
     </a>
 
@@ -161,8 +165,8 @@
       <h3>SEO reboot</h3>
       <p>Audit → architecture → links → ranked.</p>
       <div class="sc-foot">
-        <span class="sc-label">Typical build</span>
-        <span class="sc-value">4–12 wks</span>
+        <span class="sc-label">Read more</span>
+        <span class="sc-value">→</span>
       </div>
     </a>
 
@@ -172,8 +176,8 @@
       <h3>Lead scraper</h3>
       <p>Python pipelines for any source.</p>
       <div class="sc-foot">
-        <span class="sc-label">Typical build</span>
-        <span class="sc-value">5–10 days</span>
+        <span class="sc-label">Read more</span>
+        <span class="sc-value">→</span>
       </div>
     </a>
 
@@ -183,8 +187,8 @@
       <h3>Chrome extension</h3>
       <p>End-to-end SaaS with Stripe.</p>
       <div class="sc-foot">
-        <span class="sc-label">Typical build</span>
-        <span class="sc-value">3–6 wks</span>
+        <span class="sc-label">Read more</span>
+        <span class="sc-value">→</span>
       </div>
     </a>
 
@@ -194,8 +198,8 @@
       <h3>Shopify theme</h3>
       <p>Hand-coded Dawn forks.</p>
       <div class="sc-foot">
-        <span class="sc-label">Typical build</span>
-        <span class="sc-value">2–3 wks</span>
+        <span class="sc-label">Read more</span>
+        <span class="sc-value">→</span>
       </div>
     </a>
 
@@ -205,8 +209,18 @@
       <h3>AI workflow</h3>
       <p>n8n / LLM orchestration.</p>
       <div class="sc-foot">
-        <span class="sc-label">Typical build</span>
-        <span class="sc-value">1–2 wks</span>
+        <span class="sc-label">Read more</span>
+        <span class="sc-value">→</span>
+      </div>
+    </a>
+
+    <a class="svc-card reveal svc-card-open" href="../contact/">
+      <span class="sc-idx">07</span>
+      <h3>Something else</h3>
+      <p>If your problem lives on the web and needs code, I can probably build it. Describe it and I'll tell you honestly whether it's in scope.</p>
+      <div class="sc-foot">
+        <span class="sc-label">Start a brief</span>
+        <span class="sc-value">→</span>
       </div>
     </a>
 </div>
@@ -274,7 +288,7 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"
+    "three": "../vendor/three-0.160.0.module.min.js"
   }
 }
 </script>

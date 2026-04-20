@@ -41,8 +41,10 @@ body {
   line-height: 1.55;
   background: var(--ink);
   overflow-x: hidden;
-  cursor: none;
 }
+/* Native cursor is hidden only when JS has wired up the custom cursor.
+   Prevents the "invisible mouse" bug when JS fails or elements are absent. */
+body.has-custom-cursor { cursor: none; }
 
 @media (hover: none), (max-width: 900px) {
   body { cursor: auto; }
@@ -2837,6 +2839,23 @@ body.nav-open .nav-mobile {
 .cf-head p strong { color: var(--copper); font-weight: 700; }
 
 .contact-form { display: flex; flex-direction: column; gap: 22px; }
+
+/* Honeypot container: visually removed + hidden from AT, so humans never fill
+   these inputs. Naive bots auto-fill by field name ("url", "website", etc.)
+   and get silently dropped by the submit handler. */
+.cf-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.cf-hp label, .cf-hp input { display: block; }
+
+/* Disabled submit until JS unlocks it — stops no-JS bots from clicking. */
+.cf-submit[data-pending] { opacity: 0.55; cursor: wait; }
 
 .cf-row { display: grid; gap: 22px; }
 .cf-row.two   { grid-template-columns: 1fr 1fr; }

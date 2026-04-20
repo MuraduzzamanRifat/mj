@@ -23,6 +23,8 @@ HEAD = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co https://api.web3forms.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{title} — Muraduzzaman</title>
 <meta name="description" content="{description}" />
 <meta name="author" content="Muraduzzaman" />
@@ -65,6 +67,8 @@ HEAD = """<!DOCTYPE html>
 <body data-loaded="true">
 
 <a href="#main" class="skip-link">Skip to main content</a>
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 <div class="grain-overlay"></div>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -167,7 +171,7 @@ FOOTER = """
 <script type="importmap">
 {{
   "imports": {{
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"
+    "three": "{up}vendor/three-0.160.0.module.min.js"
   }}
 }}
 </script>
@@ -260,7 +264,7 @@ def build_about(up="../"):
       </ul>
 
       <h2>How to start working together</h2>
-      <p>Send a one-paragraph brief through the <a href="../contact/">contact form</a>. I reply within 24 hours with either a scope-and-price proposal or an honest "not a fit." No long qualification calls before I understand what you actually need.</p>
+      <p>Send a one-paragraph brief through the <a href="../contact/">contact form</a>. You'll get either a scope-and-price proposal or an honest "not a fit." No long qualification calls before I understand what you actually need.</p>
 
       <div class="prose-tag">SEO · AEO · GEO · AUTOMATION · AI · CODE</div>
     </section>
@@ -412,12 +416,12 @@ def build_work_case(slug, idx, name, sub, problem, approach, arch_tiles, invisib
 
 def build_services_index(up="../"):
     cards = [
-        ("01", "Growth website", "WebGL / 3D / motion brand sites, hand-built.", "2–4 wks", "growth-website/"),
-        ("02", "SEO reboot", "Audit → architecture → links → ranked.", "4–12 wks", "seo-reboot/"),
-        ("03", "Lead scraper", "Python pipelines for any source.", "5–10 days", "lead-scraper/"),
-        ("04", "Chrome extension", "End-to-end SaaS with Stripe.", "3–6 wks", "chrome-extension/"),
-        ("05", "Shopify theme", "Hand-coded Dawn forks.", "2–3 wks", "shopify-theme/"),
-        ("06", "AI workflow", "n8n / LLM orchestration.", "1–2 wks", "ai-workflow/"),
+        ("01", "Growth website",   "WebGL / 3D / motion brand sites, hand-built.",  "growth-website/"),
+        ("02", "SEO reboot",       "Audit → architecture → links → ranked.",        "seo-reboot/"),
+        ("03", "Lead scraper",     "Python pipelines for any source.",              "lead-scraper/"),
+        ("04", "Chrome extension", "End-to-end SaaS with Stripe.",                  "chrome-extension/"),
+        ("05", "Shopify theme",    "Hand-coded Dawn forks.",                        "shopify-theme/"),
+        ("06", "AI workflow",      "n8n / LLM orchestration.",                      "ai-workflow/"),
     ]
     card_html = "\n".join([
         f"""
@@ -426,13 +430,29 @@ def build_services_index(up="../"):
       <h3>{name}</h3>
       <p>{sub}</p>
       <div class="sc-foot">
-        <span class="sc-label">Typical build</span>
-        <span class="sc-value">{wks}</span>
+        <span class="sc-label">Read more</span>
+        <span class="sc-value">→</span>
       </div>
     </a>
-""" for (idx, name, sub, wks, slug) in cards
+""" for (idx, name, sub, slug) in cards
     ])
-    body = page_hero("Services", "Six things I build. Start to finish.", "Every engagement scoped, priced, and delivered by one operator. No handoffs, no hidden freelancers, no agency tax.") + f"""
+    # Add a 7th card for "anything else" so the list isn't presented as a hard limit.
+    card_html += """
+    <a class="svc-card reveal svc-card-open" href="../contact/">
+      <span class="sc-idx">07</span>
+      <h3>Something else</h3>
+      <p>If your problem lives on the web and needs code, I can probably build it. Describe it and I'll tell you honestly whether it's in scope.</p>
+      <div class="sc-foot">
+        <span class="sc-label">Start a brief</span>
+        <span class="sc-value">→</span>
+      </div>
+    </a>
+"""
+    body = page_hero(
+        "Services",
+        "I build any web product.",
+        "The six below are what I build most often — not a hard menu. If your problem lives on the web and needs code, I can ship it end-to-end. Seven years of SEO + engineering, paired with AI as a pair-programmer, lets me cover more ground than most one-person practices."
+    ) + f"""
 <main id="main" class="sub-body">
   <div class="wrap">
     <div class="svc-grid">{card_html}</div>
@@ -469,9 +489,8 @@ def build_service_page(slug, idx, name, sub, what, when, how, stack, timeline, p
       </ol>
 
       <div class="svc-summary">
-        <div><span class="svc-label">Typical build</span><span class="svc-value">{timeline}</span></div>
-        <div><span class="svc-label">Scope signal</span><span class="svc-value">{price_hint}</span></div>
         <div><span class="svc-label">Stack</span><span class="svc-value">{stack}</span></div>
+        <div><span class="svc-label">Scope</span><span class="svc-value">Scoped to your brief — share the details for a real proposal.</span></div>
       </div>
     </section>
 
@@ -653,7 +672,7 @@ def build_praise_page(up="../"):
 
 
 def build_contact_page(up="../"):
-    body = page_hero("Contact", "Let's talk.", "Currently available for select engagements — SEO, automation, AI workflows, and full-stack web projects. Share your brief below; I reply within 24 hours.") + f"""
+    body = page_hero("Contact", "Let's talk.", "Currently available for select engagements — SEO, automation, AI workflows, and full-stack web projects. Share your brief below and I'll read it personally.") + f"""
 <main id="main" class="sub-body">
   <div class="wrap">
     <div class="close-actions reveal" style="margin-bottom:20px;">
@@ -680,15 +699,25 @@ def build_contact_page(up="../"):
     <section id="contact-form" class="contact-form-wrap" aria-labelledby="contact-form-title">
       <header class="cf-head">
         <h2 id="contact-form-title">Project inquiry</h2>
-        <p>Tell me what you're trying to ship. I read every message myself and reply within <strong>24 hours</strong> with either a scoped proposal or an honest "not a fit."</p>
+        <p>Tell me what you're trying to ship. I read every message myself and reply with either a scoped proposal or an honest <strong>"not a fit."</strong> No long qualification calls before I understand what you need.</p>
       </header>
 
-      <form id="contactForm" class="contact-form" action="https://formsubmit.co/mjrifat54@gmail.com" method="POST" novalidate>
+      <form id="contactForm" class="contact-form" action="https://formsubmit.co/ajax/mjrifat54@gmail.com" method="POST" novalidate>
         <input type="hidden" name="_subject" value="New inquiry from mjrifat.com">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://mjrifat.com/contact/?sent=1">
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true">
+        <input type="hidden" name="_pageLoadedAt" id="cf-page-ts" value="">
+
+        <!-- Honeypots: real users never see or fill these; bots auto-fill by field
+             name ("url", "website", "phone") and get silently rejected. -->
+        <div class="cf-hp" aria-hidden="true">
+          <label>Leave this empty<input type="text" name="_honey"     tabindex="-1" autocomplete="off"></label>
+          <label>Website<input         type="url"  name="url"         tabindex="-1" autocomplete="off"></label>
+          <label>Company URL<input     type="url"  name="website"     tabindex="-1" autocomplete="off"></label>
+          <label>Phone extension<input type="text" name="phone_ext"   tabindex="-1" autocomplete="off"></label>
+          <label>Confirm name<input    type="text" name="name_confirm" tabindex="-1" autocomplete="off"></label>
+        </div>
 
         <div class="cf-row two">
           <div class="cf-field">
@@ -760,7 +789,7 @@ def build_contact_page(up="../"):
         </div>
 
         <div class="cf-actions">
-          <button type="submit" class="cf-submit" id="cf-submit">
+          <button type="submit" class="cf-submit" id="cf-submit" disabled data-pending="1">
             <span class="cf-submit-label">Send inquiry</span>
             <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
           </button>
@@ -771,7 +800,7 @@ def build_contact_page(up="../"):
 
         <div class="cf-success" id="cfSuccess" hidden>
           <strong>Thanks — your brief is in my inbox.</strong>
-          <p>I reply within 24 hours, usually sooner. If you don't hear from me, your email provider may have filtered my reply — check spam, or ping me on <a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+          <p>I'll reply personally. If you don't hear back in a few days, your email provider may have filtered my reply — check spam, or ping me on <a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a>.</p>
         </div>
         <div class="cf-error" id="cfError" hidden>
           <strong>Hmm — that didn't go through.</strong>
@@ -806,6 +835,11 @@ def build_contact_page(up="../"):
         <span class="c-value">Dhaka · working globally</span>
         <span class="c-arrow">·</span>
       </div>
+      <div class="c-item non-link reveal">
+        <span class="c-label">What I build</span>
+        <span class="c-value">Any web product, end-to-end</span>
+        <span class="c-arrow">·</span>
+      </div>
     </div>
   </div>
 </main>
@@ -819,7 +853,19 @@ def build_contact_page(up="../"):
   const error   = document.getElementById('cfError');
   const message = document.getElementById('cf-message');
   const counter = document.getElementById('cf-counter');
+  const pageTs  = document.getElementById('cf-page-ts');
   const max = 4000;
+  const MIN_FILL_MS = 3000;    // minimum seconds between page-load and submit
+
+  // Stamp load time + enable the submit button. A submission fired before
+  // this JS executes (pure-bot pattern) finds the button disabled and
+  // can't click it — so its click is silently rejected. HTML submit events
+  // from a scripted POST are still caught by the other defences below.
+  pageTs.value = String(Date.now());
+  setTimeout(() => {{
+    submit.disabled = false;
+    submit.removeAttribute('data-pending');
+  }}, 800);
 
   if (new URLSearchParams(location.search).get('sent') === '1') {{
     form.hidden = true;
@@ -834,12 +880,41 @@ def build_contact_page(up="../"):
   message.addEventListener('input', updateCounter);
   updateCounter();
 
+  function isBotSubmission() {{
+    // 1. Honeypot fields — any filled = bot.
+    const hpNames = ['_honey', 'url', 'website', 'phone_ext', 'name_confirm'];
+    for (const name of hpNames) {{
+      const el = form.elements[name];
+      if (el && el.value && el.value.trim() !== '') return 'honeypot:' + name;
+    }}
+    // 2. Timing — humans take > 3 s to fill a form. Bots fire in < 1 s.
+    const loaded = Number(pageTs.value) || 0;
+    const delta  = Date.now() - loaded;
+    if (!loaded || delta < MIN_FILL_MS) return 'too-fast:' + delta + 'ms';
+    return null;
+  }}
+
+  function fakeSuccess() {{
+    // Confuse bots: pretend we succeeded so they don't retry.
+    form.reset();
+    form.hidden = true;
+    success.hidden = false;
+  }}
+
   form.addEventListener('submit', async (e) => {{
     if (!form.checkValidity()) {{
       form.reportValidity();
       return;
     }}
     e.preventDefault();
+
+    const botReason = isBotSubmission();
+    if (botReason) {{
+      console.warn('[contact] dropped (' + botReason + ')');
+      fakeSuccess();
+      return;
+    }}
+
     submit.disabled = true;
     submit.classList.add('loading');
     error.hidden = true;
@@ -973,7 +1048,7 @@ CASE_STUDIES = {
             ('05 / Cold Outreach',   'Resend · warmup · timing',  'Personalized 4-touch sequence per prospect. Warmup ramps 5 → 50 emails/day over 30 days. Per-domain throttle (1 email / 3 days), send window Tue/Wed/Thu 13:00 UTC. Smart timing: clicked = 2-day follow-up, opened = 3 days, no-open = 5 days with a new subject.'),
             ('06 / Conversion',      'Webhooks · CRM',            'Resend webhook records opens, clicks, bounces, replies. Tracked /api/brain/book link redirects to Cal.com and marks booking intent. Inbound replies auto-pause sequences. Everything lives in brain.json, synced to GitHub.'),
             ('07 / Self-Learning',   'A/B · auto-apply',          'Monday 14:00 UTC digest scores every email by angle, industry, and subject style. Identifies winners and losers. Proposes A/B tests between top-performing patterns. Auto-applies winners to the planner\'s prompt when BRAIN_AUTONOMY=true. 60-day override expiry so it re-tests and doesn\'t freeze on stale truth.'),
-            ('08 / Operations',      'Self-healing · resumable',  'Six-hour health check emails mjrifat54@gmail.com on failure. DailyRun ledger lets the pipeline resume from its last checkpoint if Koyeb kills mid-tick. State synced to GitHub survives every redeploy.'),
+            ('08 / Operations',      'Self-healing · resumable',  'Six-hour health check emails the owner on failure. DailyRun ledger lets the pipeline resume from its last checkpoint if Koyeb kills mid-tick. State synced to GitHub survives every redeploy.'),
         ],
         invisible=[
             ('Frame-budget discipline —',   'every new scene element has to fit within a fixed frame budget. Nothing ships that drops the experience under 45 fps on a 2019-era laptop.'),
@@ -1271,7 +1346,7 @@ written = []
 # simple one-level pages
 written.append(write_page('about',       'About',       'A marketer who codes. Seven years of SEO, paired with production engineering. One operator, end-to-end.', build_about('../'), '../'))
 written.append(write_page('work',        'Work',        'Six shipped products, each with its own case study — problem, architecture, stack, outcomes.', build_work_index('../'), '../'))
-written.append(write_page('services',    'Services',    'Six things I build, scoped and delivered by one operator. No handoffs, no vendor chain.', build_services_index('../'), '../'))
+written.append(write_page('services',    'Services',    'Any web product — scoped and delivered by one operator. Six examples of what I build most often, but the list is not a limit.', build_services_index('../'), '../'))
 written.append(write_page('contact',     'Contact',     'Currently available for select engagements. Email, phone, CV downloads, and profile links.', build_contact_page('../'), '../'))
 written.append(write_page('experience',  'Experience',  'Seven years across four seats. Career arc with dates, responsibilities, and outcomes.', build_experience_page('../'), '../'))
 written.append(write_page('credentials', 'Credentials', 'Certifications and formal education, listed in full.', build_credentials_page('../'), '../'))

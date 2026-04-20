@@ -717,8 +717,14 @@ function runPreloader() {
 
 function initCursor() {
   if (IS_TOUCH) return;
-  const dot = document.getElementById('cursorDot');
+  const dot  = document.getElementById('cursorDot');
   const ring = document.getElementById('cursorRing');
+  // If the page is missing the cursor elements, leave the native mouse alone —
+  // don't hide it via body.has-custom-cursor, don't wire up listeners.
+  if (!dot || !ring) return;
+
+  document.body.classList.add('has-custom-cursor');
+
   let mx = window.innerWidth / 2, my = window.innerHeight / 2;
   let rx = mx, ry = my;
 

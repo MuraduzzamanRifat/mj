@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co https://api.web3forms.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Growth website — Muraduzzaman</title>
 <meta name="description" content="WebGL / 3D / motion-driven brand sites, hand-built. No templates, no bloat — the site you&#x27;re on right now is the proof." />
 <meta name="author" content="Muraduzzaman" />
@@ -85,6 +87,8 @@
 <body data-loaded="true">
 
 <a href="#main" class="skip-link">Skip to main content</a>
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 <div class="grain-overlay"></div>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -167,9 +171,8 @@
       </ol>
 
       <div class="svc-summary">
-        <div><span class="svc-label">Typical build</span><span class="svc-value">2–4 weeks</span></div>
-        <div><span class="svc-label">Scope signal</span><span class="svc-value">Scoped per project; starts at serious-commitment tier</span></div>
         <div><span class="svc-label">Stack</span><span class="svc-value">Vanilla HTML/CSS/JS · Three.js · GLSL shaders · Astro or plain static build</span></div>
+        <div><span class="svc-label">Scope</span><span class="svc-value">Scoped to your brief — share the details for a real proposal.</span></div>
       </div>
     </section>
 
@@ -237,7 +240,7 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"
+    "three": "../../vendor/three-0.160.0.module.min.js"
   }
 }
 </script>
