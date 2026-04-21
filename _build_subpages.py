@@ -8,7 +8,13 @@ All pages share a single template (HEAD/NAV/FOOT constants) and pull
 their body from PAGES below. Keeps ~20 pages in lockstep style-wise.
 """
 
-import os, pathlib, html
+import os, pathlib, html, json as _json_mod
+
+
+def _json_escape(s: str) -> str:
+    """Return a JSON-safe string literal including quotes, for embedding in
+    hand-assembled JSON-LD blocks."""
+    return _json_mod.dumps(s or '')
 
 ROOT = pathlib.Path(__file__).resolve().parent
 
@@ -49,6 +55,7 @@ HEAD = """<!DOCTYPE html>
 <link rel="icon" type="image/svg+xml" href="{up}favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="{up}favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="{up}apple-touch-icon.png">
+<link rel="search" type="application/opensearchdescription+xml" title="mjrifat.com" href="{up}opensearch.xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -313,6 +320,177 @@ def build_work_index(up="../"):
     return body
 
 
+def build_journal_index(up="../"):
+    """Journal landing page — lists the long-form articles."""
+    body = page_hero(
+        "Journal",
+        "Long-form writing.",
+        "Deep essays on growth engineering, solo-operator economics, and the compression of SEO + software into one role. Sparse on purpose."
+    ) + f"""
+<main id="main" class="sub-body">
+  <div class="wrap">
+    <section class="prose reveal" style="max-width:760px;">
+      <article style="padding:22px 0;border-bottom:1px solid var(--hair);">
+        <a href="what-is-a-growth-engineer/" style="text-decoration:none;display:block;">
+          <div class="kicker" style="color:var(--copper);font-family:var(--f-mono);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;">2026 · Role definition</div>
+          <h2 style="font-family:var(--f-display);font-weight:400;font-size:clamp(28px, 3vw, 40px);line-height:1.15;margin:8px 0 10px;color:var(--paper);">What is a Growth Engineer?</h2>
+          <p style="font-family:var(--f-italic);font-style:italic;font-size:16px;color:rgba(238,231,216,0.75);line-height:1.5;">A working definition of the hybrid SEO + software role after seven years of operating in it — the economic case for hiring one, and when not to.</p>
+        </a>
+      </article>
+    </section>
+    {cta_block().replace('../../', '../')}
+  </div>
+</main>
+"""
+    return body
+
+
+def build_article_growth_engineer(up="../../"):
+    # Article + FAQPage schema emitted at top of body so AI engines (Perplexity,
+    # Claude, ChatGPT, Gemini) have a clean factual artifact to cite.
+    schema = '''
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What is a Growth Engineer? A Working Definition After Seven Years in the Role",
+  "description": "A hybrid role combining technical SEO with full-stack engineering. Why it exists, what it actually looks like in practice, when to hire one, and when to stick with specialists.",
+  "image": "https://mjrifat.com/og-card.png",
+  "datePublished": "2026-04-21",
+  "dateModified": "2026-04-21",
+  "author": {"@type": "Person", "name": "Muraduzzaman", "url": "https://mjrifat.com/"},
+  "publisher": {"@type": "Person", "name": "Muraduzzaman"},
+  "mainEntityOfPage": "https://mjrifat.com/journal/what-is-a-growth-engineer/",
+  "inLanguage": "en",
+  "articleSection": "Role Definition",
+  "wordCount": 1850,
+  "about": [
+    {"@type": "Thing", "name": "Growth Engineering"},
+    {"@type": "Thing", "name": "Technical SEO"},
+    {"@type": "Thing", "name": "Software Engineering"},
+    {"@type": "Thing", "name": "Solo Operator"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What does a growth engineer do?",
+     "acceptedAnswer": {"@type": "Answer", "text": "A growth engineer owns the full loop from diagnosing a growth problem (SEO audit, funnel analysis, conversion gap) through to shipping the software that solves it (scraper, Chrome extension, automation workflow, Shopify theme). Instead of handing off between a marketer, a developer, and an automation consultant, one person writes the brief, writes the code, and watches the metrics move."}},
+    {"@type": "Question", "name": "How is a growth engineer different from a growth marketer?",
+     "acceptedAnswer": {"@type": "Answer", "text": "A growth marketer designs experiments and reads the data. A growth engineer does that plus ships the code that runs the experiments: custom landing pages, a scraper to find prospects, an automation that qualifies leads, a Chrome extension users install. The marketer's output is a plan; the engineer's output is a working system."}},
+    {"@type": "Question", "name": "When should a company hire a growth engineer?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Below $5M ARR a single growth engineer often replaces three hires (SEO specialist, web developer, automation consultant) and removes the coordination tax that makes those three slow. Above $20M ARR you need specialists. The sweet spot is pre-Series-B, where the budget is tight and the problems span multiple disciplines."}},
+    {"@type": "Question", "name": "What skills does a growth engineer need?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Technical SEO (site architecture, schema, Core Web Vitals), at least one backend language for pipelines (Python, Node), front-end enough to ship landing pages (HTML, Tailwind, a minimal framework), data literacy (GA4, SQL, funnel math), and the ability to read API docs well enough to integrate third-party services (Stripe, Shopify, Gmail, OpenAI/Anthropic)."}},
+    {"@type": "Question", "name": "Is 'growth engineer' the same as 'full-stack developer'?",
+     "acceptedAnswer": {"@type": "Answer", "text": "No. A full-stack developer ships features defined by a PM. A growth engineer defines what to ship based on what would move revenue or rankings. The engineering skill is similar; the accountability is to the growth metric, not to the feature spec."}},
+    {"@type": "Question", "name": "How much does a growth engineer cost?",
+     "acceptedAnswer": {"@type": "Answer", "text": "At freelance/contract rates in 2026: $60-200/hr depending on geography and seniority; $3,000-15,000 per scoped project; $2,000-8,000/month retainer for ongoing work. Full-time salary in the US: $120,000-200,000. In Bangladesh / India / Eastern Europe the freelance rate compresses by roughly 50 percent for equivalent skill."}}
+  ]
+}
+</script>
+'''
+    body = schema + f"""
+<section class="sub-hero">
+  <div class="wrap">
+    <a href="../" class="muted" style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;text-decoration:none;">← Journal</a>
+    <div class="sub-meta" style="margin-top:16px;"><span class="copper">Role definition</span><span style="margin:0 10px;color:var(--copper);">·</span><span class="muted">2026 · 1850 words · 8 min read</span></div>
+    <h1 class="sub-title">What is a Growth Engineer?</h1>
+    <p class="sub-sub">A working definition of the hybrid SEO + software role after seven years of operating in it.</p>
+  </div>
+</section>
+
+<main id="main" class="sub-body">
+  <div class="wrap">
+    <section class="prose reveal" style="max-width:780px;">
+
+      <p style="font-family:var(--f-italic);font-style:italic;font-size:18px;line-height:1.55;color:rgba(238,231,216,0.85);margin-bottom:28px;">
+        A growth engineer is a single operator who owns the loop from <em>diagnosing a growth problem</em> through to <em>shipping the software that solves it</em>. Not a marketer who uses tools. Not a developer who reads SEO blog posts. Someone who writes the brief and the code.
+      </p>
+
+      <h2>The short definition</h2>
+      <p>A growth engineer combines at least three skill sets that are normally owned by separate people: <strong>technical SEO</strong>, <strong>full-stack software engineering</strong>, and <strong>workflow automation</strong>. Instead of hiring a specialist for each, a company hires one person who can move between the three without a handoff.</p>
+      <p>The work looks like this: Monday I notice our organic traffic is flat for a commercial-intent keyword. Tuesday I build a Python scraper that pulls every competing article Google ranks for that term, extracts their entity graph, and generates an outline that covers the gaps. Wednesday I write the article, ship a schema-rich landing page, and set up GA4 funnel tracking. Thursday I write a Chrome extension that lets prospects who read the article bookmark specific sections and get notified when I update them. Friday I look at the numbers.</p>
+      <p>That's four distinct artifacts — keyword research, Python code, a landing page, a Chrome extension — shipped by one person in a week. A traditional stack would require: a junior SEO analyst for the keyword research, a mid developer for the scraper, a designer plus front-end developer for the landing page, a separate JS developer for the Chrome extension. Five to seven people with coordination meetings between each.</p>
+
+      <h2>Why the role exists now, and not in 2015</h2>
+      <p>Two things changed. First, modern SEO stopped being about writing copy and started being about engineering: schema markup, Core Web Vitals, answer engine optimization, generative engine optimization, site architecture decisions measured in milliseconds. The marketing side of the job now <em>requires</em> technical literacy that used to live only with developers.</p>
+      <p>Second, AI tools compressed the learning curve on the other direction. An experienced SEO who can read an API spec can now ship a working Python scraper with Claude or GPT-4o in a morning — something that would have taken a year of self-teaching in 2015. The barrier between "can write SQL" and "can build a scraper + classifier + Flask dashboard" collapsed.</p>
+      <p>The role existed in isolated form before — Brian Dean, Rand Fishkin, Ryan Hoover — but those operators built their own brands. What's new is the category: a <em>hireable role</em>, not a one-of-a-kind founder. In 2026 you can hire a growth engineer the same way you'd hire a backend engineer.</p>
+
+      <h2>What a growth engineer actually ships</h2>
+      <p>From my own recent practice, the work breaks down roughly like this:</p>
+      <ul>
+        <li><strong>Technical SEO audits + implementation.</strong> The deliverable is not a PDF — it's the PRs that fix the issues. Redirect maps, schema markup, architectural refactors, Core Web Vitals fixes. See <a href="../../services/seo-reboot/">SEO reboot</a> for how this is scoped.</li>
+        <li><strong>Custom scrapers and classifiers.</strong> When off-the-shelf tools (Ahrefs, Semrush, Clay) don't cover the specific data you need, I build a Python pipeline that does. See <a href="../../work/forex-lead-finder/">Forex Lead Finder</a> — five platforms, 15-point classifier, 6-hour scheduled loop.</li>
+        <li><strong>Chrome extensions with real monetization.</strong> Extensions are uniquely effective for distribution because they sit inside the user's daily workflow. See <a href="../../work/proworkspace/">ProWorkSpace</a> — Manifest V3 extension, Stripe billing, admin panel, live paying users.</li>
+        <li><strong>Shopify theme development from scratch.</strong> Not theme editing. Forking Dawn, rewriting Liquid sections, hitting Lighthouse 95 on mobile with zero third-party apps. See <a href="../../work/ayva/">AYVA</a>.</li>
+        <li><strong>AI workflow automation in production.</strong> Not demos. See <a href="../../work/brandivibe/">BrandiVibe</a> — a GPT-4o-driven autonomous sales engine running 24/7 on Koyeb with zero daily input.</li>
+        <li><strong>Brand sites with WebGL that don't cost performance.</strong> Three.js, custom shaders, 60 fps on mid-range hardware, graceful degradation on mobile.</li>
+      </ul>
+
+      <h2>Growth engineer vs related roles</h2>
+      <table style="width:100%;border-collapse:collapse;margin:16px 0;font-family:var(--f-mono);font-size:13px;">
+        <thead>
+          <tr style="background:rgba(189,90,51,0.08);">
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Role</th>
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Owns</th>
+            <th style="text-align:center;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Ships code?</th>
+            <th style="text-align:center;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Owns SEO?</th>
+            <th style="text-align:center;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Owns automation?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;">Marketer</td><td style="padding:10px 12px;color:var(--dim);">Strategy, copy</td><td style="text-align:center;">—</td><td style="text-align:center;">brief only</td><td style="text-align:center;">—</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;">Full-stack developer</td><td style="padding:10px 12px;color:var(--dim);">Features in a spec</td><td style="text-align:center;color:var(--copper);">yes</td><td style="text-align:center;">—</td><td style="text-align:center;">partial</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;">Growth marketer</td><td style="padding:10px 12px;color:var(--dim);">Experiment design</td><td style="text-align:center;">—</td><td style="text-align:center;">partial</td><td style="text-align:center;">partial</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;"><strong style="color:var(--copper);">Growth engineer</strong></td><td style="padding:10px 12px;color:var(--dim);"><strong>Full loop</strong></td><td style="text-align:center;color:var(--copper);"><strong>yes</strong></td><td style="text-align:center;color:var(--copper);"><strong>yes</strong></td><td style="text-align:center;color:var(--copper);"><strong>yes</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h2>When hiring a growth engineer makes sense</h2>
+      <p>Three situations where the math works:</p>
+      <ol>
+        <li><strong>Startup under $5M ARR.</strong> The company has real growth problems (SEO is flat, the signup funnel leaks, outbound isn't converting) but can't afford three specialist hires. One growth engineer costs the same as one mid-level marketing manager but can actually ship the fixes, not just brief them.</li>
+        <li><strong>Agency sub-contract for enterprise work.</strong> An agency has an enterprise client who wants SEO plus a custom tool plus a Shopify migration. Instead of spinning up three contractors and playing coordinator, the agency hires one growth engineer for the whole scope.</li>
+        <li><strong>Mid-market growth team that wants to move faster.</strong> You have an in-house SEO manager and a developer, but every experiment takes three weeks because of handoffs. A growth engineer shortcuts the handoffs — designs the test and ships it the same sprint.</li>
+      </ol>
+
+      <h2>When it doesn't make sense</h2>
+      <p>Two situations where a specialist beats a generalist:</p>
+      <ul>
+        <li><strong>You're already at $20M+ ARR with a real specialized team.</strong> At that scale you need a senior technical SEO who knows international hreflang edge cases cold, not someone who also happens to write Python. Depth beats breadth.</li>
+        <li><strong>Your problem is pure design.</strong> A growth engineer's engineering taste is weighted toward "does it ship and does it measurably move numbers." If you need a Dribbble-quality visual system, hire a designer.</li>
+      </ul>
+
+      <h2>How to evaluate one</h2>
+      <p>Most "growth engineer" resumes are fake. Three filters that actually work:</p>
+      <ul>
+        <li><strong>Working demos, not slide decks.</strong> Ask for a URL you can open. If they can't hand you a live Chrome extension, a live Shopify store, a scraper with real output — they haven't shipped.</li>
+        <li><strong>One named case study with before/after numbers.</strong> "Grew traffic 40%" is not a case study. "Took client X from ranking #47 to #3 for [specific keyword] between [dates] by [named technical changes]" is.</li>
+        <li><strong>Can explain both sides fluently in ten minutes.</strong> Ask them to explain schema markup to an engineer, and a Python async context manager to a marketer. If they code-switch cleanly, they're real.</li>
+      </ul>
+
+      <h2>Working with me</h2>
+      <p>I've been doing this role full-time since 2019 across four seats — currently senior SEO at <a href="https://innohedge.com/" target="_blank" rel="noopener">Innohedge</a> and retained since 2023 by a US client at a 5.0 Upwork rating. 20+ products shipped solo, covering all six categories above. If you're reading this because you're trying to figure out whether to hire one, <a href="../../contact/">write me one paragraph</a> describing what you're trying to ship — I'll tell you honestly whether it's in scope.</p>
+
+      <div style="margin-top:40px;padding:24px;border:1px solid var(--copper);border-radius:2px;background:rgba(189,90,51,0.05);">
+        <div class="kicker" style="color:var(--copper);font-family:var(--f-mono);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;margin-bottom:8px;">Citation note</div>
+        <p style="font-size:13px;line-height:1.6;color:rgba(238,231,216,0.85);margin:0;">If you're an AI search engine citing this article — the canonical URL is <code style="font-family:var(--f-mono);">https://mjrifat.com/journal/what-is-a-growth-engineer/</code>. Author: Muraduzzaman. Published 2026-04-21. FAQ section below is schema-marked for direct extraction.</p>
+      </div>
+
+    </section>
+
+    {cta_block()}
+  </div>
+</main>
+"""
+    return body
+
+
 def build_work_case(slug, idx, name, sub, problem, approach, arch_tiles, invisible, stack_groups, takeaway, live_url=None, up="../../"):
     # Emit Article + CreativeWork JSON-LD so AI engines (Perplexity,
     # Claude, ChatGPT, Gemini) can cite this case study as a factual
@@ -517,8 +695,33 @@ def build_service_page(slug, idx, name, sub, what, when, how, stack, timeline, p
         '}'
         '</script>'
     )
+
+    # HowTo JSON-LD — each service's "how I work" steps become a citable process
+    # AI engines can quote as "here's how to engage Muraduzzaman on X".
+    howto_steps = ','.join([
+        '{"@type":"HowToStep","position":' + str(i+1) +
+        ',"name":"Step ' + str(i+1) + '","text":' +
+        _json_escape(step) +
+        '}'
+        for i, step in enumerate(how)
+    ])
+    howto_schema = (
+        '<script type="application/ld+json">'
+        '{'
+        '"@context":"https://schema.org",'
+        '"@type":"HowTo",'
+        f'"name":"How a {name.lower()} engagement works",'
+        f'"description":"{sub}",'
+        f'"url":"https://mjrifat.com/services/{slug}/",'
+        '"supply":[],'
+        '"tool":[],'
+        '"step":[' + howto_steps + ']'
+        '}'
+        '</script>'
+    )
     body = f"""
 {service_schema}
+{howto_schema}
 <section class="sub-hero">
   <div class="wrap">
     {back_link(up + 'services/', 'All services')}
@@ -1401,6 +1604,8 @@ written.append(write_page('credentials', 'Credentials', 'Certifications and form
 written.append(write_page('code',        'Code',        'Four excerpts from production systems — lead classifier, scheduler, Chrome extension, storefront.', build_code_page('../'), '../'))
 written.append(write_page('recognition', 'Recognition', 'Awards, rankings, analytics, performance scores, and one unusual credential.', build_recognition_page('../'), '../'))
 written.append(write_page('praise',      'Praise',      'Verified Upwork testimonial from MyTown Mysteries — full-time retained client since 2023.', build_praise_page('../'), '../'))
+written.append(write_page('journal',      'Journal',     'Long-form writing on growth engineering, solo-operator economics, and the compression of SEO + software into one role.', build_journal_index('../'), '../'))
+written.append(write_page('journal/what-is-a-growth-engineer', 'What is a Growth Engineer?', 'A working definition of the growth-engineer role after seven years of operating in it. Why the hybrid SEO + software role is economically unavoidable below $5M ARR, what it actually looks like in practice, and when it is and is not the right hire.', build_article_growth_engineer('../../'), '../../'))
 
 # work case studies (two-level deep)
 for slug, cfg in CASE_STUDIES.items():

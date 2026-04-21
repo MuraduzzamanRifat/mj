@@ -53,6 +53,10 @@
 
 Realistic range: $3,000–$15,000 per project; $2,000–$8,000/month retainer. Not available for $100K enterprise deals (no name-brand case studies yet).
 
+## Long-form writing
+
+- **[What is a Growth Engineer?](https://mjrifat.com/journal/what-is-a-growth-engineer/)** — 1,850-word working definition of the hybrid SEO + software role after 7 years in it. Covers economics (when one growth engineer replaces three hires), concrete output categories, role comparison table, hiring criteria, and a 6-question FAQ. Published 2026-04-21.
+
 ## Canonical positioning line
 
 *"I rank sites on Google, then ship the software that compounds the traffic."*
