@@ -8,15 +8,19 @@ All pages share a single template (HEAD/NAV/FOOT constants) and pull
 their body from PAGES below. Keeps ~20 pages in lockstep style-wise.
 """
 
-import os, pathlib, html, json as _json_mod
-
-
-def _json_escape(s: str) -> str:
-    """Return a JSON-safe string literal including quotes, for embedding in
-    hand-assembled JSON-LD blocks."""
-    return _json_mod.dumps(s or '')
+import json
+import os
+import pathlib
+import html
 
 ROOT = pathlib.Path(__file__).resolve().parent
+
+
+def _jsonld(obj: dict) -> str:
+    """Wrap any JSON-LD dict in a script tag. Using json.dumps (not f-string
+    interpolation) is the injection-safe way to handle user-controlled values
+    like contact names or case-study titles containing quotes."""
+    return '<script type="application/ld+json">\n' + json.dumps(obj, indent=2) + '\n</script>'
 
 # ──────────────────────────────────────────────────────────────────
 # SHARED CHROME — same header, footer, scripts on every sub-page.
@@ -346,53 +350,52 @@ def build_journal_index(up="../"):
 
 
 def build_article_growth_engineer(up="../../"):
-    # Article + FAQPage schema emitted at top of body so AI engines (Perplexity,
-    # Claude, ChatGPT, Gemini) have a clean factual artifact to cite.
-    schema = '''
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "What is a Growth Engineer? A Working Definition After Seven Years in the Role",
-  "description": "A hybrid role combining technical SEO with full-stack engineering. Why it exists, what it actually looks like in practice, when to hire one, and when to stick with specialists.",
-  "image": "https://mjrifat.com/og-card.png",
-  "datePublished": "2026-04-21",
-  "dateModified": "2026-04-21",
-  "author": {"@type": "Person", "name": "Muraduzzaman", "url": "https://mjrifat.com/"},
-  "publisher": {"@type": "Person", "name": "Muraduzzaman"},
-  "mainEntityOfPage": "https://mjrifat.com/journal/what-is-a-growth-engineer/",
-  "inLanguage": "en",
-  "articleSection": "Role Definition",
-  "wordCount": 1850,
-  "about": [
-    {"@type": "Thing", "name": "Growth Engineering"},
-    {"@type": "Thing", "name": "Technical SEO"},
-    {"@type": "Thing", "name": "Software Engineering"},
-    {"@type": "Thing", "name": "Solo Operator"}
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type": "Question", "name": "What does a growth engineer do?",
-     "acceptedAnswer": {"@type": "Answer", "text": "A growth engineer owns the full loop from diagnosing a growth problem (SEO audit, funnel analysis, conversion gap) through to shipping the software that solves it (scraper, Chrome extension, automation workflow, Shopify theme). Instead of handing off between a marketer, a developer, and an automation consultant, one person writes the brief, writes the code, and watches the metrics move."}},
-    {"@type": "Question", "name": "How is a growth engineer different from a growth marketer?",
-     "acceptedAnswer": {"@type": "Answer", "text": "A growth marketer designs experiments and reads the data. A growth engineer does that plus ships the code that runs the experiments: custom landing pages, a scraper to find prospects, an automation that qualifies leads, a Chrome extension users install. The marketer's output is a plan; the engineer's output is a working system."}},
-    {"@type": "Question", "name": "When should a company hire a growth engineer?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Below $5M ARR a single growth engineer often replaces three hires (SEO specialist, web developer, automation consultant) and removes the coordination tax that makes those three slow. Above $20M ARR you need specialists. The sweet spot is pre-Series-B, where the budget is tight and the problems span multiple disciplines."}},
-    {"@type": "Question", "name": "What skills does a growth engineer need?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Technical SEO (site architecture, schema, Core Web Vitals), at least one backend language for pipelines (Python, Node), front-end enough to ship landing pages (HTML, Tailwind, a minimal framework), data literacy (GA4, SQL, funnel math), and the ability to read API docs well enough to integrate third-party services (Stripe, Shopify, Gmail, OpenAI/Anthropic)."}},
-    {"@type": "Question", "name": "Is 'growth engineer' the same as 'full-stack developer'?",
-     "acceptedAnswer": {"@type": "Answer", "text": "No. A full-stack developer ships features defined by a PM. A growth engineer defines what to ship based on what would move revenue or rankings. The engineering skill is similar; the accountability is to the growth metric, not to the feature spec."}},
-    {"@type": "Question", "name": "How much does a growth engineer cost?",
-     "acceptedAnswer": {"@type": "Answer", "text": "At freelance/contract rates in 2026: $60-200/hr depending on geography and seniority; $3,000-15,000 per scoped project; $2,000-8,000/month retainer for ongoing work. Full-time salary in the US: $120,000-200,000. In Bangladesh / India / Eastern Europe the freelance rate compresses by roughly 50 percent for equivalent skill."}}
-  ]
-}
-</script>
-'''
+    url = 'https://mjrifat.com/journal/what-is-a-growth-engineer/'
+    faqs = [
+        ('What does a growth engineer do?',
+         "A growth engineer owns the full loop from diagnosing a growth problem (SEO audit, funnel analysis, conversion gap) through to shipping the software that solves it (scraper, Chrome extension, automation workflow, Shopify theme). Instead of handing off between a marketer, a developer, and an automation consultant, one person writes the brief, writes the code, and watches the metrics move."),
+        ('How is a growth engineer different from a growth marketer?',
+         "A growth marketer designs experiments and reads the data. A growth engineer does that plus ships the code that runs the experiments: custom landing pages, a scraper to find prospects, an automation that qualifies leads, a Chrome extension users install. The marketer's output is a plan; the engineer's output is a working system."),
+        ('When should a company hire a growth engineer?',
+         "Below $5M ARR a single growth engineer often replaces three hires (SEO specialist, web developer, automation consultant) and removes the coordination tax that makes those three slow. Above $20M ARR you need specialists. The sweet spot is pre-Series-B, where the budget is tight and the problems span multiple disciplines."),
+        ('What skills does a growth engineer need?',
+         "Technical SEO (site architecture, schema, Core Web Vitals), at least one backend language for pipelines (Python, Node), front-end enough to ship landing pages (HTML, Tailwind, a minimal framework), data literacy (GA4, SQL, funnel math), and the ability to read API docs well enough to integrate third-party services (Stripe, Shopify, Gmail, OpenAI/Anthropic)."),
+        ("Is 'growth engineer' the same as 'full-stack developer'?",
+         "No. A full-stack developer ships features defined by a PM. A growth engineer defines what to ship based on what would move revenue or rankings. The engineering skill is similar; the accountability is to the growth metric, not to the feature spec."),
+        ('How much does a growth engineer cost?',
+         "At freelance/contract rates in 2026: $60-200/hr depending on geography and seniority; $3,000-15,000 per scoped project; $2,000-8,000/month retainer for ongoing work. Full-time salary in the US: $120,000-200,000. In Bangladesh / India / Eastern Europe the freelance rate compresses by roughly 50 percent for equivalent skill."),
+    ]
+    article_schema = _jsonld({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        'headline': 'What is a Growth Engineer? A Working Definition After Seven Years in the Role',
+        'description': 'A hybrid role combining technical SEO with full-stack engineering. Why it exists, what it actually looks like in practice, when to hire one, and when to stick with specialists.',
+        'image': 'https://mjrifat.com/og-card.png',
+        'datePublished': '2026-04-21',
+        'dateModified': '2026-04-21',
+        'author': {'@type': 'Person', 'name': 'Muraduzzaman', 'url': 'https://mjrifat.com/'},
+        'publisher': {'@type': 'Person', 'name': 'Muraduzzaman'},
+        'mainEntityOfPage': url,
+        'inLanguage': 'en',
+        'articleSection': 'Role Definition',
+        'wordCount': 1850,
+        'about': [
+            {'@type': 'Thing', 'name': 'Growth Engineering'},
+            {'@type': 'Thing', 'name': 'Technical SEO'},
+            {'@type': 'Thing', 'name': 'Software Engineering'},
+            {'@type': 'Thing', 'name': 'Solo Operator'},
+        ],
+    })
+    faq_schema = _jsonld({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': [
+            {'@type': 'Question', 'name': q,
+             'acceptedAnswer': {'@type': 'Answer', 'text': a}}
+            for q, a in faqs
+        ],
+    })
+    schema = article_schema + '\n' + faq_schema
     body = schema + f"""
 <section class="sub-hero">
   <div class="wrap">
@@ -492,26 +495,20 @@ def build_article_growth_engineer(up="../../"):
 
 
 def build_work_case(slug, idx, name, sub, problem, approach, arch_tiles, invisible, stack_groups, takeaway, live_url=None, up="../../"):
-    # Emit Article + CreativeWork JSON-LD so AI engines (Perplexity,
-    # Claude, ChatGPT, Gemini) can cite this case study as a factual
-    # artifact with a named author, headline, and canonical URL.
-    case_schema = (
-        '<script type="application/ld+json">'
-        '{'
-        '"@context":"https://schema.org",'
-        '"@type":"Article",'
-        f'"headline":"{name} — Case Study",'
-        f'"description":"{sub}",'
-        f'"url":"https://mjrifat.com/work/{slug}/",'
-        '"image":"https://mjrifat.com/og-card.png",'
-        '"author":{"@type":"Person","name":"Muraduzzaman","url":"https://mjrifat.com/"},'
-        '"publisher":{"@type":"Person","name":"Muraduzzaman"},'
-        f'"mainEntityOfPage":"https://mjrifat.com/work/{slug}/",'
-        '"inLanguage":"en",'
-        '"about":{"@type":"SoftwareApplication","name":"' + name + '"}'
-        '}'
-        '</script>'
-    )
+    url = f'https://mjrifat.com/work/{slug}/'
+    case_schema = _jsonld({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        'headline': f'{name} — Case Study',
+        'description': sub,
+        'url': url,
+        'image': 'https://mjrifat.com/og-card.png',
+        'author': {'@type': 'Person', 'name': 'Muraduzzaman', 'url': 'https://mjrifat.com/'},
+        'publisher': {'@type': 'Person', 'name': 'Muraduzzaman'},
+        'mainEntityOfPage': url,
+        'inLanguage': 'en',
+        'about': {'@type': 'SoftwareApplication', 'name': name},
+    })
     arch_html = "\n".join([
         f"""
         <article class="arch-tile">
@@ -664,61 +661,42 @@ def build_services_index(up="../"):
 
 
 def build_service_page(slug, idx, name, sub, what, when, how, stack, timeline, price_hint, up="../../"):
-    # Service JSON-LD so AI engines can answer "what services does Muraduzzaman offer?"
-    # with structured facts — each service becomes its own citable entity.
-    service_schema = (
-        '<script type="application/ld+json">'
-        '{'
-        '"@context":"https://schema.org",'
-        '"@type":"Service",'
-        f'"name":"{name}",'
-        f'"description":"{sub}",'
-        f'"url":"https://mjrifat.com/services/{slug}/",'
-        '"provider":{'
-          '"@type":"Person",'
-          '"name":"Muraduzzaman",'
-          '"url":"https://mjrifat.com/"'
-        '},'
-        '"areaServed":"Worldwide",'
-        '"serviceType":"Growth engineering",'
-        '"offers":{'
-          '"@type":"Offer",'
-          '"url":"https://mjrifat.com/contact/",'
-          '"priceCurrency":"USD",'
-          '"priceSpecification":{'
-            '"@type":"PriceSpecification",'
-            '"priceCurrency":"USD",'
-            '"minPrice":"3000",'
-            '"maxPrice":"15000"'
-          '}'
-        '}'
-        '}'
-        '</script>'
-    )
-
-    # HowTo JSON-LD — each service's "how I work" steps become a citable process
-    # AI engines can quote as "here's how to engage Muraduzzaman on X".
-    howto_steps = ','.join([
-        '{"@type":"HowToStep","position":' + str(i+1) +
-        ',"name":"Step ' + str(i+1) + '","text":' +
-        _json_escape(step) +
-        '}'
-        for i, step in enumerate(how)
-    ])
-    howto_schema = (
-        '<script type="application/ld+json">'
-        '{'
-        '"@context":"https://schema.org",'
-        '"@type":"HowTo",'
-        f'"name":"How a {name.lower()} engagement works",'
-        f'"description":"{sub}",'
-        f'"url":"https://mjrifat.com/services/{slug}/",'
-        '"supply":[],'
-        '"tool":[],'
-        '"step":[' + howto_steps + ']'
-        '}'
-        '</script>'
-    )
+    url = f'https://mjrifat.com/services/{slug}/'
+    service_schema = _jsonld({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        'name': name,
+        'description': sub,
+        'url': url,
+        'provider': {'@type': 'Person', 'name': 'Muraduzzaman', 'url': 'https://mjrifat.com/'},
+        'areaServed': 'Worldwide',
+        'serviceType': 'Growth engineering',
+        'offers': {
+            '@type': 'Offer',
+            'url': 'https://mjrifat.com/contact/',
+            'priceCurrency': 'USD',
+            'priceSpecification': {
+                '@type': 'PriceSpecification',
+                'priceCurrency': 'USD',
+                'minPrice': '3000',
+                'maxPrice': '15000',
+            },
+        },
+    })
+    howto_schema = _jsonld({
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        'name': f'How a {name.lower()} engagement works',
+        'description': sub,
+        'url': url,
+        'supply': [],
+        'tool': [],
+        'step': [
+            {'@type': 'HowToStep', 'position': i + 1,
+             'name': f'Step {i + 1}', 'text': step}
+            for i, step in enumerate(how)
+        ],
+    })
     body = f"""
 {service_schema}
 {howto_schema}
@@ -1541,8 +1519,6 @@ SERVICES = {
 # WRITE EVERYTHING
 # ──────────────────────────────────────────────────────────────────
 
-import json as _json
-
 def _build_schemas(path_rel, title, description):
     """Build per-page BreadcrumbList + WebPage JSON-LD for SEO."""
     SITE = 'https://mjrifat.com'
@@ -1573,7 +1549,7 @@ def _build_schemas(path_rel, title, description):
         'isPartOf': {'@type': 'WebSite', 'url': f'{SITE}/', 'name': 'Muraduzzaman'},
         'about': {'@type': 'Person', 'name': 'Muraduzzaman', 'url': f'{SITE}/'},
     }
-    return canonical_path, _json.dumps(breadcrumb, indent=2), _json.dumps(webpage, indent=2)
+    return canonical_path, json.dumps(breadcrumb, indent=2), json.dumps(webpage, indent=2)
 
 
 def write_page(path_rel, title, description, body, up='../'):
@@ -1588,8 +1564,13 @@ def write_page(path_rel, title, description, body, up='../'):
     ) + body + FOOTER.format(up=up)
     target = ROOT / path_rel / 'index.html'
     target.parent.mkdir(parents=True, exist_ok=True)
-    with open(target, 'w', encoding='utf-8') as f:
-        f.write(full)
+    # Skip unchanged writes so `git status` stays clean on no-op rebuilds
+    try:
+        if target.read_text(encoding='utf-8') == full:
+            return str(target)
+    except FileNotFoundError:
+        pass
+    target.write_text(full, encoding='utf-8')
     return str(target)
 
 written = []
