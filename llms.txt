@@ -1,0 +1,58 @@
+# Muraduzzaman — Growth Engineer
+
+> Solo operator in Dhaka, Bangladesh, working globally. Combines 7 years of technical SEO with full-stack engineering to ship end-to-end growth systems — from ranking strategy through to the Chrome extensions, Python scrapers, Shopify themes, and WebGL brand sites that execute it.
+
+## What I do
+
+- **Technical SEO, AEO, GEO** — audits, architecture, content clusters, schema, Core Web Vitals
+- **Full-stack engineering** — Python (FastAPI, Flask, Playwright), JavaScript/Node, Chrome extensions, Shopify Liquid, Three.js/WebGL
+- **AI automation** — GPT-4o pipelines, agent orchestration, n8n workflows, Resend warmup outreach
+- **One hire replaces three** — SEO specialist + web developer + automation consultant in a single contract
+
+## Who I work with
+
+- Startups under ~$5M ARR who need all three skill sets but can't afford three specialists
+- Growth teams at mid-market companies needing senior execution without handoff delays
+- Agencies sub-contracting specialist SEO + engineering for enterprise clients
+- Founders rebuilding their growth engine end-to-end
+
+## Shipped products (selected)
+
+- **[BrandiVibe](https://mjrifat.com/work/brandivibe/)** — Three.js brand site + autonomous GPT-4o sales engine on Koyeb. Daily SEO articles, hourly lead radar across 4 startup feeds, deep-research via Resend warmup outreach, self-learning A/B. Zero daily human input.
+- **[ProWorkSpace](https://mjrifat.com/work/proworkspace/)** — AI-powered Chrome extension for Upwork freelancers. Live SaaS with Stripe billing, admin panel, paying users.
+- **[Forex Lead Finder](https://mjrifat.com/work/forex-lead-finder/)** — Python engine harvesting 5 platforms (Reddit, TradingView, BabyPips, ForexFactory, LinkedIn) with a 15-point classifier + SQLite warehouse + Flask UI + 6-hour scheduled loop.
+- **[AYVA](https://mjrifat.com/work/ayva/)** — Shopify Dawn fork, zero third-party apps, Lighthouse 95 mobile, 50 products migrated.
+- **[Email Outreach Engine](https://mjrifat.com/work/email-outreach/)** — Playwright email extractor + rate-capped sender with deliverability guardrails.
+- **[Google Maps Lead Extractor](https://mjrifat.com/work/maps-extractor/)** — SerpAPI-based business-lead pipeline for any geo + keyword.
+
+## Verifiable receipts
+
+- USA Rank #1 for commercial-intent keyword "best clipping path service" (still live)
+- 5.0 Upwork rating; retained full-time by a US client since 2023
+- Top Performer of the Month — JK Lifestyle, July 2025
+- Lighthouse 95 mobile on client site (third-party verified)
+- Organic reach in 6 countries / 30 days (GA4)
+- Listed on Wikidata as an independent entity
+
+## Current roles
+
+- Senior SEO & Digital Marketing Specialist — Innohedge (Jan 2025 – present)
+- Independent Consultant — Upwork & direct clients (Jul 2023 – present)
+
+## Contact
+
+- Website: https://mjrifat.com
+- Contact form: https://mjrifat.com/contact/
+- Phone: +880 1917 286 515
+- CV: https://mjrifat.com/muraduzzaman-cv-portfolio.pdf
+- GitHub: https://github.com/MuraduzzamanRifat
+- Upwork: https://www.upwork.com/freelancers/~018280ef5078222f43
+- LinkedIn: https://www.linkedin.com/in/md-muraduzzaman-4a581410a/
+
+## Pricing signal
+
+Realistic range: $3,000–$15,000 per project; $2,000–$8,000/month retainer. Not available for $100K enterprise deals (no name-brand case studies yet).
+
+## Canonical positioning line
+
+*"I rank sites on Google, then ship the software that compounds the traffic."*

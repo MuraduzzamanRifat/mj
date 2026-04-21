@@ -29,6 +29,7 @@ HEAD = """<!DOCTYPE html>
 <meta name="description" content="{description}" />
 <meta name="author" content="Muraduzzaman" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="google-site-verification" content="iRdyX5Psb3apEAzQzdpOSTM-uGcF9koEMylJeObqf7g" />
 <link rel="canonical" href="https://mjrifat.com/{canonical_path}" />
 
 <meta property="og:type" content="website" />
@@ -313,6 +314,26 @@ def build_work_index(up="../"):
 
 
 def build_work_case(slug, idx, name, sub, problem, approach, arch_tiles, invisible, stack_groups, takeaway, live_url=None, up="../../"):
+    # Emit Article + CreativeWork JSON-LD so AI engines (Perplexity,
+    # Claude, ChatGPT, Gemini) can cite this case study as a factual
+    # artifact with a named author, headline, and canonical URL.
+    case_schema = (
+        '<script type="application/ld+json">'
+        '{'
+        '"@context":"https://schema.org",'
+        '"@type":"Article",'
+        f'"headline":"{name} — Case Study",'
+        f'"description":"{sub}",'
+        f'"url":"https://mjrifat.com/work/{slug}/",'
+        '"image":"https://mjrifat.com/og-card.png",'
+        '"author":{"@type":"Person","name":"Muraduzzaman","url":"https://mjrifat.com/"},'
+        '"publisher":{"@type":"Person","name":"Muraduzzaman"},'
+        f'"mainEntityOfPage":"https://mjrifat.com/work/{slug}/",'
+        '"inLanguage":"en",'
+        '"about":{"@type":"SoftwareApplication","name":"' + name + '"}'
+        '}'
+        '</script>'
+    )
     arch_html = "\n".join([
         f"""
         <article class="arch-tile">
@@ -341,6 +362,7 @@ def build_work_case(slug, idx, name, sub, problem, approach, arch_tiles, invisib
 """
 
     body = f"""
+{case_schema}
 <section class="case-hero">
   <div class="case-wrap">
     {back_link(up + 'work/', 'All work')}
@@ -464,7 +486,39 @@ def build_services_index(up="../"):
 
 
 def build_service_page(slug, idx, name, sub, what, when, how, stack, timeline, price_hint, up="../../"):
+    # Service JSON-LD so AI engines can answer "what services does Muraduzzaman offer?"
+    # with structured facts — each service becomes its own citable entity.
+    service_schema = (
+        '<script type="application/ld+json">'
+        '{'
+        '"@context":"https://schema.org",'
+        '"@type":"Service",'
+        f'"name":"{name}",'
+        f'"description":"{sub}",'
+        f'"url":"https://mjrifat.com/services/{slug}/",'
+        '"provider":{'
+          '"@type":"Person",'
+          '"name":"Muraduzzaman",'
+          '"url":"https://mjrifat.com/"'
+        '},'
+        '"areaServed":"Worldwide",'
+        '"serviceType":"Growth engineering",'
+        '"offers":{'
+          '"@type":"Offer",'
+          '"url":"https://mjrifat.com/contact/",'
+          '"priceCurrency":"USD",'
+          '"priceSpecification":{'
+            '"@type":"PriceSpecification",'
+            '"priceCurrency":"USD",'
+            '"minPrice":"3000",'
+            '"maxPrice":"15000"'
+          '}'
+        '}'
+        '}'
+        '</script>'
+    )
     body = f"""
+{service_schema}
 <section class="sub-hero">
   <div class="wrap">
     {back_link(up + 'services/', 'All services')}
