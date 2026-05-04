@@ -1172,7 +1172,7 @@
   <div class="wrap">
     <div class="sec-meta light">
       <span><span class="num">09</span> &nbsp; Get in touch</span>
-      <span class="dim"><span class="contact-status-dot"></span>Available · 1–2 day response</span>
+      <span class="dim"><span class="live-dot contact-status-dot"></span>Available · 1–2 day response</span>
     </div>
     <h2 class="close-h reveal">
       If you'd like to work together,<br>
@@ -1182,9 +1182,6 @@
       I'm currently available for select engagements — SEO, automation, AI workflows, or full-stack web projects that need one person who can see all the moving pieces.
     </p>
 
-    <!-- Inline conversion form — keeps the visitor on-page. Posts to the same
-         FormSubmit endpoint as /contact/, with _next routing to the existing
-         thank-you state so the inbox flow is unchanged. -->
     <form id="home-form"
           class="home-form reveal"
           action="https://formsubmit.co/mjrifat54@gmail.com"
@@ -1192,25 +1189,24 @@
       <input type="hidden" name="_subject"  value="New inquiry from mjrifat.com (homepage)">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha"  value="false">
-      <input type="hidden" name="_next"     value="https://mjrifat.com/contact/?sent=1">
+      <input type="hidden" name="_next"     value="/contact/?sent=1">
 
-      <!-- Honeypots — invisible to humans, harvested by bots. -->
-      <div class="hf-trap" aria-hidden="true">
+      <div class="cf-hp" aria-hidden="true">
         <label>Leave this empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
         <label>Website<input type="url" name="url" tabindex="-1" autocomplete="off"></label>
       </div>
 
-      <div class="hf-row">
-        <div class="hf-field">
+      <div class="cf-row two">
+        <div class="cf-field">
           <label for="hf-name">Your name</label>
           <input id="hf-name" name="name" type="text" required autocomplete="name" minlength="2" maxlength="100" placeholder="Jane Doe">
         </div>
-        <div class="hf-field">
+        <div class="cf-field">
           <label for="hf-email">Email</label>
           <input id="hf-email" name="email" type="email" required autocomplete="email" maxlength="120" placeholder="jane@company.com">
         </div>
       </div>
-      <div class="hf-field hf-field--message">
+      <div class="cf-field">
         <label for="hf-message">What are you trying to ship?</label>
         <textarea id="hf-message" name="message" rows="4" required minlength="20" maxlength="2000" placeholder="The shorter the brief, the better. Goals, blockers, timeline — just enough so I can reply usefully."></textarea>
       </div>
@@ -1223,7 +1219,7 @@
       </div>
     </form>
 
-    <div class="close-actions reveal" style="margin-top:28px;">
+    <div class="close-actions close-actions--after-form reveal">
       <a href="muraduzzaman-cv-portfolio.pdf" download="muraduzzaman-cv-portfolio.pdf" class="close-cta">
         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span>Download CV</span>
@@ -1278,7 +1274,7 @@
   <div class="wrap">
 
     <div class="sf-banner">
-      <span class="sf-banner-dot"></span>
+      <span class="live-dot"></span>
       <span class="sf-banner-msg"><strong>Currently available</strong> for select projects · 1–2 day reply</span>
       <a class="sf-banner-cta" href="#home-form">Start a project →</a>
     </div>
