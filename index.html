@@ -386,6 +386,37 @@
     </div>
   </div>
 
+  <!-- Inline guarantee for the count-up. The module version in app.js relies
+       on Three.js loading + boot() resolving + IntersectionObserver firing —
+       any of those can race or fail. This is the safety net. -->
+  <script>
+  (function () {
+    var els = document.querySelectorAll('#heroMetrics .metric-num[data-count]');
+    if (!els.length) return;
+    function tick(el) {
+      if (el.dataset.counted === '1') return;
+      el.dataset.counted = '1';
+      var target = parseInt(el.dataset.count, 10);
+      var pad    = parseInt(el.dataset.pad || '2', 10);
+      var suffix = el.dataset.suffix || '';
+      var dur    = 1400;
+      var start  = performance.now();
+      (function step(now) {
+        var t = Math.min(1, (now - start) / dur);
+        var e = 1 - Math.pow(1 - t, 3);
+        var v = Math.round(target * e);
+        el.textContent = String(v).padStart(pad, '0') + (t >= 1 ? suffix : '');
+        if (t < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }
+    // Begin counting just before the .hero-metrics fadeIn (CSS: 0.9s 2.8s)
+    // kicks in, so the user sees the digits ticking up as the strip resolves.
+    setTimeout(function () {
+      els.forEach(function (el, i) { setTimeout(function () { tick(el); }, i * 140); });
+    }, 2400);
+  })();
+  </script>
+
 </section>
 
 <section class="positioning" id="about">
