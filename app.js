@@ -827,6 +827,8 @@ function initMetricsCount() {
   if (!metrics.length) return;
 
   const runCount = (el) => {
+    if (el.dataset.counted === '1') return;
+    el.dataset.counted = '1';
     const target = parseInt(el.dataset.count, 10);
     const pad = parseInt(el.dataset.pad || '2', 10);
     const suffix = el.dataset.suffix || '';
@@ -842,18 +844,29 @@ function initMetricsCount() {
     requestAnimationFrame(step);
   };
 
-  // fire when the metric strip reveals into view
+  const runAll = () => metrics.forEach((m, i) => setTimeout(() => runCount(m), i * 140));
+
   const strip = document.getElementById('heroMetrics');
-  if (!strip) return;
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        metrics.forEach((m, i) => setTimeout(() => runCount(m), i * 140));
-        io.disconnect();
-      }
-    });
-  }, { threshold: 0.35 });
-  io.observe(strip);
+  // The IO is the desired path (counts up only when scrolled into view on
+  // long pages), but on landings where the strip is already in view the
+  // first callback should fire immediately. Keep threshold low so partial
+  // visibility on shorter viewports still triggers.
+  if (strip && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          runAll();
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.01 });
+    io.observe(strip);
+  }
+
+  // Safety net: if the IO never fires (Safari + some content-blockers
+  // misbehave during page-load racing) force the count after the CSS
+  // fade-in (.hero-metrics: animation 0.9s 2.8s) has had time to start.
+  setTimeout(runAll, 3200);
 }
 
 /* ═══════════════════════════════════════════════════════════════
