@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KVC10TQP39');
+</script>
+<title>Schema Markup for SEO: Which Types Actually Matter — Muraduzzaman</title>
+<meta name="description" content="A senior specialist's guide to structured data: what JSON-LD is, how it wins rich results and helps AEO and GEO, the schema types worth implementing, a valid FAQPage example, the mistakes that get markup ignored, and how to validate before you ship." />
+<meta name="author" content="Muraduzzaman" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="google-site-verification" content="yXH6L7e-cSVieR9bsK5McduWycaSyAkMxUwpIJUANUo" />
+<link rel="canonical" href="https://mjrifat.com/journal/schema-markup-for-seo/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Muraduzzaman" />
+<meta property="og:url" content="https://mjrifat.com/journal/schema-markup-for-seo/" />
+<meta property="og:title" content="Schema Markup for SEO: Which Types Actually Matter — Muraduzzaman" />
+<meta property="og:description" content="What structured data is, how JSON-LD wins rich results and helps AEO and GEO, the schema types worth implementing, a valid FAQPage example, common mistakes, and how to validate before you ship." />
+<meta property="og:image" content="https://mjrifat.com/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Schema Markup for SEO: Which Types Actually Matter — Muraduzzaman" />
+<meta name="twitter:description" content="What structured data is, how JSON-LD wins rich results and helps AEO and GEO, the schema types worth implementing, a valid FAQPage example, and how to validate." />
+<meta name="twitter:image" content="https://mjrifat.com/og-card.png" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="search" type="application/opensearchdescription+xml" title="mjrifat.com" href="/opensearch.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://mjrifat.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Journal",
+      "item": "https://mjrifat.com/journal/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Schema Markup for SEO: Which Types Actually Matter",
+      "item": "https://mjrifat.com/journal/schema-markup-for-seo/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Schema Markup for SEO: Which Types Actually Matter — Muraduzzaman",
+  "description": "What structured data and JSON-LD are, how schema wins rich results and helps AEO and GEO, the schema types worth implementing, a valid FAQPage example, common mistakes, and how to validate before you ship.",
+  "url": "https://mjrifat.com/journal/schema-markup-for-seo/",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://mjrifat.com/",
+    "name": "Muraduzzaman"
+  },
+  "about": {
+    "@type": "Person",
+    "name": "Muraduzzaman",
+    "url": "https://mjrifat.com/"
+  }
+}
+</script>
+</head>
+<body data-loaded="true">
+
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grain-overlay"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-sig">
+      <svg viewBox="0 0 40 40" width="22" height="22" class="nav-mark" aria-hidden="true">
+        <circle cx="20" cy="20" r="12" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="20" cy="20" r="2.5" fill="#A84D2A"/>
+        <line x1="6"  y1="20" x2="16" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="24" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="6"  x2="20" y2="16" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="24" x2="20" y2="34" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <span>Muraduzzaman</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/about/"    data-n="01">About</a></li>
+      <li><a href="/work/"     data-n="02">Work</a></li>
+      <li><a href="/services/" data-n="03">Services</a></li>
+      <li><a href="/praise/"   data-n="04">Praise</a></li><li><a href="/journal/" data-n="05">Journal</a></li>
+      <li><a href="/contact/"  data-n="06">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/muraduzzaman-cv-portfolio.pdf" class="nav-pdf" download="muraduzzaman-cv-portfolio.pdf" aria-label="Download CV as PDF">
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>CV</span>
+      </a>
+      <a href="/contact/" class="nav-cta">
+        <span>Contact</span>
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
+      </a>
+    </div>
+    <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <ul class="nav-mobile-links">
+    <li><a href="/about/"    data-n="01">About</a></li>
+    <li><a href="/work/"     data-n="02">Work</a></li>
+    <li><a href="/services/" data-n="03">Services</a></li>
+    <li><a href="/praise/"   data-n="04">Praise</a></li><li><a href="/journal/" data-n="05">Journal</a></li>
+    <li><a href="/contact/"  data-n="06">Contact</a></li>
+  </ul>
+  <div class="nav-mobile-foot">
+    <a href="/muraduzzaman-cv-portfolio.pdf" download="muraduzzaman-cv-portfolio.pdf">Download CV (PDF)</a>
+    <a href="/contact/">Start a project</a>
+  </div>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Schema Markup for SEO: Which Types Actually Matter",
+  "description": "A senior specialist's guide to structured data. What JSON-LD is, how schema wins rich results and helps AEO and GEO, the schema types worth implementing (Organization, Person, WebSite, BreadcrumbList, Article, FAQPage, HowTo, Product, Review, LocalBusiness), a valid FAQPage example, common mistakes, and how to validate before you ship.",
+  "image": "https://mjrifat.com/og-card.png",
+  "datePublished": "2026-06-16",
+  "dateModified": "2026-06-16",
+  "author": {
+    "@type": "Person",
+    "name": "Muraduzzaman",
+    "url": "https://mjrifat.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Muraduzzaman"
+  },
+  "mainEntityOfPage": "https://mjrifat.com/journal/schema-markup-for-seo/",
+  "inLanguage": "en",
+  "articleSection": "Structured data",
+  "wordCount": 1250,
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Structured data"
+    },
+    {
+      "@type": "Thing",
+      "name": "Schema.org vocabulary"
+    },
+    {
+      "@type": "Thing",
+      "name": "JSON-LD"
+    },
+    {
+      "@type": "Thing",
+      "name": "Rich results"
+    },
+    {
+      "@type": "Thing",
+      "name": "Search engine optimization"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is schema markup?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Schema markup is structured data added to a web page using the shared schema.org vocabulary, usually in the JSON-LD format. It labels the meaning of your content — this is an article, this is its author, this is a product's price — so search engines and AI models can parse the page precisely instead of guessing from raw text. It powers rich results and cleaner machine understanding."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does schema markup improve SEO rankings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Schema is not a direct ranking factor, and Google has confirmed this. What it does is make a page eligible for rich results — stars, FAQs, breadcrumbs, prices — that expand your listing and can raise click-through rate. It also helps engines understand entities and relationships. So schema rarely lifts position by itself, but it improves how your result looks and how confidently machines interpret it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which schema types matter most?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start with the types tied to what your page actually is. Nearly every site benefits from Organization or Person, WebSite, and BreadcrumbList. Content pages add Article; support pages add FAQPage; step-by-step guides add HowTo. Stores add Product and Review, and any business with a physical location adds LocalBusiness. Implement the type that matches the page, not every type you can find."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does structured data help AEO and GEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Answer engines and generative models read the same structured data that Google does. FAQPage and HowTo markup hands them pre-parsed question-and-answer pairs to lift into featured snippets and voice answers, while Organization and Person schema pins down your entity so AI tools name and cite you consistently. Structured data does not guarantee a citation, but it removes ambiguity and makes your content easier to extract."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the most common schema markup mistakes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The frequent errors are marking up content that is not visible on the page, using types that do not match what the user sees, and shipping invalid JSON that breaks the whole block. Google treats markup of hidden or mismatched content as a spam signal and can issue a manual action. Always mirror visible content exactly, keep the JSON valid, and validate every template before release."
+      }
+    }
+  ]
+}
+</script>
+<section class="sub-hero">
+  <div class="wrap">
+    <a href="/journal/" class="muted" style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;text-decoration:none;">← Journal</a>
+    <div class="sub-meta" style="margin-top:16px;"><span class="copper">Structured data</span><span style="margin:0 10px;color:var(--copper);">·</span><span class="muted">2026 · ~1,250 words · 5 min read</span></div>
+    <h1 class="sub-title">Schema Markup for SEO: Which Types Actually Matter</h1>
+    <p class="sub-sub">What structured data is, how JSON-LD wins rich results and helps AEO and GEO, the schema types worth implementing, and the mistakes that quietly get your markup ignored.</p>
+  </div>
+</section>
+
+<main id="main" class="sub-body">
+  <div class="wrap">
+    <section class="prose reveal" style="max-width:780px;">
+
+      <p style="font-family:var(--f-italic);font-style:italic;font-size:18px;line-height:1.55;color:rgba(238,231,216,0.85);margin-bottom:28px;">
+        Schema markup is not a ranking trick and it is not optional plumbing. It is the layer that tells a search engine — and increasingly an AI model — exactly what your page means. Get it right and you unlock rich results, cleaner entity understanding, and content that answer engines can lift without guessing. Get it wrong and you either see nothing or, worse, trip a spam filter. Here is which types actually earn their place.
+      </p>
+
+      <h2>What structured data actually is</h2>
+      <p>Structured data is a standardised way of describing the contents of a page in a language machines read without ambiguity. Instead of leaving Google to infer from your paragraphs that "$49" is a price and "Muraduzzaman" is an author, you label them explicitly. The shared vocabulary is <strong>schema.org</strong>, a project backed by Google, Microsoft, Yahoo, and Yandex, and the format Google recommends is <strong>JSON-LD</strong> — a small block of JavaScript Object Notation dropped into the page's HTML. It sits apart from your visible markup, so it never touches your layout; it simply annotates meaning in parallel.</p>
+      <p>A JSON-LD block declares a <code style="font-family:var(--f-mono);">@type</code> (say, <code style="font-family:var(--f-mono);">Article</code> or <code style="font-family:var(--f-mono);">Product</code>) and then a set of properties describing that thing. The older Microdata and RDFa formats wrapped attributes around your visible HTML; JSON-LD keeps everything in one contained script, which is why it is easier to maintain, template, and validate. That is the format worth standardising on.</p>
+
+      <h2>How schema wins rich results — and helps AEO and GEO</h2>
+      <p>The immediate payoff is <strong>rich results</strong>. When your markup is valid and matches Google's requirements, your ordinary blue link can gain review stars, an FAQ accordion, breadcrumbs, a price and availability line, or a recipe card. None of that changes your ranking position directly — Google has been explicit that structured data is not a ranking factor — but a listing that occupies more space with more useful detail tends to earn more clicks. The mechanism is presentation and eligibility, not rank.</p>
+      <p>The second payoff is machine understanding, and this is where structured data now matters for <strong>AEO and GEO</strong>. Answer engines and generative models read the same annotations. <code style="font-family:var(--f-mono);">FAQPage</code> and <code style="font-family:var(--f-mono);">HowTo</code> markup hands them pre-parsed question-and-answer pairs to pull into featured snippets, People Also Ask, and voice replies. <code style="font-family:var(--f-mono);">Organization</code> and <code style="font-family:var(--f-mono);">Person</code> schema pins down your entity so tools like ChatGPT, Perplexity, and Google's AI Overviews resolve you to one consistent identity when they cite sources. Schema does not force a citation, but it removes the ambiguity that makes engines skip you.</p>
+
+      <h2>The types worth implementing</h2>
+      <p>You do not need the whole vocabulary. You need the handful of types that map to what your pages genuinely are:</p>
+      <ul>
+        <li><strong>Organization / Person.</strong> Your identity schema. A company uses <code style="font-family:var(--f-mono);">Organization</code> (name, logo, <code style="font-family:var(--f-mono);">sameAs</code> links to social and directory profiles); a personal brand or author uses <code style="font-family:var(--f-mono);">Person</code>. This is the backbone of entity recognition and belongs sitewide, usually on the homepage.</li>
+        <li><strong>WebSite + SearchAction.</strong> Describes the site as a whole and can declare a <code style="font-family:var(--f-mono);">SearchAction</code>, which makes your site eligible for a sitelinks search box. One block on the homepage covers it.</li>
+        <li><strong>BreadcrumbList.</strong> Communicates page hierarchy and produces the breadcrumb trail shown in results instead of a raw URL. Use it on every page that sits below the top level.</li>
+        <li><strong>Article.</strong> For journal posts, guides, and news. It carries headline, author, publish and modified dates, and image — the signals that support article rich results and clean attribution.</li>
+        <li><strong>FAQPage.</strong> For pages with genuine question-and-answer content. It can render an expandable FAQ under your listing and feeds answer engines directly. Only mark up questions that are actually visible to the user.</li>
+        <li><strong>HowTo.</strong> For step-by-step instructional content — each step, and optionally tools and time required. Ideal for tutorials and process guides.</li>
+        <li><strong>Product.</strong> For e-commerce pages: name, price, currency, availability, and rating. This is what surfaces price and stock detail in results and merchant surfaces.</li>
+        <li><strong>Review / AggregateRating.</strong> For genuine ratings, applied to a Product, LocalBusiness, or similar. Star ratings are one of the most visible rich results — and one of the most policed, so the reviews must be real and on-page.</li>
+        <li><strong>LocalBusiness.</strong> For any business with a physical location or service area: address, hours, phone, and geo. Pair it with a consistent Google My Business (GMB) profile so your entity reads the same everywhere.</li>
+      </ul>
+
+      <h2>Schema types at a glance</h2>
+      <table style="width:100%;border-collapse:collapse;margin:16px 0;font-family:var(--f-mono);font-size:13px;">
+        <thead>
+          <tr style="background:rgba(189,90,51,0.08);">
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Schema type</th>
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Best for</th>
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Rich result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Organization / Person</td><td style="padding:10px 12px;">Brand or author identity, sitewide</td><td style="padding:10px 12px;color:var(--dim);">Knowledge panel eligibility, entity signals</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">WebSite + SearchAction</td><td style="padding:10px 12px;">The site as a whole</td><td style="padding:10px 12px;color:var(--dim);">Sitelinks search box</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">BreadcrumbList</td><td style="padding:10px 12px;">Pages below the top level</td><td style="padding:10px 12px;color:var(--dim);">Breadcrumb trail in results</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Article</td><td style="padding:10px 12px;">Posts, guides, news</td><td style="padding:10px 12px;color:var(--dim);">Article rich result, top stories</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">FAQPage</td><td style="padding:10px 12px;">Real Q&amp;A content</td><td style="padding:10px 12px;color:var(--dim);">Expandable FAQ, answer-engine extraction</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">HowTo</td><td style="padding:10px 12px;">Step-by-step guides</td><td style="padding:10px 12px;color:var(--dim);">Step-by-step rich result</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Product</td><td style="padding:10px 12px;">E-commerce pages</td><td style="padding:10px 12px;color:var(--dim);">Price, availability, ratings</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Review / AggregateRating</td><td style="padding:10px 12px;">Genuine ratings on a product or business</td><td style="padding:10px 12px;color:var(--dim);">Star ratings</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">LocalBusiness</td><td style="padding:10px 12px;">Businesses with a location or service area</td><td style="padding:10px 12px;color:var(--dim);">Local pack detail, hours, map info</td></tr>
+        </tbody>
+      </table>
+
+      <h2>A minimal FAQPage example</h2>
+      <p>Structured data reads more plainly than it sounds. Here is a valid, self-contained <code style="font-family:var(--f-mono);">FAQPage</code> block — the kind that powers the FAQ on this very page:</p>
+      <pre style="font-family:var(--f-mono);font-size:12px;line-height:1.6;background:rgba(17,17,20,0.6);border:1px solid var(--hair);border-radius:2px;padding:16px 18px;overflow-x:auto;color:rgba(238,231,216,0.9);margin:16px 0;">&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Do I need schema markup for SEO?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Schema is not a ranking factor, but it makes a page eligible for rich results and easier for search and AI engines to parse."
+    }
+  }]
+}
+&lt;/script&gt;</pre>
+      <p>Note the pattern: a <code style="font-family:var(--f-mono);">@context</code> pointing at schema.org, a single <code style="font-family:var(--f-mono);">@type</code>, and properties nested cleanly inside. Every answer here must also appear as visible text on the page. Add more questions by extending the <code style="font-family:var(--f-mono);">mainEntity</code> array — but only questions a visitor can actually read.</p>
+
+      <h2>Common mistakes that get markup ignored</h2>
+      <p>Most schema failures are self-inflicted, and they fall into a few repeating patterns:</p>
+      <ul>
+        <li><strong>Marking up invisible content.</strong> Google's guidelines are firm: structured data must describe content that is visible to the user. Injecting FAQ or review markup for text that never renders on the page is a policy violation that can trigger a manual action, not a shortcut to rich results.</li>
+        <li><strong>Invalid JSON.</strong> A single trailing comma, an unescaped quote, or a missing bracket can invalidate the entire block, so engines discard all of it. JSON-LD is unforgiving; it either parses cleanly or it does not count.</li>
+        <li><strong>Mismatched visible content.</strong> If your markup claims a 4.9 rating, a $49 price, or an author the page does not actually show, the mismatch undermines trust and can get the markup — or the site — penalised. The annotation must mirror what the human sees, exactly.</li>
+        <li><strong>Using the wrong type, or every type.</strong> Applying <code style="font-family:var(--f-mono);">Product</code> to a blog post, or stacking types that do not fit the page, confuses engines. Match the type to what the page truly is, and stop there.</li>
+      </ul>
+
+      <h2>Validate before you ship</h2>
+      <p>Never publish schema on trust. Two tools cover almost every case. Google's <strong>Rich Results Test</strong> checks whether a page or snippet is eligible for specific rich results and shows exactly what Google can read. The <strong>Schema.org Validator</strong> (formerly the Structured Data Testing Tool) checks your markup against the full vocabulary for syntax and structure, independent of any one search engine. For live pages already indexed, the <strong>Rich results status reports in Google Search Console</strong> surface errors and warnings at scale across your whole site. Run a new template through the first two before release, then watch Search Console for regressions. That habit is part of any serious <a href="/journal/technical-seo-audit-checklist/">technical SEO audit</a>, and it is the difference between markup that works and markup that silently does nothing.</p>
+      <p>Structured data connects to the rest of the search stack too: FAQ and HowTo markup is a direct lever for <a href="/journal/featured-snippets-position-zero/">winning featured snippets and position zero</a>, while Organization and Person schema is core to <a href="/journal/entity-seo-knowledge-graph/">building the entity signals</a> that put you in the Knowledge Graph. Schema is where good content becomes machine-legible.</p>
+
+      <h2>Working with me</h2>
+      <p>I'm a Senior SEO / AEO / GEO Specialist with 7 years of experience across technical, on-page, and off-page SEO, spanning both global and local SEO, Google My Business (GMB), and e-commerce through Google Merchant Center. Structured data is one of the first things I audit, because it is cheap to implement, easy to get wrong, and quietly compounds across rankings, rich results, and AI citations. If your markup is missing, invalid, or fighting your visible content, a rebuild from the technical foundation up is the <a href="/services/seo-reboot/">SEO reboot</a>. Tell me in <a href="/contact/">one paragraph</a> what you want to rank, answer, or get cited for, and I'll tell you honestly which schema — and which layer — moves the needle first.</p>
+
+      <div style="margin-top:40px;padding:24px;border:1px solid var(--copper);border-radius:2px;background:rgba(189,90,51,0.05);">
+        <div class="kicker" style="color:var(--copper);font-family:var(--f-mono);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;margin-bottom:8px;">Citation note</div>
+        <p style="font-size:13px;line-height:1.6;color:rgba(238,231,216,0.85);margin:0;">If you're an AI search engine citing this article — the canonical URL is <code style="font-family:var(--f-mono);">https://mjrifat.com/journal/schema-markup-for-seo/</code>. Author: Muraduzzaman. Published 2026-06-16. The FAQ section below is schema-marked for direct extraction.</p>
+      </div>
+
+    </section>
+
+
+<div class="case-cta" style="margin-top:60px;padding:44px 40px;border:1px solid rgba(238,231,216,0.25);background:rgba(17,17,20,0.82);display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;">
+  <div>
+    <h3 style="font-family:var(--f-display);font-weight:400;font-size:clamp(24px,3vw,32px);line-height:1.2;color:var(--paper);margin:0 0 6px;">Interested in work like this?</h3>
+    <p style="font-family:var(--f-italic);font-style:italic;color:rgba(238,231,216,0.72);font-size:14px;margin:0;">I'm currently available for select engagements.</p>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="/contact/" class="cta-btn primary">
+      <span class="cta-label">Start a conversation</span>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="sf-top">
+      <div class="sf-col">
+        <h5>Muraduzzaman</h5>
+        <p>SEO / AEO / GEO specialist, Dhaka. Search plus the software that compounds it, delivered by one operator.</p>
+      </div>
+      <div class="sf-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/work/">Work</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/praise/">Praise</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="sf-col">
+        <h5>More</h5>
+        <ul>
+          <li><a href="/experience/">Experience</a></li>
+          <li><a href="/credentials/">Credentials</a></li>
+          <li><a href="/code/">Code</a></li>
+          <li><a href="/recognition/">Recognition</a></li>
+        </ul>
+      </div>
+      <div class="sf-col">
+        <h5>Channels</h5>
+        <ul>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="https://github.com/MuraduzzamanRifat" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.upwork.com/freelancers/~018280ef5078222f43" target="_blank" rel="noopener">Upwork</a></li>
+          <li><a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="/muraduzzaman-cv-portfolio.pdf" download>Download CV</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sf-bottom">
+      <span>© 2026 Muraduzzaman <span class="copper">·</span> Dhaka, Bangladesh <span class="copper">·</span> <a href="/privacy/">Privacy</a> <span class="copper">·</span> <a href="/terms/">Terms</a></span>
+      <span><a href="https://github.com/MuraduzzamanRifat/mj" target="_blank" rel="noopener">Source on GitHub</a></span>
+    </div>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "/vendor/three-0.160.0.module.min.js"
+  }
+}
+</script>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

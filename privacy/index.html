@@ -3,8 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formsubmit.co https://api.web3forms.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KVC10TQP39');
+</script>
 <title>Privacy Policy — Muraduzzaman</title>
 <meta name="description" content="Privacy policy for mjrifat.com. This site uses no cookies, analytics, or third-party tracking; the only data collected is what you submit through the contact form." />
 <meta name="author" content="Muraduzzaman" />
@@ -79,8 +87,8 @@
       <li><a href="/about/"    data-n="01">About</a></li>
       <li><a href="/work/"     data-n="02">Work</a></li>
       <li><a href="/services/" data-n="03">Services</a></li>
-      <li><a href="/praise/"   data-n="04">Praise</a></li>
-      <li><a href="/contact/"  data-n="05">Contact</a></li>
+      <li><a href="/praise/"   data-n="04">Praise</a></li><li><a href="/journal/" data-n="05">Journal</a></li>
+      <li><a href="/contact/"  data-n="06">Contact</a></li>
     </ul>
     <div class="nav-right">
       <a href="/muraduzzaman-cv-portfolio.pdf" class="nav-pdf" download="muraduzzaman-cv-portfolio.pdf" aria-label="Download CV as PDF">
@@ -103,8 +111,8 @@
     <li><a href="/about/"    data-n="01">About</a></li>
     <li><a href="/work/"     data-n="02">Work</a></li>
     <li><a href="/services/" data-n="03">Services</a></li>
-    <li><a href="/praise/"   data-n="04">Praise</a></li>
-    <li><a href="/contact/"  data-n="05">Contact</a></li>
+    <li><a href="/praise/"   data-n="04">Praise</a></li><li><a href="/journal/" data-n="05">Journal</a></li>
+    <li><a href="/contact/"  data-n="06">Contact</a></li>
   </ul>
   <div class="nav-mobile-foot">
     <a href="/muraduzzaman-cv-portfolio.pdf" download="muraduzzaman-cv-portfolio.pdf">Download CV (PDF)</a>
@@ -117,7 +125,7 @@
     <a href="/" class="muted" style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;text-decoration:none;">← Home</a>
     <div class="sub-meta" style="margin-top:16px;"><span class="copper">Legal</span><span style="margin:0 10px;color:var(--copper);">·</span><span class="muted">Last updated 16 June 2026</span></div>
     <h1 class="sub-title">Privacy Policy</h1>
-    <p class="sub-sub">Short version: this site sets no cookies, runs no analytics, and tracks nothing. The only personal data it handles is what you choose to send me through the contact form.</p>
+    <p class="sub-sub">Short version: this site uses privacy-respecting Google Analytics (GA4) to understand aggregate traffic. The only personal data you actively send me is through the contact form.</p>
   </div>
 </section>
 
@@ -128,14 +136,16 @@
       <h2>Who this is</h2>
       <p>This website, <strong>mjrifat.com</strong>, is the personal portfolio of Muraduzzaman (MJ Rifat), an independent SEO / AEO / GEO specialist based in Dhaka, Bangladesh. Questions about this policy or your data: <a href="mailto:dev@try-n.com">dev@try-n.com</a>.</p>
 
-      <h2>No cookies, no tracking</h2>
-      <p>This site does <strong>not</strong> use cookies, analytics, advertising, pixels, session recording, or any third-party tracking. There is no login and no account. You can browse it without your behaviour being recorded by me.</p>
+      <h2>Analytics &amp; cookies</h2>
+      <p>This site uses <strong>Google Analytics 4 (GA4)</strong> to measure aggregate traffic — which pages are visited, rough location (country/city), device type, and how visitors arrive. GA4 sets first-party cookies and processes this data through Google acting as a processor. I use it only to learn which content is useful — not to identify you personally, and never for advertising or cross-site retargeting.</p>
+      <p>There is no login and no account. If you'd prefer not to be measured, use your browser's tracking protection, an analytics/ad blocker, or Google's <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Analytics opt-out add-on</a>. This site does not run advertising or cross-site retargeting.</p>
 
       <h2>What I collect, and only when you send it</h2>
       <p>The single place data is collected is the <a href="/contact/">contact form</a>. When you submit it, you send me your <strong>name</strong>, <strong>email address</strong>, and your <strong>message</strong>. That's it. I use it for one purpose: to read and reply to your enquiry. I do not add you to a newsletter, an auto-DM sequence, or a CRM.</p>
 
       <h2>Third parties involved in running the site</h2>
       <ul>
+        <li><strong>Google Analytics 4 (Google)</strong> — measures aggregate site traffic via first-party cookies and usage data, with Google as a processor.</li>
         <li><strong>FormSubmit</strong> — delivers contact-form submissions to my email inbox. Your form data passes through their service in transit.</li>
         <li><strong>Google Fonts</strong> — serves the typefaces used on the site; your browser requests them, which can expose your IP address to Google as part of a normal font request.</li>
         <li><strong>GitHub Pages &amp; Fastly (CDN)</strong> — host and serve the static files; like any web host they keep standard server access logs (e.g. IP, timestamp, requested file) for security and operations.</li>

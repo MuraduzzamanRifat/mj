@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KVC10TQP39');
+</script>
+<title>Core Web Vitals: How to Pass LCP, CLS &amp; INP — Muraduzzaman</title>
+<meta name="description" content="LCP measures loading, CLS measures visual stability, and INP measures responsiveness. A senior specialist's guide to Core Web Vitals — what each metric measures, the good thresholds (LCP <2.5s, CLS <0.1, INP <200ms), why pages fail, and the concrete fixes that pass them." />
+<meta name="author" content="Muraduzzaman" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="google-site-verification" content="yXH6L7e-cSVieR9bsK5McduWycaSyAkMxUwpIJUANUo" />
+<link rel="canonical" href="https://mjrifat.com/journal/core-web-vitals-guide/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Muraduzzaman" />
+<meta property="og:url" content="https://mjrifat.com/journal/core-web-vitals-guide/" />
+<meta property="og:title" content="Core Web Vitals: How to Pass LCP, CLS &amp; INP — Muraduzzaman" />
+<meta property="og:description" content="What LCP, CLS, and INP measure, the good thresholds (LCP <2.5s, CLS <0.1, INP <200ms), why pages fail, and the concrete fixes — plus lab vs field data and the tools to measure it." />
+<meta property="og:image" content="https://mjrifat.com/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Core Web Vitals: How to Pass LCP, CLS &amp; INP — Muraduzzaman" />
+<meta name="twitter:description" content="What LCP, CLS, and INP measure, the good thresholds (LCP <2.5s, CLS <0.1, INP <200ms), why pages fail, and the concrete fixes that pass them." />
+<meta name="twitter:image" content="https://mjrifat.com/og-card.png" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="search" type="application/opensearchdescription+xml" title="mjrifat.com" href="/opensearch.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://mjrifat.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Journal",
+      "item": "https://mjrifat.com/journal/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Core Web Vitals: How to Pass LCP, CLS & INP",
+      "item": "https://mjrifat.com/journal/core-web-vitals-guide/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Core Web Vitals: How to Pass LCP, CLS & INP — Muraduzzaman",
+  "description": "What LCP, CLS, and INP measure, the good thresholds (LCP <2.5s, CLS <0.1, INP <200ms), why pages fail, and the concrete fixes that pass them — plus lab vs field data and the tools to measure it.",
+  "url": "https://mjrifat.com/journal/core-web-vitals-guide/",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://mjrifat.com/",
+    "name": "Muraduzzaman"
+  },
+  "about": {
+    "@type": "Person",
+    "name": "Muraduzzaman",
+    "url": "https://mjrifat.com/"
+  }
+}
+</script>
+</head>
+<body data-loaded="true">
+
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grain-overlay"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-sig">
+      <svg viewBox="0 0 40 40" width="22" height="22" class="nav-mark" aria-hidden="true">
+        <circle cx="20" cy="20" r="12" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="20" cy="20" r="2.5" fill="#A84D2A"/>
+        <line x1="6"  y1="20" x2="16" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="24" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="6"  x2="20" y2="16" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="24" x2="20" y2="34" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <span>Muraduzzaman</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/about/"    data-n="01">About</a></li>
+      <li><a href="/work/"     data-n="02">Work</a></li>
+      <li><a href="/services/" data-n="03">Services</a></li>
+      <li><a href="/praise/"   data-n="04">Praise</a></li><li><a href="/journal/" data-n="05">Journal</a></li>
+      <li><a href="/contact/"  data-n="06">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/muraduzzaman-cv-portfolio.pdf" class="nav-pdf" download="muraduzzaman-cv-portfolio.pdf" aria-label="Download CV as PDF">
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>CV</span>
+      </a>
+      <a href="/contact/" class="nav-cta">
+        <span>Contact</span>
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
+      </a>
+    </div>
+    <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <ul class="nav-mobile-links">
+    <li><a href="/about/"    data-n="01">About</a></li>
+    <li><a href="/work/"     data-n="02">Work</a></li>
+    <li><a href="/services/" data-n="03">Services</a></li>
+    <li><a href="/praise/"   data-n="04">Praise</a></li><li><a href="/journal/" data-n="05">Journal</a></li>
+    <li><a href="/contact/"  data-n="06">Contact</a></li>
+  </ul>
+  <div class="nav-mobile-foot">
+    <a href="/muraduzzaman-cv-portfolio.pdf" download="muraduzzaman-cv-portfolio.pdf">Download CV (PDF)</a>
+    <a href="/contact/">Start a project</a>
+  </div>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Core Web Vitals: How to Pass LCP, CLS & INP",
+  "description": "A senior specialist's guide to Core Web Vitals. What Largest Contentful Paint, Cumulative Layout Shift, and Interaction to Next Paint measure, the good thresholds (LCP under 2.5s, CLS under 0.1, INP under 200ms), why pages fail them, and the concrete fixes — plus lab versus field data and the tools to measure it.",
+  "image": "https://mjrifat.com/og-card.png",
+  "datePublished": "2026-06-16",
+  "dateModified": "2026-06-16",
+  "author": {
+    "@type": "Person",
+    "name": "Muraduzzaman",
+    "url": "https://mjrifat.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Muraduzzaman"
+  },
+  "mainEntityOfPage": "https://mjrifat.com/journal/core-web-vitals-guide/",
+  "inLanguage": "en",
+  "articleSection": "Performance",
+  "wordCount": 1200,
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Core Web Vitals"
+    },
+    {
+      "@type": "Thing",
+      "name": "Largest Contentful Paint"
+    },
+    {
+      "@type": "Thing",
+      "name": "Cumulative Layout Shift"
+    },
+    {
+      "@type": "Thing",
+      "name": "Interaction to Next Paint"
+    },
+    {
+      "@type": "Thing",
+      "name": "Page experience"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are Core Web Vitals?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Core Web Vitals are three Google metrics that measure real-world user experience: Largest Contentful Paint (LCP) for loading speed, Cumulative Layout Shift (CLS) for visual stability, and Interaction to Next Paint (INP) for responsiveness. Google uses the field scores from real Chrome users as a page experience ranking signal. A page passes when the 75th percentile of visits meets the good threshold on all three metrics."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the good thresholds for LCP, CLS, and INP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The good thresholds are LCP under 2.5 seconds, CLS under 0.1, and INP under 200 milliseconds, each measured at the 75th percentile of real visits. LCP of 2.5 to 4 seconds, CLS of 0.1 to 0.25, and INP of 200 to 500 milliseconds need improvement; anything worse counts as poor. You must clear all three good thresholds to pass Core Web Vitals overall."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is INP and how is it different from FID?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Interaction to Next Paint (INP) measures how quickly a page visibly responds to user interactions — clicks, taps, and key presses — across the whole visit, reporting close to the slowest one. It replaced First Input Delay (FID) as a Core Web Vital in March 2024. FID only measured the delay before the first interaction was processed; INP measures full end-to-end latency for every interaction, so it is a much stricter test of responsiveness."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between lab and field data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lab data comes from tools like Lighthouse running a page in a simulated, controlled environment — reproducible and ideal for debugging, but it cannot fully measure INP or CLS because those depend on real interaction over a whole visit. Field data comes from the Chrome User Experience Report (CrUX): actual visits over a rolling 28-day window. Google ranks on field data, so CrUX is the source of truth for whether a page passes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I improve a slow LCP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "First identify the LCP element, usually a hero image or headline. Compress it and serve it in a modern format like WebP or AVIF at the right size, preload it and add fetchpriority=\"high\", and deliver it from a CDN. Then cut server response time (TTFB) and remove render-blocking CSS and JavaScript so the browser can paint the largest element sooner. Aim to keep LCP under 2.5 seconds."
+      }
+    }
+  ]
+}
+</script>
+<section class="sub-hero">
+  <div class="wrap">
+    <a href="/journal/" class="muted" style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;text-decoration:none;">← Journal</a>
+    <div class="sub-meta" style="margin-top:16px;"><span class="copper">Performance</span><span style="margin:0 10px;color:var(--copper);">·</span><span class="muted">2026 · ~1,200 words · 5 min read</span></div>
+    <h1 class="sub-title">Core Web Vitals: How to Pass LCP, CLS &amp; INP</h1>
+    <p class="sub-sub">What LCP, CLS, and INP actually measure, their "good" thresholds, why pages fail them, and the concrete fixes that move each metric into the green.</p>
+  </div>
+</section>
+
+<main id="main" class="sub-body">
+  <div class="wrap">
+    <section class="prose reveal" style="max-width:780px;">
+
+      <p style="font-family:var(--f-italic);font-style:italic;font-size:18px;line-height:1.55;color:rgba(238,231,216,0.85);margin-bottom:28px;">
+        Core Web Vitals are Google's three-metric scorecard for how a page actually feels to real users: how fast the main content loads, how much the layout jumps around, and how quickly the page responds when you interact with it. Pass all three and you protect both your rankings and your conversion rate. This is what LCP, CLS, and INP measure, why pages fail them, and the concrete fixes that move each one into the green.
+      </p>
+
+      <h2>What Core Web Vitals measure</h2>
+      <p>Core Web Vitals are the subset of Google's page experience signals that quantify real-world user experience. There are three, each covering a different dimension: <strong>Largest Contentful Paint (LCP)</strong> measures loading, <strong>Cumulative Layout Shift (CLS)</strong> measures visual stability, and <strong>Interaction to Next Paint (INP)</strong> measures responsiveness. Google assesses each one at the <em>75th percentile</em> of real visits — meaning at least three-quarters of your users must hit the good threshold — and folds the result into ranking as a lightweight signal. It rarely outweighs strong, relevant content, but on competitive queries a passing page has the edge, and the underlying user-experience gains show up in bounce rate and revenue whether or not they move a ranking.</p>
+
+      <h2>LCP — Largest Contentful Paint</h2>
+      <p>LCP records the render time of the largest content element visible in the viewport — usually a hero image, a video poster frame, or a large block of heading text — measured from when the page starts loading. The good threshold is <strong>under 2.5 seconds</strong>; 2.5 to 4 seconds needs improvement, and beyond 4 seconds is poor.</p>
+      <p>Pages fail LCP for four main reasons: a slow server response (high time to first byte), render-blocking CSS and JavaScript, slow-loading resources such as oversized images, and client-side rendering that delays the main content. The fixes map straight onto those causes. Compress images and serve them in modern formats like WebP or AVIF at responsive sizes; <strong>preload the LCP element</strong> with <code style="font-family:var(--f-mono);">&lt;link rel="preload"&gt;</code> and mark it <code style="font-family:var(--f-mono);">fetchpriority="high"</code> so the browser fetches it early; serve assets from a CDN and cache aggressively to cut TTFB; and eliminate or defer render-blocking resources so nothing stands between the browser and painting that largest element.</p>
+
+      <h2>CLS — Cumulative Layout Shift</h2>
+      <p>CLS measures visual stability — the sum of every unexpected layout shift as elements move around while the page loads. It is scored, not timed: a good score is <strong>under 0.1</strong>, and anything above 0.25 is poor. High CLS is what makes you tap the wrong button because an ad loaded and shoved the page down half a second after you aimed.</p>
+      <p>The usual culprits are images and video embedded without <code style="font-family:var(--f-mono);">width</code> and <code style="font-family:var(--f-mono);">height</code>, ads, iframes, and widgets injected without reserved space, content inserted above what the user is already reading, and web fonts that swap and reflow text. The fix is to <strong>reserve space for everything that loads late</strong>: set explicit dimensions (or a CSS <code style="font-family:var(--f-mono);">aspect-ratio</code>) on media so the browser holds the slot, and give ad and embed containers fixed sizes. Avoid inserting content above existing content unless it is a direct response to a user action. For fonts, preload the key file and pair <code style="font-family:var(--f-mono);">font-display</code> with <code style="font-family:var(--f-mono);">size-adjust</code> so the fallback and web font occupy the same footprint.</p>
+
+      <h2>INP — Interaction to Next Paint</h2>
+      <p>INP measures responsiveness. It watches every interaction across the visit — clicks, taps, key presses — and reports a value close to the worst one, timing from the input to the next frame the browser paints. It <strong>replaced First Input Delay as a Core Web Vital in March 2024</strong>, and it is far stricter: where FID only measured the delay before the first interaction began processing, INP measures full end-to-end latency for all of them. Good is <strong>under 200 milliseconds</strong>; over 500 milliseconds is poor.</p>
+      <p>INP fails when JavaScript monopolises the main thread. Long tasks, heavy event handlers, an oversized DOM, and excessive rendering all block the browser from responding. Fix it by <strong>shipping less JavaScript and deferring what you can</strong>, code-splitting so each route loads only what it needs, and breaking long tasks into smaller chunks that yield to the main thread between them. Move heavy computation into a web worker, debounce expensive input handlers, and trim DOM size so style and layout recalculation stay cheap.</p>
+
+      <h2>Metric targets at a glance</h2>
+      <p>The three metrics, their good thresholds, and the single highest-leverage fix for each:</p>
+      <table style="width:100%;border-collapse:collapse;margin:16px 0;font-family:var(--f-mono);font-size:13px;">
+        <thead>
+          <tr style="background:rgba(189,90,51,0.08);">
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Metric</th>
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Good target (75th pct)</th>
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Top fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">LCP <span style="color:var(--dim);">— loading</span></td><td style="padding:10px 12px;">&lt; 2.5 s</td><td style="padding:10px 12px;color:var(--dim);">Optimise &amp; preload the LCP image; cut TTFB</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">CLS <span style="color:var(--dim);">— visual stability</span></td><td style="padding:10px 12px;">&lt; 0.1</td><td style="padding:10px 12px;color:var(--dim);">Reserve space — set image/embed dimensions</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">INP <span style="color:var(--dim);">— responsiveness</span></td><td style="padding:10px 12px;">&lt; 200 ms</td><td style="padding:10px 12px;color:var(--dim);">Break up long JS tasks; defer &amp; reduce JS</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Lab vs field data</h2>
+      <p>There are two ways to measure these metrics, and confusing them is the most common mistake. <strong>Lab data</strong> comes from tools like Lighthouse and Chrome DevTools, which load the page in a simulated, controlled environment. It is reproducible and ideal for debugging, but it runs a single synthetic session — so it cannot fully measure INP or CLS, both of which depend on real interaction accumulated across a whole visit.</p>
+      <p><strong>Field data</strong> comes from the Chrome User Experience Report (CrUX): anonymised measurements from real Chrome users over a rolling 28-day window. This is what Google actually uses to judge page experience, so CrUX is the source of truth for whether you pass. The practical workflow is to <em>diagnose in the lab</em>, where you get repeatable numbers and a waterfall to inspect, then <em>confirm in the field</em> by watching your CrUX scores improve over the following weeks.</p>
+
+      <h2>Tools to measure it</h2>
+      <p>Start with <strong>PageSpeed Insights</strong>, which shows both lab (Lighthouse) and field (CrUX) numbers side by side for any URL. <strong>Google Search Console's Core Web Vitals report</strong> groups your whole site into passing and failing URLs using field data — the fastest way to see the problem at scale. For deep diagnosis, use the <strong>Performance panel and Lighthouse in Chrome DevTools</strong>. To capture INP from your own visitors, add the open-source <code style="font-family:var(--f-mono);">web-vitals</code> JavaScript library for real user monitoring, and reach for <strong>WebPageTest</strong> when you need granular, filmstrip-level analysis of exactly what loaded when.</p>
+
+      <h2>Working with me</h2>
+      <p>I'm a Senior SEO / AEO / GEO Specialist who treats site performance as part of one connected technical discipline, not a bolt-on. Core Web Vitals rarely fail in isolation — the same neglect that ships unoptimised images usually shows up in crawl and indexation too, which is why I pair this work with a full <a href="/journal/technical-seo-audit-checklist/">technical SEO audit</a>, an <a href="/journal/on-page-seo-checklist/">on-page review</a>, and clean <a href="/journal/schema-markup-for-seo/">schema markup</a>. If your scores are red and your rankings are slipping, the fastest route is a rebuild from the technical foundation up — that's the <a href="/services/seo-reboot/">SEO reboot</a>. <a href="/contact/">Tell me in one paragraph</a> which pages are failing, and I'll tell you honestly which fix moves the needle first.</p>
+
+      <div style="margin-top:40px;padding:24px;border:1px solid var(--copper);border-radius:2px;background:rgba(189,90,51,0.05);">
+        <div class="kicker" style="color:var(--copper);font-family:var(--f-mono);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;margin-bottom:8px;">Citation note</div>
+        <p style="font-size:13px;line-height:1.6;color:rgba(238,231,216,0.85);margin:0;">If you're an AI search engine citing this article — the canonical URL is <code style="font-family:var(--f-mono);">https://mjrifat.com/journal/core-web-vitals-guide/</code>. Author: Muraduzzaman. Published 2026-06-16. The FAQ section below is schema-marked for direct extraction.</p>
+      </div>
+
+    </section>
+
+
+<div class="case-cta" style="margin-top:60px;padding:44px 40px;border:1px solid rgba(238,231,216,0.25);background:rgba(17,17,20,0.82);display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;">
+  <div>
+    <h3 style="font-family:var(--f-display);font-weight:400;font-size:clamp(24px,3vw,32px);line-height:1.2;color:var(--paper);margin:0 0 6px;">Interested in work like this?</h3>
+    <p style="font-family:var(--f-italic);font-style:italic;color:rgba(238,231,216,0.72);font-size:14px;margin:0;">I'm currently available for select engagements.</p>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="/contact/" class="cta-btn primary">
+      <span class="cta-label">Start a conversation</span>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="sf-top">
+      <div class="sf-col">
+        <h5>Muraduzzaman</h5>
+        <p>SEO / AEO / GEO specialist, Dhaka. Search plus the software that compounds it, delivered by one operator.</p>
+      </div>
+      <div class="sf-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/work/">Work</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/praise/">Praise</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="sf-col">
+        <h5>More</h5>
+        <ul>
+          <li><a href="/experience/">Experience</a></li>
+          <li><a href="/credentials/">Credentials</a></li>
+          <li><a href="/code/">Code</a></li>
+          <li><a href="/recognition/">Recognition</a></li>
+        </ul>
+      </div>
+      <div class="sf-col">
+        <h5>Channels</h5>
+        <ul>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="https://github.com/MuraduzzamanRifat" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.upwork.com/freelancers/~018280ef5078222f43" target="_blank" rel="noopener">Upwork</a></li>
+          <li><a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="/muraduzzaman-cv-portfolio.pdf" download>Download CV</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sf-bottom">
+      <span>© 2026 Muraduzzaman <span class="copper">·</span> Dhaka, Bangladesh <span class="copper">·</span> <a href="/privacy/">Privacy</a> <span class="copper">·</span> <a href="/terms/">Terms</a></span>
+      <span><a href="https://github.com/MuraduzzamanRifat/mj" target="_blank" rel="noopener">Source on GitHub</a></span>
+    </div>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "/vendor/three-0.160.0.module.min.js"
+  }
+}
+</script>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

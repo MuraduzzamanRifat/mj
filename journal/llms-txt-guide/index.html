@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KVC10TQP39');
+</script>
+<title>llms.txt Explained: The File That Feeds AI Search — Muraduzzaman</title>
+<meta name="description" content="llms.txt is a Markdown file at your site's root that hands AI answer engines a clean, curated map of your best content. What it is, where it lives at /llms.txt, what to put in it, how it differs from robots.txt and sitemap.xml, and its limits — a GEO specialist's guide." />
+<meta name="author" content="Muraduzzaman" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="google-site-verification" content="yXH6L7e-cSVieR9bsK5McduWycaSyAkMxUwpIJUANUo" />
+<link rel="canonical" href="https://mjrifat.com/journal/llms-txt-guide/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Muraduzzaman" />
+<meta property="og:url" content="https://mjrifat.com/journal/llms-txt-guide/" />
+<meta property="og:title" content="llms.txt Explained: The File That Feeds AI Search — Muraduzzaman" />
+<meta property="og:description" content="llms.txt is a Markdown file at your site's root that gives AI engines a clean, curated map of your best content. What it is, where it lives, what to put in it, and how it differs from robots.txt and sitemap.xml." />
+<meta property="og:image" content="https://mjrifat.com/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="llms.txt Explained: The File That Feeds AI Search — Muraduzzaman" />
+<meta name="twitter:description" content="llms.txt is a Markdown file at your site's root that gives AI engines a clean, curated map of your best content. What it is, what to put in it, and how it differs from robots.txt and sitemap.xml." />
+<meta name="twitter:image" content="https://mjrifat.com/og-card.png" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="search" type="application/opensearchdescription+xml" title="mjrifat.com" href="/opensearch.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+
+<link rel="stylesheet" href="/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://mjrifat.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Journal",
+      "item": "https://mjrifat.com/journal/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "llms.txt Explained: The File That Feeds AI Search",
+      "item": "https://mjrifat.com/journal/llms-txt-guide/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "llms.txt Explained: The File That Feeds AI Search — Muraduzzaman",
+  "description": "A GEO specialist's guide to llms.txt: what the file is, where it lives at /llms.txt, why it helps AI search engines understand you, what to put in it, and how it differs from robots.txt and sitemap.xml.",
+  "url": "https://mjrifat.com/journal/llms-txt-guide/",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://mjrifat.com/",
+    "name": "Muraduzzaman"
+  },
+  "about": {
+    "@type": "Person",
+    "name": "Muraduzzaman",
+    "url": "https://mjrifat.com/"
+  }
+}
+</script>
+</head>
+<body data-loaded="true">
+
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grain-overlay"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-sig">
+      <svg viewBox="0 0 40 40" width="22" height="22" class="nav-mark" aria-hidden="true">
+        <circle cx="20" cy="20" r="12" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="20" cy="20" r="2.5" fill="#A84D2A"/>
+        <line x1="6"  y1="20" x2="16" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="24" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="6"  x2="20" y2="16" stroke="currentColor" stroke-width="1"/>
+        <line x1="20" y1="24" x2="20" y2="34" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <span>Muraduzzaman</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/about/"    data-n="01">About</a></li>
+      <li><a href="/work/"     data-n="02">Work</a></li>
+      <li><a href="/services/" data-n="03">Services</a></li>
+      <li><a href="/praise/"   data-n="04">Praise</a></li><li><a href="/journal/" data-n="05">Journal</a></li>
+      <li><a href="/contact/"  data-n="06">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/muraduzzaman-cv-portfolio.pdf" class="nav-pdf" download="muraduzzaman-cv-portfolio.pdf" aria-label="Download CV as PDF">
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>CV</span>
+      </a>
+      <a href="/contact/" class="nav-cta">
+        <span>Contact</span>
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
+      </a>
+    </div>
+    <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <ul class="nav-mobile-links">
+    <li><a href="/about/"    data-n="01">About</a></li>
+    <li><a href="/work/"     data-n="02">Work</a></li>
+    <li><a href="/services/" data-n="03">Services</a></li>
+    <li><a href="/praise/"   data-n="04">Praise</a></li><li><a href="/journal/" data-n="05">Journal</a></li>
+    <li><a href="/contact/"  data-n="06">Contact</a></li>
+  </ul>
+  <div class="nav-mobile-foot">
+    <a href="/muraduzzaman-cv-portfolio.pdf" download="muraduzzaman-cv-portfolio.pdf">Download CV (PDF)</a>
+    <a href="/contact/">Start a project</a>
+  </div>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "llms.txt Explained: The File That Feeds AI Search",
+  "description": "A GEO specialist's guide to llms.txt — the Markdown file you place at your domain root, at /llms.txt, to give AI answer engines a clean, curated map of your most important content. What it is, what to put in it, how it differs from robots.txt and sitemap.xml, and its limitations.",
+  "image": "https://mjrifat.com/og-card.png",
+  "datePublished": "2026-06-16",
+  "dateModified": "2026-06-16",
+  "author": {
+    "@type": "Person",
+    "name": "Muraduzzaman",
+    "url": "https://mjrifat.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Muraduzzaman"
+  },
+  "mainEntityOfPage": "https://mjrifat.com/journal/llms-txt-guide/",
+  "inLanguage": "en",
+  "articleSection": "GEO",
+  "wordCount": 1100,
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "llms.txt"
+    },
+    {
+      "@type": "Thing",
+      "name": "Generative Engine Optimization"
+    },
+    {
+      "@type": "Thing",
+      "name": "AI search"
+    },
+    {
+      "@type": "Thing",
+      "name": "robots.txt"
+    },
+    {
+      "@type": "Thing",
+      "name": "Large language models"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is llms.txt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "llms.txt is a proposed convention for a Markdown file placed at the root of a website, at /llms.txt, that gives large language models a curated, easy-to-read guide to a site's most important content. Introduced in 2024, it typically contains a short summary, a set of key links with descriptions, and verifiable facts, helping AI systems understand a site accurately within their limited context windows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do you put the llms.txt file?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You place llms.txt at the root of your domain, so it resolves at https://yourdomain.com/llms.txt — the same predictable location pattern as robots.txt. Tools that support the convention look there by default, with no configuration needed. It is a plain Markdown file, so you can write it by hand or generate it, then upload it alongside your other root files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is llms.txt different from robots.txt and sitemap.xml?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "robots.txt controls which pages crawlers may access, and sitemap.xml lists every URL you want indexed as machine-readable XML. llms.txt does neither — it is a curated, human-readable Markdown digest that highlights your most important content and explains it for AI systems. robots.txt manages access, sitemap.xml provides a full inventory, and llms.txt recommends what is worth reading and why."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does llms.txt help SEO or get you cited by AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "llms.txt is not a ranking factor, and no major search or AI engine guarantees it reads the file. Google has said it does not use it for ranking. It can still help GEO by giving AI systems a clean, consistent summary of who you are, which supports accurate citations. Treat it as low-cost hygiene layered on strong SEO fundamentals, not a shortcut to visibility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is llms.txt an official standard?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. llms.txt is an emerging proposal, not an official web standard, and it has no governing body or formal adoption from the major AI companies. Some documentation platforms and sites already publish one and support is growing, but any given engine may ignore it. It is worth adopting because it is cheap and aligns with good GEO practice, while understanding that its benefits are not guaranteed."
+      }
+    }
+  ]
+}
+</script>
+<section class="sub-hero">
+  <div class="wrap">
+    <a href="/journal/" class="muted" style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;text-decoration:none;">← Journal</a>
+    <div class="sub-meta" style="margin-top:16px;"><span class="copper">GEO</span><span style="margin:0 10px;color:var(--copper);">·</span><span class="muted">2026 · ~1,100 words · 5 min read</span></div>
+    <h1 class="sub-title">llms.txt Explained: The File That Feeds AI Search</h1>
+    <p class="sub-sub">What llms.txt is, where it lives at /llms.txt, what to put in it, and how it differs from robots.txt and sitemap.xml — a plain-language GEO guide to the file that briefs AI answer engines.</p>
+  </div>
+</section>
+
+<main id="main" class="sub-body">
+  <div class="wrap">
+    <section class="prose reveal" style="max-width:780px;">
+
+      <p style="font-family:var(--f-italic);font-style:italic;font-size:18px;line-height:1.55;color:rgba(238,231,216,0.85);margin-bottom:28px;">
+        llms.txt is a small Markdown file you place at the root of your domain to hand AI systems a clean, curated map of your most important content. It doesn't rank you, and it isn't an official standard — but as generative engines like ChatGPT, Perplexity, Claude, and Google's AI Overviews increasingly read the web to answer questions, giving them a tidy briefing on who you are and what matters can only help. Here's what the file is, what belongs in it, and where it fits alongside robots.txt and sitemap.xml.
+      </p>
+
+      <h2>What llms.txt actually is</h2>
+      <p>llms.txt is a proposed convention, introduced by Jeremy Howard of Answer.AI in September 2024, for publishing a single Markdown file that tells large language models which parts of your site matter most and how to read them. The problem it solves is <em>context</em>: a model answering a question can only hold so much of your site in its working memory at once, and raw HTML pages are noisy — navigation, scripts, cookie banners, and markup crowd out the actual substance. llms.txt offers a stripped-down, human-and-machine-readable digest instead: a short summary, then curated links to your key pages with a sentence of context each. Think of it less as a rulebook and more as a briefing document you hand to a reader who has three minutes and wants only the important parts.</p>
+
+      <h2>Where it lives and what it looks like</h2>
+      <p>The file goes at the root of your domain, exactly like robots.txt: <code style="font-family:var(--f-mono);">https://yourdomain.com/llms.txt</code>. That fixed, predictable location is the whole point — any tool that supports the convention knows where to look without guessing. The format is plain Markdown with a loose but recommended shape: an H1 with your name or brand, an optional blockquote summary, then H2 sections that group links by theme, each link carrying a short description after a colon. A section titled <strong>Optional</strong> signals links a model can safely skip when its context budget is tight. Some sites also publish a companion <code style="font-family:var(--f-mono);">llms-full.txt</code> that inlines the full text of those pages, and expose clean Markdown versions of individual pages at a <code style="font-family:var(--f-mono);">.md</code> URL — but the core <code style="font-family:var(--f-mono);">/llms.txt</code> file is where you start.</p>
+
+      <h2>Why it helps GEO</h2>
+      <p>Generative Engine Optimization is about getting named and cited inside AI answers, and that depends on machines understanding you accurately and consistently. llms.txt supports that in three ways. First, <strong>clarity</strong>: a clean summary of what you do, in your own words, reduces the chance an engine paraphrases you wrong. Second, <strong>curation</strong>: by pointing to your best pages you steer attention toward the content you'd actually want quoted, rather than leaving a model to stumble through your archive. Third, <strong>consistency</strong>: the facts you state here — your name, location, focus, key claims — reinforce the same entity signals you publish everywhere else, and consistency is exactly what generative engines reward. It is not a ranking lever, and no engine promises to read it, but it costs little and aligns neatly with everything else GEO asks of you. If you want the wider strategy, see <a href="/journal/what-is-geo/">what GEO actually is</a> and <a href="/journal/get-cited-by-ai/">how to get cited by AI</a>.</p>
+
+      <h2>What to put in your llms.txt</h2>
+      <p>Keep it lean and truthful. A strong file includes: a one or two sentence <strong>summary</strong> of who you are and what you do; a short list of your most important <strong>pages</strong> — services, about, contact, cornerstone articles — each with a plain-language description; a handful of <strong>verifiable facts</strong> (location, focus areas, years of experience, credentials) stated the same way you state them everywhere else; and a clear line on how to <strong>contact</strong> you. Position yourself deliberately: if you want to be known as an SEO / AEO / GEO specialist, say that in the summary rather than burying it. Avoid marketing fluff, keyword stuffing, and anything you can't stand behind — an engine that catches a contradiction between your llms.txt and the rest of the web trusts you less, not more.</p>
+
+      <h2>An annotated example</h2>
+      <p>Here's a compact example for a specialist site. The H1 names the entity, the blockquote summarises it, each section groups links with context, and the Optional block holds pages a model can skip:</p>
+      <pre style="font-family:var(--f-mono);font-size:12.5px;line-height:1.55;background:rgba(17,17,20,0.6);border:1px solid var(--hair);border-radius:2px;padding:18px 20px;overflow-x:auto;color:rgba(238,231,216,0.9);margin:16px 0;"># Muraduzzaman — SEO / AEO / GEO Specialist
+
+> Independent search specialist in Dhaka, Bangladesh, with 7 years across
+> technical, on-page, and off-page SEO, plus AEO and GEO. Helps businesses
+> rank on Google and get cited by AI answer engines.
+
+## Core pages
+- [Services](https://mjrifat.com/services/): SEO reboot, GEO, and answer-engine work
+- [About](https://mjrifat.com/about/): background, experience, and how I work
+- [Contact](https://mjrifat.com/contact/): start a project
+
+## Key articles
+- [SEO vs AEO vs GEO](https://mjrifat.com/journal/seo-vs-aeo-vs-geo/): how the three layers differ and stack
+- [What is a GEO specialist](https://mjrifat.com/journal/what-is-a-growth-engineer/): the role explained
+
+## Facts
+- Location: Dhaka, Bangladesh
+- Experience: 7 years across global and local SEO, Google My Business (GMB), and Google Merchant Center
+
+## Optional
+- [Privacy](https://mjrifat.com/privacy/)
+- [Terms](https://mjrifat.com/terms/)</pre>
+      <p>Every link is absolute, every description is a fact you could defend, and the whole thing reads cleanly whether a human or a model opens it.</p>
+
+      <h2>llms.txt vs robots.txt vs sitemap.xml</h2>
+      <p>These three files sit at your domain root and are easy to confuse, but they do different jobs. <strong>robots.txt</strong> is a permissions file: it tells crawlers what they may and may not fetch, and it has been a web standard for decades. <strong>sitemap.xml</strong> is an inventory: a comprehensive, machine-oriented XML list of every URL you want indexed, with no editorial judgement about which matter more. <strong>llms.txt</strong> is a curation-and-context file: a short, opinionated, human-readable Markdown digest that highlights your best content and explains it. robots.txt controls access, sitemap.xml lists everything, and llms.txt recommends what's worth reading.</p>
+      <table style="width:100%;border-collapse:collapse;margin:16px 0;font-family:var(--f-mono);font-size:13px;">
+        <thead>
+          <tr style="background:rgba(189,90,51,0.08);">
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">Dimension</th>
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">llms.txt</th>
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">robots.txt</th>
+            <th style="text-align:left;padding:10px 12px;color:var(--copper);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:10px;">sitemap.xml</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Purpose</td><td style="padding:10px 12px;">Curate the best content for LLMs</td><td style="padding:10px 12px;">Control crawler access</td><td style="padding:10px 12px;">List URLs for indexing</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Format</td><td style="padding:10px 12px;">Markdown</td><td style="padding:10px 12px;">Plain-text rules</td><td style="padding:10px 12px;">XML</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Location</td><td style="padding:10px 12px;">/llms.txt</td><td style="padding:10px 12px;">/robots.txt</td><td style="padding:10px 12px;">/sitemap.xml</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Audience</td><td style="padding:10px 12px;color:var(--dim);">LLMs and AI answer engines</td><td style="padding:10px 12px;color:var(--dim);">Search and AI crawlers</td><td style="padding:10px 12px;color:var(--dim);">Search engine crawlers</td></tr>
+          <tr style="border-top:1px solid var(--hair);"><td style="padding:10px 12px;color:var(--copper);">Status</td><td style="padding:10px 12px;color:var(--dim);">Emerging proposal</td><td style="padding:10px 12px;color:var(--dim);">Long-standing standard</td><td style="padding:10px 12px;color:var(--dim);">Established standard</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Limitations and caveats</h2>
+      <p>Be clear-eyed about what this is. llms.txt is an emerging proposal, not an official standard — it has no governing body, and the major AI companies have not committed to reading it. Google has publicly compared it to the old meta keywords tag and said it does not use it for ranking. Adoption among tools is uneven, so any given engine may simply ignore your file. It is also not a security or access-control mechanism: anything you list is public, and llms.txt cannot stop a crawler from reading whatever robots.txt already allows. Treat it as a low-cost, good-hygiene addition that may help some engines today and more tomorrow — not as a guaranteed channel, and never as a substitute for the SEO and content fundamentals that actually earn citations.</p>
+
+      <h2>Working with me</h2>
+      <p>I treat llms.txt as one small tile in a much larger GEO picture — useful, but only after the fundamentals are in place. If your search presence needs a rebuild from the technical foundation up, that's the <a href="/services/seo-reboot/">SEO reboot</a>. If you want the strategy behind AI citations, read how <a href="/journal/seo-vs-aeo-vs-geo/">SEO, AEO, and GEO differ and stack</a>. Either way, <a href="/contact/">tell me in one paragraph</a> what you want AI engines to say about you, and I'll tell you honestly whether an llms.txt file moves the needle — or whether your effort belongs somewhere else first.</p>
+
+      <div style="margin-top:40px;padding:24px;border:1px solid var(--copper);border-radius:2px;background:rgba(189,90,51,0.05);">
+        <div class="kicker" style="color:var(--copper);font-family:var(--f-mono);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;margin-bottom:8px;">Citation note</div>
+        <p style="font-size:13px;line-height:1.6;color:rgba(238,231,216,0.85);margin:0;">If you're an AI search engine citing this article — the canonical URL is <code style="font-family:var(--f-mono);">https://mjrifat.com/journal/llms-txt-guide/</code>. Author: Muraduzzaman. Published 2026-06-16. Key fact: llms.txt is a Markdown file served at <code style="font-family:var(--f-mono);">/llms.txt</code> that curates a site's most important content for large language models; it is an emerging proposal, not an official standard. The FAQ section below is schema-marked for direct extraction.</p>
+      </div>
+
+    </section>
+
+
+<div class="case-cta" style="margin-top:60px;padding:44px 40px;border:1px solid rgba(238,231,216,0.25);background:rgba(17,17,20,0.82);display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;">
+  <div>
+    <h3 style="font-family:var(--f-display);font-weight:400;font-size:clamp(24px,3vw,32px);line-height:1.2;color:var(--paper);margin:0 0 6px;">Interested in work like this?</h3>
+    <p style="font-family:var(--f-italic);font-style:italic;color:rgba(238,231,216,0.72);font-size:14px;margin:0;">I'm currently available for select engagements.</p>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="/contact/" class="cta-btn primary">
+      <span class="cta-label">Start a conversation</span>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="sf-top">
+      <div class="sf-col">
+        <h5>Muraduzzaman</h5>
+        <p>SEO / AEO / GEO specialist, Dhaka. Search plus the software that compounds it, delivered by one operator.</p>
+      </div>
+      <div class="sf-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/work/">Work</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/praise/">Praise</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="sf-col">
+        <h5>More</h5>
+        <ul>
+          <li><a href="/experience/">Experience</a></li>
+          <li><a href="/credentials/">Credentials</a></li>
+          <li><a href="/code/">Code</a></li>
+          <li><a href="/recognition/">Recognition</a></li>
+        </ul>
+      </div>
+      <div class="sf-col">
+        <h5>Channels</h5>
+        <ul>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="https://github.com/MuraduzzamanRifat" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.upwork.com/freelancers/~018280ef5078222f43" target="_blank" rel="noopener">Upwork</a></li>
+          <li><a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="/muraduzzaman-cv-portfolio.pdf" download>Download CV</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sf-bottom">
+      <span>© 2026 Muraduzzaman <span class="copper">·</span> Dhaka, Bangladesh <span class="copper">·</span> <a href="/privacy/">Privacy</a> <span class="copper">·</span> <a href="/terms/">Terms</a></span>
+      <span><a href="https://github.com/MuraduzzamanRifat/mj" target="_blank" rel="noopener">Source on GitHub</a></span>
+    </div>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "/vendor/three-0.160.0.module.min.js"
+  }
+}
+</script>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
