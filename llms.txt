@@ -1,58 +1,62 @@
-# Muraduzzaman — Growth Engineer
+# Muraduzzaman — SEO / AEO / GEO Specialist
 
-> Solo operator in Dhaka, Bangladesh, working globally. Combines 7 years of technical SEO with full-stack engineering to ship end-to-end growth systems — from ranking strategy through to the Chrome extensions, Python scrapers, Shopify themes, and WebGL brand sites that execute it.
+> Senior SEO specialist in Dhaka, Bangladesh, working globally. 7 years across technical, on-page, and off-page SEO — spanning global and local SEO, Google My Business (GMB), and e-commerce through Google Merchant Center. Now focused on AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization): optimizing content for AI answer boxes and generative-engine citation. Also builds the automation and software that compound search results.
 
 ## What I do
 
-- **Technical SEO, AEO, GEO** — audits, architecture, content clusters, schema, Core Web Vitals
-- **Full-stack engineering** — Python (FastAPI, Flask, Playwright), JavaScript/Node, Chrome extensions, Shopify Liquid, Three.js/WebGL
-- **AI automation** — GPT-4o pipelines, agent orchestration, n8n workflows, Resend warmup outreach
-- **One hire replaces three** — SEO specialist + web developer + automation consultant in a single contract
+- **SEO** — technical audits, on-page & off-page, keyword strategy, SERP analysis, topical authority, internal linking, Core Web Vitals
+- **Global & Local SEO** — international targeting plus Google My Business (GMB) and local search
+- **E-commerce SEO** — Google Merchant Center, Shopping feeds, product & catalogue optimization
+- **AEO** — Answer Engine Optimization: structuring content to win AI answer boxes and featured answers
+- **GEO** — Generative Engine Optimization: building entity authority to be cited by ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews
+- **AI & automation** — n8n workflows, Claude / OpenAI pipelines, automated content and reporting that scale rankings
 
 ## Who I work with
 
-- Startups under ~$5M ARR who need all three skill sets but can't afford three specialists
-- Growth teams at mid-market companies needing senior execution without handoff delays
-- Agencies sub-contracting specialist SEO + engineering for enterprise clients
-- Founders rebuilding their growth engine end-to-end
-
-## Shipped products (selected)
-
-- **[BrandiVibe](https://mjrifat.com/work/brandivibe/)** — Three.js brand site + autonomous GPT-4o sales engine on Koyeb. Daily SEO articles, hourly lead radar across 4 startup feeds, deep-research via Resend warmup outreach, self-learning A/B. Zero daily human input.
-- **[ProWorkSpace](https://mjrifat.com/work/proworkspace/)** — AI-powered Chrome extension for Upwork freelancers. Live SaaS with Stripe billing, admin panel, paying users.
-- **[Forex Lead Finder](https://mjrifat.com/work/forex-lead-finder/)** — Python engine harvesting 5 platforms (Reddit, TradingView, BabyPips, ForexFactory, LinkedIn) with a 15-point classifier + SQLite warehouse + Flask UI + 6-hour scheduled loop.
-- **[AYVA](https://mjrifat.com/work/ayva/)** — Shopify Dawn fork, zero third-party apps, Lighthouse 95 mobile, 50 products migrated.
-- **[Email Outreach Engine](https://mjrifat.com/work/email-outreach/)** — Playwright email extractor + rate-capped sender with deliverability guardrails.
-- **[Google Maps Lead Extractor](https://mjrifat.com/work/maps-extractor/)** — SerpAPI-based business-lead pipeline for any geo + keyword.
+- Startups and B2B / SaaS teams that need senior SEO plus the automation to execute it
+- Agencies sub-contracting specialist SEO / AEO / GEO work
+- Founders rebuilding their organic-growth engine end-to-end
 
 ## Verifiable receipts
 
-- USA Rank #1 for commercial-intent keyword "best clipping path service" (still live)
+- USA Rank #1 for a high-intent commercial keyword (US SERP)
 - 5.0 Upwork rating; retained full-time by a US client since 2023
 - Top Performer of the Month — JK Lifestyle, July 2025
-- Lighthouse 95 mobile on client site (third-party verified)
-- Organic reach in 6 countries / 30 days (GA4)
+- Lighthouse 95 performance / 100 best practices on a client mobile site (third-party verified)
+- Organic reach across 6 countries in 30 days — GA4: Germany, UK, France, Turkey, US, Sweden
 - Listed on Wikidata as an independent entity
 
-## Current roles
+## Experience
 
 - Senior SEO & Digital Marketing Specialist — Innohedge (Jan 2025 – present)
+- Senior SEO & Digital Marketing Specialist — Print Britannia (May 2021 – Mar 2025)
 - Independent Consultant — Upwork & direct clients (Jul 2023 – present)
+- SEO & Digital Marketing Specialist — Image Retouching Lab (Jan 2019 – May 2021)
+
+## Selected work
+
+- **[BrandiVibe](https://mjrifat.com/work/brandivibe/)** — autonomous SEO + AI content engine: daily SEO articles, hourly lead radar, self-learning outreach. Zero daily human input.
+- **[ProWorkSpace](https://mjrifat.com/work/proworkspace/)** — AI SaaS Chrome extension, built and monetised solo.
+- **[AYVA](https://mjrifat.com/work/ayva/)** — Shopify Dawn fork, Lighthouse 95 mobile, 50 products migrated.
+- **[Forex Lead Finder](https://mjrifat.com/work/forex-lead-finder/)** — multi-source Python scraper + 15-point lead classifier.
+
+## Supporting skills (secondary to SEO / AEO / GEO)
+
+- AI: Claude / OpenAI API pipelines, LLM content and classification, agent orchestration, prompt engineering
+- Web: hand-built websites (WordPress, Shopify/Liquid, Three.js/WebGL), page-speed and Core Web Vitals — the software that compounds the SEO
+- Automation: n8n workflows for content distribution, lead flow, and reporting
 
 ## Contact
 
 - Website: https://mjrifat.com
 - Contact form: https://mjrifat.com/contact/
 - Phone: +880 1917 286 515
+- Email: dev@try-n.com
 - CV: https://mjrifat.com/muraduzzaman-cv-portfolio.pdf
 - GitHub: https://github.com/MuraduzzamanRifat
 - Upwork: https://www.upwork.com/freelancers/~018280ef5078222f43
 - LinkedIn: https://www.linkedin.com/in/md-muraduzzaman-4a581410a/
 
-## Long-form writing
-
-- **[What is a Growth Engineer?](https://mjrifat.com/journal/what-is-a-growth-engineer/)** — 1,850-word working definition of the hybrid SEO + software role after 7 years in it. Covers economics (when one growth engineer replaces three hires), concrete output categories, role comparison table, hiring criteria, and a 6-question FAQ. Published 2026-04-21.
-
 ## Canonical positioning line
 
-*"I rank sites on Google, then ship the software that compounds the traffic."*
+*"I rank you on Google and apply AEO/GEO to capture AI-search visibility — then ship the software that compounds it."*
