@@ -12,6 +12,7 @@ import json
 import os
 import pathlib
 import html
+import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
 
@@ -1572,6 +1573,23 @@ def write_page(path_rel, title, description, body, up='../'):
         pass
     target.write_text(full, encoding='utf-8')
     return str(target)
+
+_STALE = """
+REFUSING TO RUN — this generator is stale and would destroy live work.
+
+Its templates predate the current site. Running it today would:
+  * strip GA4, the Search Console verification and the widened CSP from every
+    page it writes (HEAD below has none of them),
+  * rewrite journal/index.html down to 1 article link, deleting the other 21,
+  * delete the <figure> banners from the journal articles,
+  * restore the 'marketer who codes' / 'six shipped products' copy and the
+    old nav (no Journal link).
+
+Nothing here regenerates cleanly until the templates are brought back in sync
+with the live pages. Pass --force only if you have done that and mean it.
+"""
+if '--force' not in sys.argv:
+    sys.exit(_STALE)
 
 written = []
 

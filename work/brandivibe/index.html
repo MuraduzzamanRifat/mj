@@ -208,7 +208,7 @@
     <section class="case-section case-prose">
       <div class="case-eyebrow">02 · The approach</div>
       <h2 class="case-h2">A front-end that earns the trust, and an AI Sales Brain that converts it.</h2>
-      <p><strong>Layer 1 — Experience.</strong> Three.js with custom shaders, cursor-aware geometry, scroll-linked motion. JSON-driven scene config so the brand edits copy and colour without touching render code. 60 fps desktop target; 30 fps graceful fallback on mid-range mobile.</p><p><strong>Layer 2 — The AI Sales Brain.</strong> A GPT-4o-driven autonomous system running on Koyeb with state persisted to GitHub. It writes one long-form SEO article every day, scans four startup feeds hourly for ICP-fit prospects, researches each one (scrapes homepage/about/pricing/contact, extracts personalization hooks), and runs a warmup-curve cold-email sequence via Resend. A weekly digest scores every email by angle, industry, and subject style — then proposes and auto-applies A/B winners. Zero daily human input.</p>
+      <p><strong>Layer 1 — Experience.</strong> Three.js with custom shaders, cursor-aware geometry, scroll-linked motion. JSON-driven scene config so the brand edits copy and color without touching render code. 60 fps desktop target; 30 fps graceful fallback on mid-range mobile.</p><p><strong>Layer 2 — The AI Sales Brain.</strong> A GPT-4o-driven autonomous system running on Koyeb with state persisted to GitHub. It writes one long-form SEO article every day, scans four startup feeds hourly for ICP-fit prospects, researches each one (scrapes homepage/about/pricing/contact, extracts personalization hooks), and runs a warmup-curve cold-email sequence via Resend. A weekly digest scores every email by angle, industry, and subject style — then proposes and auto-applies A/B winners. Zero daily human input.</p>
     </section>
 
     <section class="case-section">
@@ -225,21 +225,21 @@
         <article class="arch-tile">
           <span class="arch-num">02 / Content Engine</span>
           <h4>GPT-4o · daily</h4>
-          <p>1,800–2,500-word SEO article per day. 10 content angles rotating (ROI, conversion psychology, case studies…). Pexels hero images, 40+ banned AI-phrase filter for E-E-A-T, auto-publishes to /journal.</p>
+          <p>1,800–2,500-word SEO article per day. 10 rotating content angles (ROI, conversion psychology, case studies…). Pexels hero images, 40+ banned AI-phrase filter for E-E-A-T, auto-publishes to /journal.</p>
         </article>
 
 
         <article class="arch-tile">
           <span class="arch-num">03 / Lead Radar</span>
           <h4>4 feeds · hourly</h4>
-          <p>Scans TechCrunch, Product Hunt, Hacker News Show HN, and BetaList every hour. GPT-4o extracts company, domain, funding, industry. Filters out mega-brands and sites already using premium design (Three.js, Spline, Framer, GSAP) to keep only ICP fit.</p>
+          <p>Scans TechCrunch, Product Hunt, Hacker News Show HN, and BetaList every hour. GPT-4o extracts company, domain, funding, industry. Filters out mega-brands and sites already using premium design (Three.js, Spline, Framer, GSAP) to keep only ICP-fit prospects.</p>
         </article>
 
 
         <article class="arch-tile">
           <span class="arch-num">04 / Deep Research</span>
           <h4>Scrape + GPT-4o hooks</h4>
-          <p>Scrapes each prospect's homepage, about, team, pricing, contact. Tech-stack + design-quality score. GPT-4o extracts personalization hooks — specific weaknesses, decision-maker name, budget estimate. Email found via scrape then pattern fallback with MX verification.</p>
+          <p>Scrapes each prospect's homepage, about, team, pricing, contact. Tech-stack + design-quality score. GPT-4o extracts personalization hooks — specific weaknesses, decision-maker name, budget estimate. Email found via scraping, then pattern fallback with MX verification.</p>
         </article>
 
 
@@ -267,7 +267,7 @@
         <article class="arch-tile">
           <span class="arch-num">08 / Operations</span>
           <h4>Self-healing · resumable</h4>
-          <p>Six-hour health check emails the owner on failure. DailyRun ledger lets the pipeline resume from its last checkpoint if Koyeb kills mid-tick. State synced to GitHub survives every redeploy.</p>
+          <p>Six-hour health check emails the owner on failure. DailyRun ledger lets the pipeline resume from its last checkpoint if Koyeb kills it mid-tick. State synced to GitHub survives every redeploy.</p>
         </article>
 </div>
     </section>
@@ -276,10 +276,10 @@
       <div class="case-eyebrow">04 · The work beneath the surface</div>
       <h2 class="case-h2">Non-obvious decisions.</h2>
       <ul class="case-list"><li><strong>Frame-budget discipline —</strong> every new scene element has to fit within a fixed frame budget. Nothing ships that drops the experience under 45 fps on a 2019-era laptop.</li>
-<li><strong>Deliverability engineering —</strong> the warmup curve, per-domain throttle, and narrow send window aren't optional — they're what keeps the from-domain off spam filters and makes the engine sustainable past month one.</li>
+<li><strong>Deliverability engineering —</strong> the warmup curve, per-domain throttle, and narrow send window aren't optional; they're what keeps the from-domain out of spam filters and makes the engine sustainable past month one.</li>
 <li><strong>ICP filtering that refuses customers —</strong> Lead Radar actively rejects prospects that already ship premium design (Three.js / Spline / Framer / GSAP detected on their site). They're not the ICP, so they're noise — even if the brain could get a reply.</li>
 <li><strong>Self-experimentation with guardrails —</strong> the brain proposes its own A/B tests and applies winners, but overrides expire after 60 days. That stops it from freezing on a pattern that stopped working six months ago.</li>
-<li><strong>State as version-controlled artifact —</strong> brain.json sits in a GitHub repo. Every run commits a diff. The entire history of every prospect, email, and learning decision is auditable — and Koyeb redeploys can't wipe it.</li></ul>
+<li><strong>State as a version-controlled artifact —</strong> brain.json sits in a GitHub repo. Every run commits a diff. The entire history of every prospect, email, and learning decision is auditable — and Koyeb redeploys can't wipe it.</li></ul>
     </section>
 
     <section class="case-section">

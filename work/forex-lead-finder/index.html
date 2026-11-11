@@ -225,14 +225,14 @@
         <article class="arch-tile">
           <span class="arch-num">02 / Classifier</span>
           <h4>15-point scoring</h4>
-          <p>Bio keywords (+10), post keywords (+10), trading pairs (+10), MT4/MT5 (+5), hashtags (+5). ≥15 keeps the lead; below discards it.</p>
+          <p>Bio keywords (+10), post keywords (+10), trading pairs (+10), MT4/MT5 (+5), hashtags (+5). A score of ≥15 keeps the lead; anything below is discarded.</p>
         </article>
 
 
         <article class="arch-tile">
           <span class="arch-num">03 / Storage</span>
           <h4>SQLite warehouse</h4>
-          <p>Profiles, posts, emails, websites — all normalised into a single store, keyed by profile URL. Idempotent re-runs, no duplicates.</p>
+          <p>Profiles, posts, emails, websites — all normalized into a single store, keyed by profile URL. Idempotent re-runs, no duplicates.</p>
         </article>
 
 
@@ -249,7 +249,7 @@
       <h2 class="case-h2">Non-obvious decisions.</h2>
       <ul class="case-list"><li><strong>Rate-limit isolation —</strong> each platform has its own throttle config. A spike on one source never triggers a ban on another.</li>
 <li><strong>SPA vs static detection —</strong> Playwright only boots where the platform requires JS render; the rest run through requests + BS4 for 10× speed.</li>
-<li><strong>Classifier calibration —</strong> the 15-point threshold was tuned against a labelled seed set; accepts roughly 26% of scraped profiles and rejects 74%.</li></ul>
+<li><strong>Classifier calibration —</strong> the 15-point threshold was tuned against a labeled seed set; it accepts roughly 26% of scraped profiles and rejects 74%.</li></ul>
     </section>
 
     <section class="case-section">

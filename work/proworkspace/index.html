@@ -429,7 +429,7 @@
     <p class="case-subtitle">A live, monetized Chrome-extension SaaS — replacing a 20-minute manual task with 20 seconds inside the UI the user already has open.</p>
 
     <p class="case-lede">
-      <strong>Problem:</strong> a good Upwork proposal takes ~20 minutes. Forty of them takes a day. A freelancer charging $50/hour is losing the margin before the first invoice is sent. <strong>Product:</strong> a Chrome extension that injects an AI drafting panel directly into Upwork's cover-letter modal — reads the brief, generates a tailored proposal, streams it back in seconds. <strong>Scope:</strong> I designed, coded, shipped, and monetized the entire stack — extension, marketing site, Stripe subscription layer, and a role-gated admin panel — as a solo operator over ten weeks.
+      <strong>Problem:</strong> a good Upwork proposal takes ~20 minutes. Forty of them take a day. A freelancer charging $50/hour is losing the margin before the first invoice is sent. <strong>Product:</strong> a Chrome extension that injects an AI drafting panel directly into Upwork's cover-letter modal — reads the brief, generates a tailored proposal, streams it back in seconds. <strong>Scope:</strong> I designed, coded, shipped, and monetized the entire stack — extension, marketing site, Stripe subscription layer, and a role-gated admin panel — as a solo operator over ten weeks.
     </p>
 
     <div class="case-summary">
@@ -479,7 +479,7 @@
       </p>
       <ul class="case-list">
         <li><strong>A Chrome extension</strong> that injects an AI panel into the Upwork cover-letter modal, watches for the brief, and drafts a proposal styled to the freelancer's profile.</li>
-        <li><strong>A marketing site</strong> with an activation flow that explains the value in 30 seconds and turns a skeptical first-time visitor into a trialed user.</li>
+        <li><strong>A marketing site</strong> with an activation flow that explains the value in 30 seconds and turns a skeptical first-time visitor into a trial user.</li>
         <li><strong>A Stripe-backed billing layer</strong> that handles subscription conversion, plan tiers, and payment recovery without a finance team in the loop.</li>
         <li><strong>An admin panel</strong> that lets me gate features, monitor usage, and push prompt updates without shipping a new extension build.</li>
       </ul>
@@ -524,7 +524,7 @@
         Most Chrome extensions fail on the same three invisible problems. Getting these right was half the battle.
       </p>
       <ul class="case-list">
-        <li><strong>SPA safety.</strong> Upwork re-renders chunks of its page without triggering a full navigation event. The naive "run on load" injection misses 80% of page states. The extension uses a MutationObserver gated by a dataset flag so it injects exactly once, per visible job posting, even as Upwork re-mounts the surrounding React tree.</li>
+        <li><strong>SPA safety.</strong> Upwork re-renders chunks of its page without triggering a full navigation event. The naive "run on load" injection misses 80% of page states. The extension uses a MutationObserver gated by a dataset flag so it injects exactly once per visible job posting, even as Upwork re-mounts the surrounding React tree.</li>
         <li><strong>Prompt versioning.</strong> The AI drafts are only as good as the latest prompt. Ship that prompt inside the extension and every iteration costs a new Chrome Web Store review. So the extension pulls the active prompt ID at runtime from the API, and the admin panel lets me swap prompts in seconds.</li>
         <li><strong>Deliverability of the marketing funnel.</strong> SaaS acquisition costs break the math for small-ticket products unless you control the full funnel. I built landing, Stripe, and admin as one coherent stack so the cost of iterating on any of them is minutes, not days.</li>
       </ul>

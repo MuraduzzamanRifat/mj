@@ -1,12 +1,12 @@
 # Muraduzzaman — SEO / AEO / GEO Specialist
 
-> Senior SEO specialist in Dhaka, Bangladesh, working globally. 7 years across technical, on-page, and off-page SEO — spanning global and local SEO, Google My Business (GMB), and e-commerce through Google Merchant Center. Now focused on AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization): optimizing content for AI answer boxes and generative-engine citation. Also builds the automation and software that compound search results.
+> Senior SEO Specialist at JK Lifestyle Ltd, based in Dhaka, Bangladesh, and working with clients worldwide. 5+ years of experience in technical SEO, on-page and off-page SEO, semantic SEO, and organic growth strategy, covering global and local SEO, Google Business Profile, and e-commerce through Google Merchant Center. Focused on AEO (Answer Engine Optimization), GEO (Generative Engine Optimization), and AI-powered search: optimizing content for AI answer boxes and citations in generative engines. Also builds the websites and workflow automation that help search results scale.
 
 ## What I do
 
 - **SEO** — technical audits, on-page & off-page, keyword strategy, SERP analysis, topical authority, internal linking, Core Web Vitals
-- **Global & Local SEO** — international targeting plus Google My Business (GMB) and local search
-- **E-commerce SEO** — Google Merchant Center, Shopping feeds, product & catalogue optimization
+- **Global & Local SEO** — international targeting, Google Business Profile optimization, and local citation building
+- **E-commerce SEO** — Google Merchant Center, Shopping feeds, product and catalog optimization
 - **AEO** — Answer Engine Optimization: structuring content to win AI answer boxes and featured answers
 - **GEO** — Generative Engine Optimization: building entity authority to be cited by ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews
 - **AI & automation** — n8n workflows, Claude / OpenAI pipelines, automated content and reporting that scale rankings
@@ -14,31 +14,31 @@
 ## Who I work with
 
 - Startups and B2B / SaaS teams that need senior SEO plus the automation to execute it
-- Agencies sub-contracting specialist SEO / AEO / GEO work
+- Agencies subcontracting specialist SEO / AEO / GEO work
 - Founders rebuilding their organic-growth engine end-to-end
 
 ## Verifiable receipts
 
-- USA Rank #1 for a high-intent commercial keyword (US SERP)
+- #1 Google ranking in the USA for a high-intent commercial keyword
 - 5.0 Upwork rating; retained full-time by a US client since 2023
-- Top Performer of the Month — JK Lifestyle, July 2025
+- Top Performer of the Month — JK Lifestyle Ltd, July 2025
 - Lighthouse 95 performance / 100 best practices on a client mobile site (third-party verified)
-- Organic reach across 6 countries in 30 days — GA4: Germany, UK, France, Turkey, US, Sweden
+- Organic reach across six countries in 30 days — GA4: Germany, UK, France, Turkey, US, Sweden
 - Listed on Wikidata as an independent entity
 
 ## Experience
 
-- Senior SEO & Digital Marketing Specialist — Innohedge (Jan 2025 – present)
-- Senior SEO & Digital Marketing Specialist — Print Britannia (May 2021 – Mar 2025)
-- Independent Consultant — Upwork & direct clients (Jul 2023 – present)
+- Senior SEO Specialist — JK Lifestyle Ltd, Dhaka (Jun 2025 – present)
+- Independent SEO Consultant — Upwork & direct clients (Jul 2023 – present)
+- Digital Marketing & Local SEO Specialist — Print Britannia, London, remote (May 2021 – Jun 2025)
 - SEO & Digital Marketing Specialist — Image Retouching Lab (Jan 2019 – May 2021)
 
 ## Selected work
 
 - **[BrandiVibe](https://mjrifat.com/work/brandivibe/)** — autonomous SEO + AI content engine: daily SEO articles, hourly lead radar, self-learning outreach. Zero daily human input.
-- **[ProWorkSpace](https://mjrifat.com/work/proworkspace/)** — AI SaaS Chrome extension, built and monetised solo.
+- **[ProWorkSpace](https://mjrifat.com/work/proworkspace/)** — AI SaaS Chrome extension, built and monetized solo.
 - **[AYVA](https://mjrifat.com/work/ayva/)** — Shopify Dawn fork, Lighthouse 95 mobile, 50 products migrated.
-- **[Forex Lead Finder](https://mjrifat.com/work/forex-lead-finder/)** — multi-source Python scraper + 15-point lead classifier.
+- **[Forex Lead Finder](https://mjrifat.com/work/forex-lead-finder/)** — multi-source Python scraper with a 15-point lead classifier.
 
 ## Supporting skills (secondary to SEO / AEO / GEO)
 
@@ -60,3 +60,11 @@
 ## Canonical positioning line
 
 *"I rank you on Google and apply AEO/GEO to capture AI-search visibility — then ship the software that compounds it."*
+
+## Credentials
+
+- Semrush Academy — SEO Crash Course with Brian Dean (2024)
+- HubSpot Academy — SEO Certification Course (2024)
+- UY Lab, Dhaka — SEO Specialist Course, 6 months (2018)
+- LLB — Bangladesh Islami University, Dhaka (2019)
+- Languages: Bangla (native), English (professional), Hindi (conversational)
