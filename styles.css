@@ -1012,7 +1012,7 @@ button:focus-visible,
   text-transform: uppercase;
   padding-top: 6px;
 }
-.exp-body h4 {
+.exp-body h3, .exp-body h4 {
   font-family: var(--f-display);
   font-weight: 400;
   font-size: 26px;
@@ -1020,7 +1020,7 @@ button:focus-visible,
   color: var(--ink);
   margin-bottom: 10px;
 }
-.exp-body h4 .co {
+.exp-body h3 .co, .exp-body h4 .co {
   color: var(--graphite);
   font-family: var(--f-italic);
   font-style: italic;
@@ -1393,7 +1393,7 @@ button:focus-visible,
   font-family: var(--f-italic);
   font-style: italic;
   font-size: 13px;
-  color: var(--graphite);
+  color: rgba(238,231,216,0.62);
 }
 
 @media (max-width: 900px) {
@@ -1698,8 +1698,8 @@ html, body { background: var(--ink); }
 /* experience */
 .exp { border-bottom-color: rgba(238,231,216,0.14); }
 .exp-date { color: rgba(238,231,216,0.65); }
-.exp-body h4 { color: var(--paper); }
-.exp-body h4 .co { color: rgba(238,231,216,0.70); }
+.exp-body h3, .exp-body h4 { color: var(--paper); }
+.exp-body h3 .co, .exp-body h4 .co { color: rgba(238,231,216,0.70); }
 .exp-body p { color: rgba(238,231,216,0.88); }
 
 /* credentials */
@@ -3298,8 +3298,7 @@ html.has-lenis { scroll-behavior: auto; }
   inset: 0;
   z-index: 90;
   pointer-events: none;
-  opacity: 0.07;
-  mix-blend-mode: overlay;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -3698,3 +3697,146 @@ html.gate-on .gate,
   color: rgba(238,231,216,0.65);
 }
 .case-back:hover { color: var(--copper-l); }
+
+/* ── Audit fixes ── */
+/* While the entrance gate is up, skip rendering everything underneath it. */
+html.gate-on body > *:not(.gate):not(script):not(style) { content-visibility: hidden; }
+/* Blur reveals are costly on phones: keep the fade and slide, drop the blur. */
+@media (max-width: 900px) {
+  .reveal { filter: none; }
+  .bw-ready .bw { filter: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CASE STUDY — work/site-rebuild/
+   ═══════════════════════════════════════════════════════════════ */
+.cs-cover { margin: 0 0 56px; }
+.cs-cover img, .cs-fig img, .cs-pair img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(238,231,216,0.16);
+}
+.cs-cover figcaption, .cs-fig figcaption, .cs-pair figcaption {
+  margin-top: 10px;
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(238,231,216,0.62);
+}
+.cs-tiles { margin-bottom: 72px; }
+.cs-fig { margin: 40px 0; }
+.cs-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 40px 0;
+}
+.cs-pair.mobile { max-width: 640px; }
+.cs-pair figure { position: relative; margin: 0; }
+.cs-tag {
+  position: absolute;
+  top: 12px; left: 12px;
+  z-index: 1;
+  padding: 5px 10px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: rgba(17,17,20,0.85);
+  border: 1px solid rgba(238,231,216,0.3);
+}
+.cs-tag.after { color: var(--ink); background: var(--copper-l); border-color: var(--copper-l); }
+.prose h3 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(20px, 2.2vw, 26px);
+  color: var(--paper);
+  margin: 36px 0 6px;
+}
+.cs-chart {
+  margin: 28px 0;
+  padding: 32px clamp(20px, 3vw, 40px);
+  border: 1px solid rgba(238,231,216,0.16);
+  background: rgba(238,231,216,0.02);
+}
+.cs-chart h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(20px, 2.2vw, 26px);
+  color: var(--paper);
+  margin: 0 0 24px;
+}
+.cs-chart h3 span {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(238,231,216,0.55);
+}
+.cs-bar-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 240px) 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid rgba(238,231,216,0.1);
+}
+.cs-bar-label { font-family: var(--f-italic); font-style: italic; font-size: 17px; color: rgba(238,231,216,0.85); }
+.cs-bars { display: grid; gap: 8px; }
+.cs-bar {
+  display: grid;
+  grid-template-columns: 1fr 86px 52px;
+  align-items: center;
+  gap: 12px;
+}
+.cs-bar span { display: block; height: 12px; background: rgba(238,231,216,0.28); }
+.cs-bar.after span { background: var(--copper-l); }
+.cs-bar.after.worse span { background: rgba(238,231,216,0.55); }
+.cs-bar b {
+  font-family: var(--f-mono);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--paper);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.cs-bar i {
+  font-family: var(--f-mono);
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(238,231,216,0.55);
+}
+/* the bar track is the first grid column: the fill sits inside it */
+.cs-bar > span { justify-self: start; }
+@media (max-width: 720px) {
+  .cs-pair { grid-template-columns: 1fr; }
+  .cs-pair.mobile { grid-template-columns: 1fr 1fr; }
+  .cs-bar-row { grid-template-columns: 1fr; gap: 8px; }
+}
+
+.cs-card {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  margin-top: 18px;
+  border: 1px solid rgba(238,231,216,0.2);
+  color: var(--paper);
+  text-decoration: none;
+  transition: border-color 0.3s ease;
+}
+.cs-card:hover, .cs-card:focus-visible { border-color: var(--copper-l); }
+.cs-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cs-card-body { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: clamp(22px, 3vw, 40px); }
+.cs-card-title { font-family: var(--f-display); font-size: clamp(22px, 2.6vw, 34px); line-height: 1.15; }
+.cs-card-sub { font-family: var(--f-italic); font-style: italic; font-size: 16px; line-height: 1.5; color: rgba(238,231,216,0.72); }
+.cs-card-link { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--copper-l); }
+@media (max-width: 720px) { .cs-card { grid-template-columns: 1fr; } }

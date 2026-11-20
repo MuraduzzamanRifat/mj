@@ -6,7 +6,7 @@
      metric count-up
    ═══════════════════════════════════════════════════════════════ */
 
-import * as THREE from 'three';
+let THREE = null;   // loaded on demand in boot(): only pages with the preloader canvas need it
 
 const IS_MOBILE = window.matchMedia('(max-width: 720px)').matches;
 const IS_TOUCH  = window.matchMedia('(hover: none)').matches;
@@ -930,6 +930,7 @@ async function boot() {
   let preRunning = true;
   if (preCanvas) {
     try {
+      THREE = await import('three');
       preNeuron = new Neuron(preCanvas);
       (function loop() {
         if (!preRunning || document.hidden) return;

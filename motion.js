@@ -14,6 +14,8 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ── Smooth scroll ─────────────────────────────────────────────── */
 function initSmoothScroll() {
   if (REDUCED) return null;
+  // touch devices keep native scrolling: it is already smooth and far cheaper
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return null;
   const lenis = new Lenis({ lerp: 0.1, smoothWheel: true, anchors: true, autoRaf: true });
   document.documentElement.classList.add('has-lenis');
   // freeze the page behind the mobile menu
@@ -92,7 +94,20 @@ function initGrain() {
   document.body.appendChild(g);
 }
 
-initSmoothScroll();
-initBlurHeadings();
-initHeroDrift();
-initGrain();
+function start() {
+  initSmoothScroll();
+  initBlurHeadings();
+  initHeroDrift();
+  initGrain();
+}
+
+// Wait until the entrance gate is gone: nothing here is visible underneath it.
+const rootEl = document.documentElement;
+if (rootEl.classList.contains('gate-on')) {
+  const mo = new MutationObserver(() => {
+    if (!rootEl.classList.contains('gate-on')) { mo.disconnect(); start(); }
+  });
+  mo.observe(rootEl, { attributes: true, attributeFilter: ['class'] });
+} else {
+  start();
+}

@@ -4,7 +4,7 @@
    turns slightly as the page scrolls and the pointer moves.
    Tunables: TURN_SCROLL, TURN_MOUSE, FOCUS_X.
    ═══════════════════════════════════════════════════════════════ */
-import * as THREE from 'three';
+let THREE = null;   // imported on demand, so phones never download it
 
 const TURN_SCROLL = 0.030;   // how far the figure turns across the hero scroll
 const TURN_MOUSE  = 0.014;   // extra turn from pointer position
@@ -52,6 +52,22 @@ async function initCharacter() {
   if (!wrap || !canvas || !hero) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Phones show the figure dimmed behind the copy: the still image (CSS
+  // background) is enough there, and skipping WebGL saves ~670 KB of script.
+  if (window.matchMedia('(max-width: 900px)').matches) { wrap.classList.add('ready'); return; }
+
+  // Do nothing while the entrance gate covers the page.
+  const root = document.documentElement;
+  if (root.classList.contains('gate-on')) {
+    await new Promise((resolve) => {
+      const mo = new MutationObserver(() => {
+        if (!root.classList.contains('gate-on')) { mo.disconnect(); resolve(); }
+      });
+      mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+    });
+  }
+  THREE = await import('three');
 
   let renderer;
   try {

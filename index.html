@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; base-uri 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co; base-uri 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39"></script>
@@ -48,7 +48,10 @@
 <link rel="stylesheet" href="styles.css">
 <script>
 /* Entrance gate: first visit of a session only, never for #anchor links */
-try { if (!sessionStorage.getItem('mj-gate') && !location.hash) document.documentElement.classList.add('gate-on'); } catch (e) {}
+try {
+  var isBot = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|embedly|quora|pinterest|vkshare|whatsapp|telegram|gptbot|chatgpt|oai-search|claude|anthropic|perplexity|google-extended|ccbot|bytespider|applebot|duckduck|yandex|baidu/i.test(navigator.userAgent);
+  if (!isBot && !sessionStorage.getItem('mj-gate') && !location.hash) document.documentElement.classList.add('gate-on');
+} catch (e) {}
 </script>
 
 <!-- Person schema for rich search results -->
@@ -322,7 +325,7 @@ try { if (!sessionStorage.getItem('mj-gate') && !location.hash) document.documen
         <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span>CV</span>
       </a>
-      <a href="contact/" class="nav-cta">
+      <a href="contact/" class="nav-cta" aria-label="Contact">
         <span>Contact</span>
         <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>
       </a>
@@ -646,7 +649,7 @@ try { if (!sessionStorage.getItem('mj-gate') && !location.hash) document.documen
         <span class="exp-num">01</span>
         <div class="exp-date">Jun 2025 — Present</div>
         <div class="exp-body">
-          <h4>Senior SEO Specialist <span class="co">— JK Lifestyle Ltd</span></h4>
+          <h3>Senior SEO Specialist <span class="co">— JK Lifestyle Ltd</span></h3>
           <p>Lead SEO and digital marketing across technical SEO, on-page optimization, and content strategy. Apply AEO and GEO alongside traditional SEO, using semantic SEO, topical authority, structured data, and E-E-A-T, so that pages rank on Google and are cited in AI-generated answers. Named Top Performer of the Month in July 2025.</p>
         </div>
       </li>
@@ -654,7 +657,7 @@ try { if (!sessionStorage.getItem('mj-gate') && !location.hash) document.documen
         <span class="exp-num">02</span>
         <div class="exp-date">Jul 2023 — Present</div>
         <div class="exp-body">
-          <h4>Independent SEO Consultant <span class="co">— Upwork &amp; direct clients</span></h4>
+          <h3>Independent SEO Consultant <span class="co">— Upwork &amp; direct clients</span></h3>
           <p>Deliver SEO strategy, AI-ready content, WordPress and Shopify optimization, and custom automation for clients worldwide. Combine search strategy, data pipelines, and web execution in one engagement, so clients work with one specialist instead of several vendors. 5.0 Upwork rating.</p>
         </div>
       </li>
@@ -662,7 +665,7 @@ try { if (!sessionStorage.getItem('mj-gate') && !location.hash) document.documen
         <span class="exp-num">03</span>
         <div class="exp-date">May 2021 — Jun 2025 · 4 yrs</div>
         <div class="exp-body">
-          <h4>Digital Marketing &amp; Local SEO Specialist <span class="co">— Print Britannia, London</span></h4>
+          <h3>Digital Marketing &amp; Local SEO Specialist <span class="co">— Print Britannia, London</span></h3>
           <p>Developed the SEO and content strategy that ranked high-value commercial keywords and turned organic traffic into revenue. Built keyword clusters, internal linking, and conversion-focused landing pages; grew local visibility through Google Business Profile and citation building; and managed Google Ads, social media, and email campaigns, tracking results in Google Analytics, Search Console, and Semrush.</p>
         </div>
       </li>
@@ -670,7 +673,7 @@ try { if (!sessionStorage.getItem('mj-gate') && !location.hash) document.documen
         <span class="exp-num">04</span>
         <div class="exp-date">Jan 2019 — May 2021 · 2 yrs 4 mos</div>
         <div class="exp-body">
-          <h4>SEO &amp; Digital Marketing Specialist <span class="co">— Image Retouching Lab</span></h4>
+          <h3>SEO &amp; Digital Marketing Specialist <span class="co">— Image Retouching Lab</span></h3>
           <p>Led digital marketing across SEO, PPC, content, and social media. Managed team operations, campaign rollout, and engagement strategy, and improved brand visibility and client acquisition through structured content and search optimization.</p>
         </div>
       </li>
