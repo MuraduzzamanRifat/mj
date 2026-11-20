@@ -9,11 +9,10 @@
 - **E-commerce SEO** — Google Merchant Center, Shopping feeds, product and catalog optimization
 - **AEO** — Answer Engine Optimization: structuring content to win AI answer boxes and featured answers
 - **GEO** — Generative Engine Optimization: building entity authority to be cited by ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews
-- **AI & automation** — n8n workflows, Claude / OpenAI pipelines, automated content and reporting that scale rankings
 
 ## Who I work with
 
-- Startups and B2B / SaaS teams that need senior SEO plus the automation to execute it
+- Startups and B2B / SaaS teams that need senior SEO, AEO and GEO from one specialist
 - Agencies subcontracting specialist SEO / AEO / GEO work
 - Founders rebuilding their organic-growth engine end-to-end
 
@@ -33,18 +32,16 @@
 - Digital Marketing & Local SEO Specialist — Print Britannia, London, remote (May 2021 – Jun 2025)
 - SEO & Digital Marketing Specialist — Image Retouching Lab (Jan 2019 – May 2021)
 
-## Selected work
+## Services
 
-- **[BrandiVibe](https://mjrifat.com/work/brandivibe/)** — autonomous SEO + AI content engine: daily SEO articles, hourly lead radar, self-learning outreach. Zero daily human input.
-- **[ProWorkSpace](https://mjrifat.com/work/proworkspace/)** — AI SaaS Chrome extension, built and monetized solo.
-- **[AYVA](https://mjrifat.com/work/ayva/)** — Shopify Dawn fork, Lighthouse 95 mobile, 50 products migrated.
-- **[Forex Lead Finder](https://mjrifat.com/work/forex-lead-finder/)** — multi-source Python scraper with a 15-point lead classifier.
+- **[Technical SEO audit](https://mjrifat.com/services/technical-seo-audit/)** — crawlability, indexation, site architecture, Core Web Vitals, and structured data, turned into a prioritized fix list.
+- **[SEO reboot](https://mjrifat.com/services/seo-reboot/)** — technical audit, content architecture, internal linking, with AEO and GEO built in.
+- **[AEO & GEO](https://mjrifat.com/services/aeo-geo/)** — content and structured data shaped for featured snippets, AI answer boxes, and citations in AI-generated answers.
+- **[Local & e-commerce SEO](https://mjrifat.com/services/local-ecommerce-seo/)** — Google Business Profile, citations and local landing pages; Google Merchant Center and product feeds.
 
-## Supporting skills (secondary to SEO / AEO / GEO)
+## Results
 
-- AI: Claude / OpenAI API pipelines, LLM content and classification, agent orchestration, prompt engineering
-- Web: hand-built websites (WordPress, Shopify/Liquid, Three.js/WebGL), page-speed and Core Web Vitals — the software that compounds the SEO
-- Automation: n8n workflows for content distribution, lead flow, and reporting
+- Verified results: https://mjrifat.com/work/
 
 ## Contact
 
@@ -59,7 +56,7 @@
 
 ## Canonical positioning line
 
-*"I rank you on Google and apply AEO/GEO to capture AI-search visibility — then ship the software that compounds it."*
+*"I rank you on Google, win the AI answer box, and get you cited in AI search."*
 
 ## Credentials
 
