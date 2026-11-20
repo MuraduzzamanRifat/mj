@@ -8,7 +8,7 @@ import * as THREE from 'three';
 
 const TURN_SCROLL = 0.030;   // how far the figure turns across the hero scroll
 const TURN_MOUSE  = 0.014;   // extra turn from pointer position
-const FOCUS_X     = 0.68;    // horizontal centre of the figure in the image (0–1)
+const FOCUS_X     = 0.74;    // horizontal centre of the figure in the image (0–1)
 const IMG_ASPECT  = 16 / 9;
 
 const VERT = `
@@ -106,7 +106,7 @@ async function initCharacter() {
     const r = hero.getBoundingClientRect();
     scrollP = Math.min(Math.max(-r.top / Math.max(r.height, 1), 0), 1);
     // drift down at a third of scroll speed so the figure lingers in view
-    wrap.style.transform = 'translate3d(0,' + Math.round(Math.max(-r.top, 0) * 0.3) + 'px,0)';
+    wrap.style.transform = 'translate3d(0,' + Math.round(Math.max(-r.top, 0) * 0.12) + 'px,0)';
   }
   function retarget() {
     target.x = -((scrollP * 2 - 1) * TURN_SCROLL + mouse.x * TURN_MOUSE);
