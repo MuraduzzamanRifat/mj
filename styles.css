@@ -3678,3 +3678,8 @@ html.gate-on .gate,
   .gate-hint { animation: none; }
   .gate-nav a { opacity: 1; filter: none; transform: none; }
 }
+
+/* Capabilities: four tiles sit as a 2 x 2 grid on wide screens */
+@media (min-width: 900px) {
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+}
