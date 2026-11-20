@@ -337,6 +337,9 @@
 
 <section class="hero" id="hero">
   <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-char" id="heroChar" aria-hidden="true">
+    <canvas id="heroCharCanvas"></canvas>
+  </div>
 
   <div class="hero-top-bar">
     <div class="tb-left">
@@ -1369,10 +1372,11 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "vendor/three-0.160.0.module.min.js"
+    "three": "./vendor/three-0.160.0.module.min.js"
   }
 }
 </script>
 <script type="module" src="app.js"></script>
+<script type="module" src="character.js"></script>
 </body>
 </html>
