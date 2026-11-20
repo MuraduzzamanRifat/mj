@@ -46,6 +46,10 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
 
 <link rel="stylesheet" href="styles.css">
+<script>
+/* Entrance gate: first visit of a session only, never for #anchor links */
+try { if (!sessionStorage.getItem('mj-gate') && !location.hash) document.documentElement.classList.add('gate-on'); } catch (e) {}
+</script>
 
 <!-- Person schema for rich search results -->
 <script type="application/ld+json">
@@ -241,31 +245,61 @@
 
 <a href="#about" class="skip-link">Skip to main content</a>
 
-<!-- ══════════ PRELOADER ══════════ -->
-<div class="preloader" id="preloader">
-  <canvas class="preloader-canvas" id="preloaderCanvas" aria-hidden="true"></canvas>
-  <div class="pre-grid">
-    <span class="pre-mono">INITIALIZING</span>
-    <span class="pre-mono right">DHAKA, BANGLADESH</span>
-  </div>
+<!-- ══════════ GATE — door, ascent, top-floor menu (gate.js) ══════════ -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Entrance" data-stage="door" data-lenis-prevent>
 
-  <div class="pre-centre">
-    <span class="pre-kicker">SEO / AEO / GEO Specialist &nbsp;·&nbsp; MMXXVI</span>
-    <h2 class="pre-name" aria-label="Muraduzzaman">
-      <span class="pre-char">M</span><span class="pre-char">u</span><span class="pre-char">r</span><span class="pre-char">a</span><span class="pre-char">d</span><span class="pre-char">u</span><span class="pre-char">z</span><span class="pre-char">z</span><span class="pre-char">a</span><span class="pre-char">m</span><span class="pre-char">a</span><span class="pre-char">n</span>
-    </h2>
-    <div class="pre-rules"><span class="pre-r"></span><span class="pre-dot"></span><span class="pre-r"></span></div>
-    <span class="pre-tagline">I rank you on Google and apply AEO/GEO to capture AI-search visibility — then ship the software that compounds it.</span>
-  </div>
-
-  <div class="pre-progress">
-    <span class="pre-mono" id="preProgress">0000</span>
-    <div class="pre-bar">
-      <div class="pre-bar-fill" id="preBar"></div>
-      <div class="pre-bar-shine"></div>
+  <!-- Stage 1: the building front and its door -->
+  <div class="gate-facade">
+    <div class="gate-tower" aria-hidden="true"></div>
+    <div class="gate-entry">
+      <p class="gate-plaque">
+        <span class="gate-plaque-name">Muraduzzaman</span>
+        <span class="gate-plaque-sub">SEO &nbsp;·&nbsp; AEO &nbsp;·&nbsp; GEO</span>
+      </p>
+      <div class="gate-doorway">
+        <div class="gate-light" aria-hidden="true"></div>
+        <button class="gate-door" id="gateDoor" type="button" aria-label="Open the door and enter the site">
+          <span class="gate-leaf l" aria-hidden="true"></span>
+          <span class="gate-leaf r" aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="gate-hint" aria-hidden="true"><span class="gate-hint-dot"></span>Click the door to enter</p>
     </div>
-    <span class="pre-mono">READY</span>
   </div>
+
+  <!-- Stage 2: the climb, search position #50 up to #1 -->
+  <div class="gate-shaft" aria-hidden="true">
+    <div class="shaft-track">
+      <div class="shaft-floor"><span class="n">#1</span><span class="c">Top floor &nbsp;·&nbsp; Position one</span></div>
+      <div class="shaft-floor"><span class="n">#2</span><span class="c">Cited in AI answers &nbsp;·&nbsp; GEO</span></div>
+      <div class="shaft-floor"><span class="n">#3</span><span class="c">Google AI Overviews</span></div>
+      <div class="shaft-floor"><span class="n">#5</span><span class="c">Featured snippets &nbsp;·&nbsp; AEO</span></div>
+      <div class="shaft-floor"><span class="n">#10</span><span class="c">Topical authority</span></div>
+      <div class="shaft-floor"><span class="n">#20</span><span class="c">Schema markup</span></div>
+      <div class="shaft-floor"><span class="n">#30</span><span class="c">On-page SEO</span></div>
+      <div class="shaft-floor"><span class="n">#50</span><span class="c">Ground floor &nbsp;·&nbsp; Technical SEO</span></div>
+    </div>
+    <div class="shaft-meter">
+      <span class="shaft-meter-label">Search position</span>
+      <span class="shaft-meter-num" id="gatePos">#50</span>
+    </div>
+  </div>
+
+  <!-- Stage 3: the top floor -->
+  <div class="gate-top">
+    <p class="gate-top-kicker"><span class="gate-hint-dot"></span>Top floor &nbsp;·&nbsp; Position #1</p>
+    <p class="gate-top-title">Where would you like <em>to go?</em></p>
+    <nav class="gate-nav" aria-label="Site sections">
+      <a href="about/"><span class="i">01</span><span class="t">About</span><span class="d">Who I am and how I work</span></a>
+      <a href="services/"><span class="i">02</span><span class="t">Services</span><span class="d">SEO, AEO and GEO, plus the systems behind them</span></a>
+      <a href="work/"><span class="i">03</span><span class="t">Portfolio</span><span class="d">Selected work and results</span></a>
+      <a href="journal/"><span class="i">04</span><span class="t">Journal</span><span class="d">Guides on SEO, AEO and GEO</span></a>
+      <a href="contact/"><span class="i">05</span><span class="t">Contact</span><span class="d">Start a project</span></a>
+    </nav>
+    <button class="gate-home" id="gateHome" type="button">Or step into the homepage <span aria-hidden="true">↓</span></button>
+  </div>
+
+  <button class="gate-skip" id="gateSkip" type="button">Skip intro</button>
 </div>
 
 <!-- thin top scroll-progress rail -->
@@ -1384,6 +1418,7 @@
   }
 }
 </script>
+<script defer src="gate.js"></script>
 <script type="module" src="app.js"></script>
 <script type="module" src="character.js"></script>
 <script type="module" src="motion.js"></script>

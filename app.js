@@ -688,6 +688,7 @@ function renderSpecimenCard(canvas, shapeIdx) {
 function runPreloader() {
   return new Promise((resolve) => {
     const el = document.getElementById('preloader');
+    if (!el) { resolve(); return; }   // homepage uses the gate instead
     const barEl = document.getElementById('preBar');
     const txtEl = document.getElementById('preProgress');
     // Preloader total ≈ 1.7 s — long enough to see the name letters
