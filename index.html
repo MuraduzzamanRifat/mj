@@ -6,7 +6,13 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co; base-uri 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39"></script>
+<script>
+/* Load Google Analytics once the page has finished loading, so it never delays first paint. */
+window.addEventListener('load', function () {
+  var go = function () { var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39'; document.head.appendChild(s); };
+  if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 3000 }); else setTimeout(go, 1);
+});
+</script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -405,7 +411,7 @@ try {
       <span class="hp-stars" aria-hidden="true">★★★★★</span>
       <span class="hp-rating"><strong>5.0</strong> on Upwork · retained by US client since 2023</span>
       <span class="hp-sep">·</span>
-      <a href="#praise" class="hp-quote">&ldquo;by far the best web designer I&rsquo;ve worked with&rdquo;</a>
+      <a href="#praise" class="hp-quote">&ldquo;stands out as an exceptional provider&rdquo; &mdash; client with 250+ Upwork hires</a>
     </p>
   </div>
 
@@ -560,7 +566,7 @@ try {
           </div>
           <span class="cap-live"><span class="cap-dot"></span>Available</span>
         </div>
-        <h3>Technical SEO audit</h3>
+        <h3><a href="services/technical-seo-audit/">Technical SEO audit <span aria-hidden="true">→</span></a></h3>
         <p>Crawlability, indexation, site architecture, Core Web Vitals, and structured data, checked and prioritized into a fix list you can act on.</p>
         <footer>
           <span class="cap-label">Scope</span>
@@ -579,7 +585,7 @@ try {
           </div>
           <span class="cap-live"><span class="cap-dot"></span>Available</span>
         </div>
-        <h3>SEO reboot</h3>
+        <h3><a href="services/seo-reboot/">SEO reboot <span aria-hidden="true">→</span></a></h3>
         <p>Technical audit → content architecture → internal linking → ranked. More than five years in the machinery of Google search, now with AEO and GEO built in.</p>
         <footer>
           <span class="cap-label">Scope</span>
@@ -598,7 +604,7 @@ try {
           </div>
           <span class="cap-live"><span class="cap-dot"></span>Available</span>
         </div>
-        <h3>AEO &amp; GEO</h3>
+        <h3><a href="services/aeo-geo/">AEO &amp; GEO <span aria-hidden="true">→</span></a></h3>
         <p>Content and structured data shaped for featured snippets, AI answer boxes, and citations in generative AI engines, so you show up where answers are given, not only where links are listed.</p>
         <footer>
           <span class="cap-label">Scope</span>
@@ -623,7 +629,7 @@ try {
           </div>
           <span class="cap-live"><span class="cap-dot"></span>Available</span>
         </div>
-        <h3>Local &amp; e-commerce SEO</h3>
+        <h3><a href="services/local-ecommerce-seo/">Local &amp; e-commerce SEO <span aria-hidden="true">→</span></a></h3>
         <p>Google Business Profile, citation building, and local landing pages for nearby customers. Google Merchant Center and product feeds for online stores.</p>
         <footer>
           <span class="cap-label">Scope</span>

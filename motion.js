@@ -52,7 +52,7 @@ function splitWords(root) {
 
 function initBlurHeadings() {
   if (REDUCED || !('IntersectionObserver' in window)) return;
-  const heads = document.querySelectorAll('.act-h, .close-h');
+  const heads = document.querySelectorAll('.act-h, .close-h, .prose h2');
   if (!heads.length) return;
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {

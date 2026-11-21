@@ -6,7 +6,13 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co; base-uri 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <!-- Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39"></script>
+<script>
+/* Load Google Analytics once the page has finished loading, so it never delays first paint. */
+window.addEventListener('load', function () {
+  var go = function () { var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KVC10TQP39'; document.head.appendChild(s); };
+  if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 3000 }); else setTimeout(go, 1);
+});
+</script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -317,7 +323,7 @@
       </ol>
 
       <h2>Working with me</h2>
-      <p>I'm a Senior SEO / AEO / GEO Specialist with 5+ years of experience across technical, on-page, and off-page SEO, spanning both global and local SEO, Google My Business (GMB), and e-commerce through Google Merchant Center. I now apply the full stack — ranking the page, winning the answer box, and earning citations inside AI answers — as one connected discipline rather than three separate services. If you want a plain-language breakdown of the role itself, see <a href="/journal/what-is-a-growth-engineer/">What is an SEO / AEO / GEO Specialist?</a>; if your search presence needs a rebuild from the technical foundation up, that's the <a href="/services/seo-reboot/">SEO reboot</a>. Either way, <a href="/contact/">tell me in one paragraph</a> what you're trying to rank, answer, or get cited for, and I'll tell you honestly which layers move the needle first.</p>
+      <p>I'm a Senior SEO / AEO / GEO Specialist with 5+ years of experience across technical, on-page, and off-page SEO, spanning both global and local SEO, Google My Business (GMB), and e-commerce through Google Merchant Center. I now apply the full stack — ranking the page, winning the answer box, and earning citations inside AI answers — as one connected discipline rather than three separate services. If you want a plain-language breakdown of the role itself, see <a href="/about/">What is an SEO / AEO / GEO Specialist?</a>; if your search presence needs a rebuild from the technical foundation up, that's the <a href="/services/seo-reboot/">SEO reboot</a>. Either way, <a href="/contact/">tell me in one paragraph</a> what you're trying to rank, answer, or get cited for, and I'll tell you honestly which layers move the needle first.</p>
 
       <div style="margin-top:40px;padding:24px;border:1px solid var(--copper);border-radius:2px;background:rgba(189,90,51,0.05);">
         <div class="kicker" style="color:var(--copper);font-family:var(--f-mono);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;margin-bottom:8px;">Citation note</div>
@@ -394,5 +400,6 @@
 }
 </script>
 <script type="module" src="/app.js"></script>
+<script type="module" src="/motion.js"></script>
 </body>
 </html>

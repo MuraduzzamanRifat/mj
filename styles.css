@@ -3860,3 +3860,8 @@ html.gate-on body > *:not(.gate):not(script):not(style) { content-visibility: hi
 .price-note { margin: 22px 0 0; max-width: 760px; font-size: 13.5px; line-height: 1.7; color: rgba(238,231,216,0.72); }
 .cap-pricing { margin-top: 36px; }
 @media (max-width: 900px) { .price-grid { grid-template-columns: 1fr; } }
+
+/* Service cards link to their pages */
+.cap-tile h3 a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+.cap-tile h3 a span { color: var(--copper-l); font-size: 0.7em; }
+.cap-tile h3 a:hover, .cap-tile h3 a:focus-visible { color: var(--copper-l); }
