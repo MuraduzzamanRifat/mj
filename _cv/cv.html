@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Source of muraduzzaman-cv-portfolio.pdf. Edit this file, then re-render: npm i puppeteer-core && node _cv/render.mjs _cv/cv.html muraduzzaman-cv-portfolio.pdf. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Muraduzzaman">
+<meta name="description" content="CV of Muraduzzaman, Senior SEO Specialist: SEO, AEO, GEO and LLMO.">
+<title>Muraduzzaman — SEO / AEO / GEO Specialist — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --ink:#111114; --paper:#EEE7D8; --copper:#BD5A33; --copper-l:#D8784F; --dim:rgba(238,231,216,0.62); --hair:rgba(238,231,216,0.2); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: var(--ink); color: var(--paper); font-family: "JetBrains Mono", monospace; font-size: 8.4pt; line-height: 1.55; }
+  a { color: inherit; text-decoration: none; border-bottom: 0.5pt solid rgba(216,120,79,0.55); }
+  .page { width: 210mm; height: 297mm; padding: 11mm 16mm 10mm; background: var(--ink); page-break-after: always; overflow: hidden; display: flex; flex-direction: column; }
+  .page:last-child { page-break-after: auto; }
+  .mono { font-size: 6.6pt; letter-spacing: 0.24em; text-transform: uppercase; }
+  .copper { color: var(--copper-l); }
+  .dim { color: var(--dim); }
+  .top { display: flex; justify-content: space-between; margin-bottom: 5mm; }
+  .top .dot { display: inline-block; width: 5pt; height: 5pt; border-radius: 50%; background: var(--copper); margin-right: 7pt; }
+  h1 { font-family: "Bodoni Moda", serif; font-weight: 600; font-size: 40pt; line-height: 1; letter-spacing: -0.02em; margin: 2mm 0 2mm; }
+  .lede { font-family: "Instrument Serif", serif; font-size: 13pt; line-height: 1.25; max-width: 168mm; }
+  .lede em { color: var(--copper-l); }
+  .rule { border: 0; border-top: 0.6pt solid var(--hair); margin: 4mm 0; }
+  .stats, .contact { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stats > div, .contact > div { padding: 0 4mm; border-left: 0.6pt solid var(--hair); }
+  .stats > div:first-child, .contact > div:first-child { border-left: 0; padding-left: 0; }
+  .stats b { display: block; font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 23pt; line-height: 1.1; }
+  .stats b i { font-style: normal; color: var(--copper-l); }
+  .stats .mono, .contact .mono { display: block; margin: 1.5mm 0 1mm; color: var(--copper-l); }
+  .stats small { font-size: 6.6pt; color: var(--dim); }
+  .contact { margin-top: 4mm; }
+  .contact span.v { font-size: 8.6pt; }
+  .sec { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3mm; }
+  .sec .n { color: var(--copper-l); margin-right: 8pt; }
+  .sec i { font-family: "Instrument Serif", serif; font-size: 11pt; color: var(--dim); }
+  h2 { font-family: "Bodoni Moda", serif; font-weight: 600; font-size: 19pt; line-height: 1.15; margin-bottom: 2.5mm; }
+  h2 em { font-family: "Instrument Serif", serif; font-weight: 400; color: var(--copper-l); }
+  .serif p { font-family: "Instrument Serif", serif; font-size: 9.5pt; line-height: 1.36; margin-bottom: 1.6mm; color: rgba(238,231,216,0.92); }
+  .tagbox { display: inline-block; border: 0.6pt solid var(--hair); padding: 2.4mm 4mm; margin-top: 2mm; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .card { border: 0.6pt solid var(--hair); padding: 3.2mm 4mm; min-height: 18mm; }
+  .card .mono { color: var(--copper-l); display: block; margin-bottom: 1.5mm; }
+  .card b { display: block; font-family: "Bodoni Moda", serif; font-weight: 600; font-size: 12.5pt; line-height: 1.2; margin-bottom: 1.5mm; }
+  .card small { font-size: 6.9pt; color: var(--dim); display: block; line-height: 1.45; }
+  blockquote { border-left: 2pt solid var(--copper); padding: 1mm 0 1mm 5mm; }
+  blockquote p { font-family: "Instrument Serif", serif; font-size: 12.5pt; line-height: 1.4; margin-bottom: 3mm; }
+  .job { padding: 4.5mm 0; border-top: 0.6pt solid var(--hair); }
+  .job:first-of-type { border-top: 0; padding-top: 0; }
+  .job header { display: flex; justify-content: space-between; align-items: baseline; gap: 6mm; margin-bottom: 2mm; }
+  .job h3 { font-family: "Bodoni Moda", serif; font-weight: 600; font-size: 11.5pt; }
+  .job header span { white-space: nowrap; }
+  .job h3 em { font-family: "Instrument Serif", serif; font-weight: 400; color: var(--copper-l); }
+  .job ul { list-style: none; }
+  .job li { position: relative; padding-left: 5mm; margin-bottom: 1.3mm; }
+  .job li::before { content: ""; position: absolute; left: 0.6mm; top: 1.5mm; width: 4pt; height: 4pt; border: 0.7pt solid var(--copper-l); transform: rotate(45deg); }
+  .stack { display: grid; grid-template-columns: 44mm 1fr; padding: 3.6mm 0; border-top: 0.6pt solid var(--hair); }
+  .stack:first-of-type { border-top: 0; padding-top: 0; }
+  .stack .k { color: var(--copper-l); }
+  .stack .k i { display: block; font-family: "Instrument Serif", serif; font-size: 8.5pt; letter-spacing: 0; text-transform: none; color: var(--dim); margin-top: 1mm; }
+  .cred { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+  .cred h4 { color: var(--copper-l); font-weight: 700; margin-bottom: 2mm; }
+  .cred .row { display: flex; justify-content: space-between; padding: 1.9mm 0; border-bottom: 0.6pt dotted var(--hair); }
+  .cred .row span:last-child { color: var(--copper-l); }
+  .close { margin-top: auto; border-left: 2pt solid var(--copper); background: rgba(238,231,216,0.04); padding: 5mm 6mm; }
+  .close p { font-family: "Instrument Serif", serif; font-style: italic; font-size: 10.5pt; color: var(--copper-l); }
+  .foot { text-align: center; margin-top: 5mm; color: var(--dim); line-height: 2; }
+  .grow { flex: 1; }
+</style>
+</head>
+<body>
+
+<!-- ═════════════ PAGE 1 ═════════════ -->
+<section class="page">
+  <div class="top mono"><span><span class="dot"></span>Available for projects and full-time · Remote</span><span class="dim">Portfolio CV · MMXXVI</span></div>
+  <p class="mono dim">Senior SEO Specialist · SEO / AEO / GEO / LLMO · Remote, worldwide</p>
+  <h1>Muraduzzaman</h1>
+  <p class="lede"><em>I rank you on Google</em> — then get you cited by ChatGPT, Gemini, Perplexity, and AI Overviews. SEO, AEO, GEO, and LLMO, end to end.</p>
+  <hr class="rule">
+  <div class="stats">
+    <div><b>5<i>+</i></b><span class="mono">Years in SEO</span><small>technical · on-page · off-page</small></div>
+    <div><b>100<i>+</i></b><span class="mono">Keywords ranked</span><small>USA · UK · AU · DE + more</small></div>
+    <div><b>AI</b><span class="mono">Search optimization</span><small>SEO · AEO · GEO · LLMO</small></div>
+    <div><b>6</b><span class="mono">AI engines targeted</span><small>ChatGPT · Gemini · Perplexity + 3</small></div>
+  </div>
+  <div class="contact">
+    <div><span class="mono">Contact</span><span class="v"><a href="https://mjrifat.com/contact/">mjrifat.com/contact</a></span></div>
+    <div><span class="mono">Phone · WhatsApp</span><span class="v"><a href="tel:+8801917286515">+880 1917 286 515</a><br><a href="https://wa.me/8801917286515">Chat on WhatsApp</a></span></div>
+    <div><span class="mono">Web · Email</span><span class="v"><a href="https://mjrifat.com/">mjrifat.com</a><br><a href="mailto:dev@try-n.com">dev@try-n.com</a></span></div>
+    <div><span class="mono">Linked</span><span class="v"><a href="https://www.upwork.com/freelancers/~018280ef5078222f43">Upwork</a> · <a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/">LinkedIn</a> · <a href="https://github.com/MuraduzzamanRifat">GitHub</a></span></div>
+  </div>
+  <hr class="rule">
+  <div class="sec"><span class="mono"><span class="n">01</span>About</span><i>The short version</i></div>
+  <h2>Search has changed. <em>I optimize for all of it.</em></h2>
+  <div class="serif">
+    <p>Results-driven Senior SEO Specialist with 5+ years of experience in technical SEO, organic growth strategy, and website optimization. Currently Senior SEO Specialist at JK Lifestyle Ltd, with expertise in on-page and off-page SEO, keyword and search-intent research, SERP and competitor analysis, semantic SEO and topical authority, entity SEO, E-E-A-T, schema markup and structured data, Core Web Vitals, and both global and local SEO, including Google Business Profile and e-commerce through Google Merchant Center.</p>
+    <p>My focus now is AI-powered search: AEO, GEO, and LLMO. SEO ranks the page, AEO wins the answer box, and GEO and LLMO earn citations inside generative engines. I run all four as one system. Verified results include a #1 Google ranking in the USA for a high-intent commercial keyword; a 5.0 Upwork rating with full-time retention since July 2023; Lighthouse scores of 95 for Performance and 100 for Best Practices, verified by a third party; and organic reach across six countries within 30 days (GA4: DE, UK, FR, TR, US, and SE).</p>
+    <p>I optimize brands for the engines people now ask first — ChatGPT, Google AI Overviews, Gemini, Perplexity, Microsoft Copilot, and Claude — with AI-friendly content, structured data, and entity authority. WordPress and Elementor Pro, plus Claude- and n8n-based workflow automation, handle the build, monitoring, and reporting behind it (Search Console, GA4, Ahrefs, Semrush, Screaming Frog).</p>
+  </div>
+  <div><span class="tagbox mono"><span class="copper">SEO · AEO · GEO · LLMO</span> — optimized for Google and every AI answer engine</span></div>
+  <hr class="rule">
+  <div class="sec"><span class="mono"><span class="n">02</span>Recognition</span><i>Receipts</i></div>
+  <div class="cards">
+    <div class="card"><span class="mono">Search rank</span><b>USA Rank #1</b><small>high-intent commercial keyword — top of the US SERP</small></div>
+    <div class="card"><span class="mono">Organic reach</span><b>6 countries in 30 days</b><small>GA4: DE, UK, FR, TR, US, SE</small></div>
+    <div class="card"><span class="mono">Top Performer of the Month</span><b>JK Lifestyle Ltd</b><small>July 2025</small></div>
+    <div class="card"><span class="mono">Upwork rating</span><b>5.0</b><small>retained full-time since Jul 2023</small></div>
+    <div class="card"><span class="mono">Lighthouse</span><b>95 performance / 100 best practices</b><small>client mobile site — third-party verified</small></div>
+    <div class="card"><span class="mono">Wikidata entity</span><b>Listed as an entity</b><small>knowledge-graph presence, uncommon for a specialist</small></div>
+  </div>
+</section>
+
+<!-- ═════════════ PAGE 2 ═════════════ -->
+<section class="page">
+  <div class="sec"><span class="mono"><span class="n">03</span>Praise</span><i>Verified Upwork review</i></div>
+  <blockquote>
+    <p>“As someone who has spent over $120,000 on Upwork and hired over 250 providers, I can confidently say that Muraduz stands out as an exceptional provider. … He consistently completes tasks well ahead of schedule, surpassing my expectations every time.”</p>
+    <span class="mono dim">MyTown Mysteries — verified Upwork client · 5.0 rating</span>
+  </blockquote>
+  <hr class="rule">
+  <div class="sec"><span class="mono"><span class="n">04</span>Experience</span><i>Five-plus years, four roles</i></div>
+
+  <article class="job">
+    <header><h3>Senior SEO Specialist — SEO / AEO / GEO <em>— JK Lifestyle Ltd, Dhaka</em></h3><span class="mono dim">Jun 2025 – Present</span></header>
+    <ul>
+      <li>Lead SEO and digital marketing across technical SEO, on-page optimization, and content strategy.</li>
+      <li>Apply AEO and GEO alongside traditional SEO, using semantic SEO, topical authority, structured data, and E-E-A-T so that pages rank on Google and are cited in AI-generated answers.</li>
+      <li>Drive keyword research, SERP analysis, and competitor research for commercial-intent queries; named Top Performer of the Month in July 2025.</li>
+    </ul>
+  </article>
+  <article class="job">
+    <header><h3>Independent SEO Consultant — SEO / AEO / GEO / LLMO <em>— Upwork &amp; direct clients</em></h3><span class="mono dim">Jul 2023 – Present</span></header>
+    <ul>
+      <li>Earned a 5.0 Upwork rating and full-time retention since Jul 2023 by delivering measurable search growth across strategy, content, and web execution.</li>
+      <li>Delivered SEO and AI-friendly content for clients in the US, UK, Germany, France, Turkey, and Sweden.</li>
+      <li>Optimized WordPress (Elementor Pro) and Shopify sites for technical SEO, Core Web Vitals, and conversion.</li>
+    </ul>
+  </article>
+  <article class="job">
+    <header><h3>Digital Marketing &amp; Local SEO Specialist <em>— Print Britannia, London (remote)</em></h3><span class="mono dim">May 2021 – Jun 2025 · 4 yrs</span></header>
+    <ul>
+      <li>Developed and implemented SEO strategies that ranked high-value commercial keywords and turned organic traffic into revenue, optimizing content, site structure, and technical elements.</li>
+      <li>Built keyword clusters, internal linking, and conversion-focused landing pages; strengthened local visibility through Google Business Profile optimization and citation building.</li>
+      <li>Managed Google Ads, social media, and email campaigns, and tracked KPIs in Google Analytics, Search Console, and Semrush to refine strategy with content teams and stakeholders.</li>
+    </ul>
+  </article>
+  <article class="job">
+    <header><h3>SEO &amp; Digital Marketing Specialist <em>— Image Retouching Lab</em></h3><span class="mono dim">Jan 2019 – May 2021 · 2 yrs 4 mos</span></header>
+    <ul>
+      <li>Delivered a #1 Google ranking in the USA for a high-intent commercial keyword, leading global and local SEO, PPC, content, and social media.</li>
+      <li>Managed team operations, campaign rollout, and engagement strategy.</li>
+    </ul>
+  </article>
+
+  <div class="grow"></div>
+  <div class="close">
+    <h2 style="font-size:14pt;margin-bottom:1.5mm;">See the work behind these results.</h2>
+    <p>Case study, services and pricing: <a href="https://mjrifat.com/work/site-rebuild/">mjrifat.com/work/site-rebuild</a> · <a href="https://mjrifat.com/services/">mjrifat.com/services</a></p>
+  </div>
+</section>
+
+<!-- ═════════════ PAGE 3 ═════════════ -->
+<section class="page">
+  <div class="sec"><span class="mono"><span class="n">05</span>Core stack</span><i>Five domains — search-led</i></div>
+  <div class="stack"><span class="mono k">Search — SEO / AEO / GEO / LLMO<i>primary</i></span><span>Technical SEO · on-page · off-page · keyword research and search-intent analysis · SERP and competitor research · semantic SEO · topical authority · topic clusters · entity SEO and knowledge-graph optimization · E-E-A-T · schema markup and structured data · Core Web Vitals optimization · global and local SEO · Google Business Profile · citation building · e-commerce SEO · Merchant Center · shopping feeds · AEO: structuring content for AI answer boxes and featured answers · GEO / LLMO: citations and entity authority inside generative-engine answers</span></div>
+  <div class="stack"><span class="mono k">AI search platforms<i>the engines buyers now ask first</i></span><span>ChatGPT · Google AI Overviews · Gemini · Perplexity · Microsoft Copilot · Claude · AI-friendly content optimization · citation and mention tracking</span></div>
+  <div class="stack"><span class="mono k">Digital marketing<i>supporting channels</i></span><span>Google Ads (PPC) · social media marketing · email marketing · content strategy · analytics and KPI reporting</span></div>
+  <div class="stack"><span class="mono k">Web, CMS &amp; automation<i>where the optimization ships</i></span><span>WordPress + Elementor Pro · Shopify · Odoo · conversion-focused landing pages · n8n workflow automation · Claude / OpenAI content pipelines · prompt engineering</span></div>
+  <div class="stack"><span class="mono k">Tools &amp; analytics<i>monitoring and proof</i></span><span>Google Search Console · GA4 · Looker Studio · Ahrefs · Semrush · Screaming Frog · funnel tracking · attribution · A/B testing</span></div>
+  <hr class="rule">
+  <div class="sec"><span class="mono"><span class="n">06</span>Credentials</span><i>Training, education &amp; languages</i></div>
+  <div class="cred">
+    <div>
+      <h4 class="mono">Certifications</h4>
+      <div class="row"><span>Semrush Academy — SEO Crash Course with Brian Dean</span><span>2024</span></div>
+      <div class="row"><span>HubSpot Academy — SEO Certification Course</span><span>2024</span></div>
+      <div class="row"><span>UY Lab, Dhaka — SEO Specialist Course (6 months)</span><span>2018</span></div>
+    </div>
+    <div>
+      <h4 class="mono">Education</h4>
+      <div class="row"><span>LLB — Bangladesh Islami University, Dhaka</span><span>2019</span></div>
+      <div class="row"><span>HSC — Khilgaon Model University College</span><span>2015</span></div>
+      <div class="row"><span>SSC — Haider Ali School and College</span><span>2013</span></div>
+      <h4 class="mono" style="margin-top:5mm;">Languages</h4>
+      <div class="row"><span>Bangla</span><span>Native</span></div>
+      <div class="row"><span>English</span><span>Professional</span></div>
+      <div class="row"><span>Hindi</span><span>Conversational</span></div>
+    </div>
+  </div>
+  <div class="close">
+    <h2 style="font-size:15pt;margin-bottom:1.5mm;">Search has changed. I optimize for all of it.</h2>
+    <p>Google rankings, AI answer boxes, and generative-engine citations — technical SEO, AEO, GEO, and LLMO, delivered by one specialist who also handles the content, schema, and analytics behind them.</p>
+  </div>
+  <p class="foot mono">Dhaka (GMT+6), remote worldwide · <a href="https://mjrifat.com/">mjrifat.com</a> · <a href="mailto:dev@try-n.com">dev@try-n.com</a> · <a href="https://wa.me/8801917286515">WhatsApp +880 1917 286 515</a><br><a href="https://www.upwork.com/freelancers/~018280ef5078222f43">Upwork 5.0</a> · <a href="https://www.linkedin.com/in/md-muraduzzaman-4a581410a/">LinkedIn</a> · <a href="https://github.com/MuraduzzamanRifat">GitHub /MuraduzzamanRifat</a></p>
+</section>
+
+</body>
+</html>
