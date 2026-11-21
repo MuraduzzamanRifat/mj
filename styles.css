@@ -3840,3 +3840,23 @@ html.gate-on body > *:not(.gate):not(script):not(style) { content-visibility: hi
 .cs-card-sub { font-family: var(--f-italic); font-style: italic; font-size: 16px; line-height: 1.5; color: rgba(238,231,216,0.72); }
 .cs-card-link { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--copper-l); }
 @media (max-width: 720px) { .cs-card { grid-template-columns: 1fr; } }
+
+/* ── Pricing (services/#pricing) ── */
+.price-h { font-family: var(--f-display); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.15; color: var(--paper); margin: 10px 0 32px; }
+.price-h em { font-family: var(--f-italic); font-style: italic; color: var(--copper); }
+.price-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+.price-card { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 34px 28px 28px; border: 1px solid rgba(238,231,216,0.2); background: rgba(238,231,216,0.02); }
+.price-card.featured { border-color: var(--copper-l); background: rgba(189,90,51,0.08); }
+.price-tag { position: absolute; top: -11px; left: 28px; padding: 4px 10px; background: var(--copper-l); color: var(--ink); font-family: var(--f-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+.price-card h3 { font-family: var(--f-display); font-weight: 400; font-size: 26px; color: var(--paper); margin: 0; }
+.price-amount { margin: 0; color: var(--paper); }
+.price-amount b { font-family: var(--f-display); font-weight: 400; font-size: clamp(34px, 3.6vw, 46px); line-height: 1; }
+.price-amount span { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(238,231,216,0.62); }
+.price-sub { margin: 0; font-family: var(--f-italic); font-style: italic; font-size: 16px; line-height: 1.5; color: rgba(238,231,216,0.78); }
+.price-card ul { list-style: none; margin: 4px 0 10px; padding: 0; flex: 1; }
+.price-card li { position: relative; padding: 9px 0 9px 20px; border-top: 1px solid rgba(238,231,216,0.1); font-size: 13.5px; line-height: 1.5; color: rgba(238,231,216,0.88); }
+.price-card li::before { content: ""; position: absolute; left: 0; top: 16px; width: 6px; height: 6px; border-radius: 50%; background: var(--copper-l); }
+.price-card .cta-btn { align-self: flex-start; }
+.price-note { margin: 22px 0 0; max-width: 760px; font-size: 13.5px; line-height: 1.7; color: rgba(238,231,216,0.72); }
+.cap-pricing { margin-top: 36px; }
+@media (max-width: 900px) { .price-grid { grid-template-columns: 1fr; } }
