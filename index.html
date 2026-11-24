@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<script>
+/* Language: a saved choice (cookie "lang") wins; otherwise a browser whose first language is Arabic goes to the Arabic page. Bots are never redirected. */
+try { var lc = document.cookie.match(/(?:^|; )lang=(en|ar)/), lp = lc ? lc[1] : ((navigator.languages && navigator.languages[0]) || navigator.language || '');
+  if (lp.slice(0, 2).toLowerCase() === 'ar' && !/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|gptbot|chatgpt|claude|anthropic|perplexity|bingpreview|google/i.test(navigator.userAgent)) location.replace('/ar/');
+} catch (e) {}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; form-action 'self' https://formsubmit.co; base-uri 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -25,6 +31,9 @@ window.addEventListener('load', function () {
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <meta name="google-site-verification" content="yXH6L7e-cSVieR9bsK5McduWycaSyAkMxUwpIJUANUo" />
 <link rel="canonical" href="https://mjrifat.com/" />
+<link rel="alternate" hreflang="en" href="https://mjrifat.com/" />
+<link rel="alternate" hreflang="ar" href="https://mjrifat.com/ar/" />
+<link rel="alternate" hreflang="x-default" href="https://mjrifat.com/" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Muraduzzaman" />
@@ -331,6 +340,7 @@ try {
       <li><a href="contact/"  data-n="06">Contact</a></li>
     </ul>
     <div class="nav-right">
+      <a href="ar/" class="nav-lang" lang="ar" hreflang="ar" onclick="document.cookie='lang=ar;path=/;max-age=31536000;samesite=lax'">العربية</a>
       <a href="muraduzzaman-cv-portfolio.pdf" class="nav-pdf" download="muraduzzaman-cv-portfolio.pdf" aria-label="Download CV as PDF">
         <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span>CV</span>

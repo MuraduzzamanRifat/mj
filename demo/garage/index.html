@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Language: a saved choice (cookie "lang") wins; otherwise a browser whose first language is Arabic goes to the Arabic page. Bots are never redirected. */
+try { var lc = document.cookie.match(/(?:^|; )lang=(en|ar)/), lp = lc ? lc[1] : ((navigator.languages && navigator.languages[0]) || navigator.language || '');
+  if (lp.slice(0, 2).toLowerCase() === 'ar' && !/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|gptbot|chatgpt|claude|anthropic|perplexity|bingpreview|google/i.test(navigator.userAgent)) location.replace('/ar/demo/garage/');
+} catch (e) {}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Your Garage Name — Car Repairs &amp; Servicing in Your Town</title>
@@ -82,6 +88,7 @@
       <a href="#reviews">Reviews</a>
       <a href="#find">Find us</a>
     </nav>
+    <a href="../../ar/demo/garage/" lang="ar" hreflang="ar" onclick="document.cookie='lang=ar;path=/;max-age=31536000;samesite=lax'" style="color:#fff;font-size:14px;margin-left:auto;margin-right:14px">العربية</a>
     <a class="btn call" href="#contact">Call now</a>
   </div>
 </header>

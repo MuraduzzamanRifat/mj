@@ -3929,3 +3929,14 @@ html.gate-on .wa-float { z-index: 1001; }
   .shaft-growth { bottom: 190px; width: 110px; }
   .shaft-growth svg { height: 56px; }
 }
+
+/* Language switch (homepage nav) */
+.nav-lang {
+  font-family: "IBM Plex Sans Arabic", Tahoma, sans-serif;
+  font-size: 14px;
+  color: var(--paper);
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid rgba(238,231,216,0.3);
+}
+.nav-lang:hover, .nav-lang:focus-visible { border-color: var(--copper-l); color: var(--copper-l); }
