@@ -381,8 +381,8 @@ class Neuron {
     this.nodeMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uPixel: { value: Math.min(window.devicePixelRatio, 2) },
-        uPaper:  { value: new THREE.Color('#E6F4F6') },
-        uCopper: { value: new THREE.Color('#0FA4AF') },
+        uPaper:  { value: new THREE.Color('#EEE7D8') },
+        uCopper: { value: new THREE.Color('#BD5A33') },
       },
       vertexShader: /* glsl */`
         attribute float aSize;
@@ -433,7 +433,7 @@ class Neuron {
 
     this.lineMaterial = new THREE.ShaderMaterial({
       uniforms: {
-        uColor: { value: new THREE.Color('#E6F4F6') },
+        uColor: { value: new THREE.Color('#EEE7D8') },
       },
       vertexShader: /* glsl */`
         attribute float aAlpha;
@@ -482,7 +482,7 @@ class Neuron {
     this.pulseMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uPixel:  { value: Math.min(window.devicePixelRatio, 2) },
-        uCopper: { value: new THREE.Color('#AFDDE5') },
+        uCopper: { value: new THREE.Color('#D8784F') },
       },
       vertexShader: /* glsl */`
         attribute float aSize;
@@ -663,17 +663,17 @@ function renderSpecimenCard(canvas, shapeIdx) {
     const y = -positions[i * 3 + 1] * scale + cy;
     const r = Math.random();
     const isCopper = r < 0.12;
-    ctx.fillStyle = isCopper ? '#0FA4AF' : 'rgba(230,244,246,0.82)';
+    ctx.fillStyle = isCopper ? '#BD5A33' : 'rgba(238,231,216,0.82)';
     const size = isCopper ? 1.6 : 1.1;
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  ctx.strokeStyle = 'rgba(230,244,246,0.25)';
+  ctx.strokeStyle = 'rgba(238,231,216,0.25)';
   ctx.lineWidth = 1;
   ctx.strokeRect(8, 8, W - 16, H - 16);
-  ctx.fillStyle = '#0FA4AF';
+  ctx.fillStyle = '#BD5A33';
   [[8,8],[W-8,8],[8,H-8],[W-8,H-8]].forEach(([x, y]) => {
     ctx.beginPath();
     ctx.arc(x, y, 2, 0, Math.PI * 2);
